@@ -10,69 +10,95 @@
     <height>400</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+background-color:#1d1d1d;
+}
+QDial{
+background-color: #4a4a4a;
+}
+QPushButton {
+font:14pt;
+font-family:Segoe UI;
+color:#fff;
+border: 0px;
+border-radius: 6px;      
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67,  stop: 0 #4a4a4a, stop: 1 #3d3d3d);
+}
+ QPushButton:pressed {
+font:14pt;
+font-family:Segoe UI;
+color:#fff;
+border: 0px;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #3d3d3d, stop: 1 #303030);
+}
+QLabel{
+font:14pt;
+font-family:Segoe UI;
+color:#fff;
+qproperty-alignment:AlignCenter;
+}</string>
   </property>
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QToolButton" name="tBtnClose">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>330</y>
-     <width>51</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>CLOSE</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>571</width>
-     <height>171</height>
+     <x>0</x>
+     <y>160</y>
+     <width>601</width>
+     <height>201</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QDial" name="dialGain"/>
+    </item>
     <item row="0" column="1">
      <widget class="QDial" name="dialDepth"/>
     </item>
     <item row="0" column="2">
-     <widget class="QDial" name="dialCutoff"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QDial" name="dialGain"/>
+     <widget class="QDial" name="dialCutoff">
+      <property name="styleSheet">
+       <string notr="true">background&gt;qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(0, 0, 0, 255), stop:0.33 rgba(0, 0, 0, 255), stop:0.34 rgba(255, 30, 30, 255), stop:0.66 rgba(255, 0, 0, 255), stop:0.67 rgba(255, 255, 0, 255), stop:1 rgba(255, 255, 0, 255))</string>
+      </property>
+     </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QToolButton" name="tBtnIO">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>10</y>
-     <width>51</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>IO</string>
-   </property>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>571</width>
-     <height>31</height>
+     <x>0</x>
+     <y>100</y>
+     <width>601</width>
+     <height>61</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLabel" name="lblDepth">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Depth</string>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QLabel" name="lblGain">
       <property name="text">
@@ -81,16 +107,128 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="lblDepth">
+     <widget class="QLabel" name="lblCutoff">
       <property name="text">
-       <string>Depth</string>
+       <string>Cutoff</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>601</width>
+     <height>82</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QPushButton" name="btnClose">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>CLOSE</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="lblCutoff">
+     <widget class="QPushButton" name="btnPreset1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>80</height>
+       </size>
+      </property>
       <property name="text">
-       <string>Cutoff</string>
+       <string>P1</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPreset2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>P2</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPreset3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>P3</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnOnOff">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>IO</string>
       </property>
      </widget>
     </item>

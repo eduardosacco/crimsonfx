@@ -13,14 +13,43 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+background-color:#1d1d1d;
+}
+QDial{
+background-color: #4a4a4a;
+}
+QPushButton {
+font:14pt;
+font-family:Segoe UI;
+color:#fff;
+border: 0px;
+border-radius: 6px;      
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67,  stop: 0 #4a4a4a, stop: 1 #3d3d3d);
+}
+ QPushButton:pressed {
+font:14pt;
+font-family:Segoe UI;
+color:#fff;
+border: 0px;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #3d3d3d, stop: 1 #303030);
+}
+QLabel{
+font:14pt;
+font-family:Segoe UI;
+color:#fff;
+qproperty-alignment:AlignCenter;
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>451</width>
-      <height>341</height>
+      <y>140</y>
+      <width>581</width>
+      <height>231</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -31,6 +60,12 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
        </property>
        <property name="text">
         <string>Equalizer</string>
@@ -45,6 +80,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="text">
         <string>Compressor</string>
        </property>
@@ -57,6 +98,12 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
        </property>
        <property name="text">
         <string>Delay</string>
@@ -71,18 +118,30 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="text">
         <string>Overdrive</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QToolButton" name="pBtnFx4">
+      <widget class="QPushButton" name="pBtnFx4">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
        </property>
        <property name="text">
         <string>Reverb</string>
@@ -91,25 +150,49 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>30</y>
-      <width>91</width>
-      <height>181</height>
+      <x>10</x>
+      <y>10</y>
+      <width>581</width>
+      <height>101</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="pBtnDSPOnOff">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="text">
-        <string>DSP ON/OFF</string>
+        <string>DSP</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="text">
         <string>PLAY</string>
        </property>
@@ -117,6 +200,18 @@
      </item>
      <item>
       <widget class="QPushButton" name="pBtnExit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="text">
         <string>X</string>
        </property>

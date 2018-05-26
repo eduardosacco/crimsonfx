@@ -1,8 +1,13 @@
 #include "crimson.h"
 
+#include <QDebug>
+
 Crimson::Crimson(QObject *parent) :
     QObject(parent)
 {
+    crimsonSettings.setPath(QSettings::IniFormat,QSettings::UserScope, "crimsonSettings.ini");
+    qDebug() << crimsonSettings.fileName();
+
     //ACA TENGO QUE CONECTAR LA GILADA
     
     mainWindow = new MainWindow();
@@ -34,41 +39,19 @@ void Crimson::slot_exit()
 }
 
 //*****************************************************************
-//CRIMSONSETTINGS ADDRESSES
-//*****************************************************************
-//Direcciones para guardar parametros en settings
-
-//OVERDRIVE
-const QString Crimson::sOverdrive1Gain = "over/g";
-const QString Crimson::sOverdrive1Depth = "over/d";
-const QString Crimson::sOverdrive1Cutoff = "over/c";
-
-//REVERB
-const QString Crimson::sReverb1DryWet = "rev/dw";
-const QString Crimson::sReverb1Damping = "rev/d";
-const QString Crimson::sReverb1RoomSize = "rev/rs";
-
-//DELAY
-const QString Crimson::sDelay1Level = "del/l";
-const QString Crimson::sDelay1Delay = "del/d";
-const QString Crimson::sDelay1Feedback = "del/f";
-
-//*****************************************************************
 //INIT ALL FX PARAMETERS!!!
 //*****************************************************************
 void Crimson::initializeFxParameters()
 {
-     fxOverdrive1.gain = crimsonSettings.value(sOverdrive1Gain, 50).toInt();
-     fxOverdrive1.depth = crimsonSettings.value(sOverdrive1Depth,50).toInt();
-     fxOverdrive1.cutoff = crimsonSettings.value(sOverdrive1Cutoff, 50).toInt();
+    //ACA SOLO HABRIA QUE LEER CUAL FUE EL ULTIMO MAIN PRESET Y CARGARLO
 
-     fxDelay1.level = crimsonSettings.value(sDelay1Level,80).toInt();
-     fxDelay1.level = crimsonSettings.value(sDelay1Delay,22).toInt();
-     fxDelay1.feedback = crimsonSettings.value(sDelay1Feedback,15).toInt();
+     fx.overdrive1.gain  = crimsonSettings.value(fx.overdrive1.pdAddrGain , OVERDRIVE1DEFAULTG).toInt();
+     fx.overdrive1.depth = crimsonSettings.value(fx.overdrive1.pdAddrDepth,OVERDRIVE1DEFAULTD).toInt();
+     fx.overdrive1.cutoff = crimsonSettings.value(fx.overdrive1.pdAddrCuttof, OVERDRIVE1DEFAULTC).toInt();
 
-     fxReverb1.dryWet = crimsonSettings.value(sReverb1DryWet,80).toInt();
-     fxReverb1.roomSize = crimsonSettings.value(sReverb1RoomSize,30).toInt();
-     fxReverb1.damping = crimsonSettings.value(sReverb1Damping,25).toInt();
+     fx.reverb1.dryWet = crimsonSettings.value(fx.reverb1.pdAddrWet,REVERB1DEFAULTDW).toInt();
+     fx.reverb1.roomSize = crimsonSettings.value(fx.reverb1.pdAddrRoomSize,REVERB1DEFAULTRS).toInt();
+     fx.reverb1.damping = crimsonSettings.value(fx.reverb1.pdAddrDamping,REVERB1DEFAULTD).toInt();
 
 }
 
@@ -92,6 +75,7 @@ void Crimson::slot_fx8BandEqualizer_open()
 void Crimson::slot_fxReverb1_open()
 {
     dialogReverb1 = new DialogReverb1();
+    dialogReverb1->sendFxReverb1Param(fx.reverb1);
 
     //Conexiones con señales de mainWindow con dialogOverdrive1
     connect(dialogReverb1,SIGNAL(signal_dryWet_changed(int)),
@@ -100,27 +84,27 @@ void Crimson::slot_fxReverb1_open()
             this,SLOT(slot_fxReverb1_roomSize_changed(int)));
     connect(dialogReverb1,SIGNAL(signal_damping_changed(int)),
             this,SLOT(slot_fxReverb1_damping_changed(int)));
-
-    //Settings: Inicializar variables correspondientes
+    connect(dialogReverb1,SIGNAL(signal_preset_changed(int)),
+            this,SLOT(slot_fxReverb1_preset_changed(int)));
 
     dialogReverb1->show();
 }
 
 void Crimson::slot_fxReverb1_dryWet_changed(int position)
 {
-    fxReverb1.dryWet = position;
+    fx.reverb1.dryWet = position;
     comms.oscSendInt(Comms::oscReverb1DryWet, position);
 }
 
 void Crimson::slot_fxReverb1_roomSize_changed(int position)
 {
-    fxReverb1.roomSize = position;
+    fx.reverb1.roomSize = position;
     comms.oscSendInt(Comms::oscReverb1RoomSize, position);
 }
 
 void Crimson::slot_fxReverb1_damping_changed(int position)
 {
-    fxReverb1.damping = position;
+    fx.reverb1.damping = position;
     comms.oscSendInt(Comms::oscReverb1Damping, position);
 }
 
@@ -128,7 +112,7 @@ void Crimson::slot_fxReverb1_damping_changed(int position)
 void Crimson::slot_fxDelay1_open()
 {
     dialogDelay1 = new DialogDelay1();
-    dialogDelay1->sendFxDelay1Param(fxDelay1);
+    dialogDelay1->sendFxDelay1Param(fx.delay1);
 
     //Conexiones con señales de mainWindow con dialogOverdrive1
     connect(dialogDelay1,SIGNAL(signal_level_changed(int)),
@@ -137,33 +121,56 @@ void Crimson::slot_fxDelay1_open()
             this,SLOT(slot_fxDelay1_delay_changed(int)));
     connect(dialogDelay1,SIGNAL(signal_feedback_changed(int)),
             this,SLOT(slot_fxDelay1_feedback_changed(int)));
+    connect(dialogDelay1,SIGNAL(signal_preset_changed(int)),
+            this,SLOT(slot_fxDelay1_preset_changed(int)));
 
     dialogDelay1->show();
 }
 
 void Crimson::slot_fxDelay1_level_changed(int position)
 {
-    fxDelay1.level = position;
+//    float value = pos2Value(position,fx.delay1.)
+    fx.delay1.level = position;
     comms.oscSendInt(Comms::oscDelay1Level,position);
 }
 
 void Crimson::slot_fxDelay1_delay_changed(int position)
 {
-    fxDelay1.delay = position;
+    fx.delay1.delay = position;
     comms.oscSendInt(Comms::oscDelay1Delay,position);
 }
 
 void Crimson::slot_fxDelay1_feedback_changed(int position)
 {
-    fxDelay1.feedback = position;
+    fx.delay1.feedback = position;
     comms.oscSendInt(Comms::oscDelay1Feedback,position);
+}
+
+void Crimson::slot_fxDelay1_preset_changed(int preset)
+{
+    //Si este preset ya estaba seleccionado guardo la config actual
+    if(fx.delay1.preset == preset)
+    {
+        fx.delay1.level = crimsonSettings.setValue(
+                    QString(fx.delay1.pdAddrLevel).arg(preset),DELAY1DEFAULTL);
+        fx.delay1.level = crimsonSettings.setValue(
+                    QString(fx.delay1.pdAddrDelay).arg(preset),DELAY1DEFAULTD);
+        fx.delay1.feedback = crimsonSettings.value(
+                    QString(fx.delay1.pdAddrFeedback).arg(preset),DELAY1DEFAULTF).toInt());
+
+    }
+    //si no era el preset seleccionado cargo la configuracion guardada
+    else
+    {
+
+    }
 }
 
 //OVERDRIVE ***********************************************************
 void Crimson::slot_fxOverdrive1_open()
 {
     dialogOverdrive1 = new DialogOverdrive1();
-    dialogOverdrive1->sendFxOverdrive1Param(fxOverdrive1);
+    dialogOverdrive1->sendFxOverdrive1Param(fx.overdrive1);
 
     //Conexiones con señales de mainWindow con dialogOverdrive1
     connect(dialogOverdrive1,SIGNAL(signal_gain_changed(int)),
@@ -172,24 +179,43 @@ void Crimson::slot_fxOverdrive1_open()
             this,SLOT(slot_fxOverdrive1_depth_changed(int)));
     connect(dialogOverdrive1,SIGNAL(signal_cutoff_changed(int)),
             this,SLOT(slot_fxOverdrive1_cutoff_changed(int)));
+    connect(dialogOverdrive1,SIGNAL(signal_preset_changed(int)),
+            this,SLOT(slot_fxOverdrive_preset_changed(int)));
 
     dialogOverdrive1->show();
 }
 
 void Crimson::slot_fxOverdrive1_gain_changed(int position)
 {
-    fxOverdrive1.gain = position;
+//    float value = pos2Value(position,fx.overdrive1.minGain,fx.overdrive1.maxGain);
+    fx.overdrive1.gain = position;
     comms.oscSendInt(Comms::oscOverdrive1Gain,position);
 }
 
 void Crimson::slot_fxOverdrive1_depth_changed(int position)
 {
-    fxOverdrive1.depth = position;
+//    float value = pos2Value(position,fx.overdrive1.minDepth,fx.overdrive1.maxDepth);
+    fx.overdrive1.depth = position;
     comms.oscSendInt(Comms::oscOverdrive1Depth, position);
 }
 
 void Crimson::slot_fxOverdrive1_cutoff_changed(int position)
 {
-    fxOverdrive1.cutoff = position;
+//    float value = pos2Value(position,fx.overdrive1.minCutoff,fx.overdrive1.maxCutoff);
+    fx.overdrive1.cutoff = position;
     comms.oscSendInt(Comms::oscOverdrive1Cutoff,position);
+}
+
+void Crimson::changeMainPreset(int preset)
+{
+//    if(1)
+//        else
+
+}
+
+//Convertidor de posicion del dial de Qt a valor del efecto de Pd
+float Crimson::pos2Value(int pos, float minValue,float maxValue)
+{
+    float value = (pos/99)*(maxValue-minValue)+minValue;
+    return value;
 }

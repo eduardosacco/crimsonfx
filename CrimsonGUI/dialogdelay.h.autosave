@@ -1,0 +1,33 @@
+#ifndef DIALOGDELAY_H
+#define DIALOGDELAY_H
+
+#include <QDialog>
+
+namespace Ui {
+class DialogDelay;
+}
+
+class DialogDelay : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit DialogDelay(QWidget *parent = 0);
+    ~DialogDelay();
+    
+private slots:
+    void on_dialLevel_valueChanged(int value);
+    void on_dialDelay_valueChanged(int value);
+    void on_dialFeedback_valueChanged(int value);
+    
+signals:
+    void signal_level_changed(float value);
+    void signal_delay_changed(float value);
+    void signal_feedback_changed(float value);
+    
+
+private:
+    Ui::DialogDelay *ui;
+};
+
+#endif // DIALOGDELAY_H

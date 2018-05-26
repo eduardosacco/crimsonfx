@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QMAKE_CFLAGS += -std=gnu99
+QMAKE_CXXFLAGS += -std=gnu++11
+
 LIBS += -lwsock32
 
 QT       += core gui
@@ -23,7 +25,8 @@ SOURCES += main.cpp\
     comms.cpp \
     crimson.cpp \
     tinyosc.c \
-    dialogdelay1.cpp
+    dialogdelay1.cpp \
+    fx.cpp
 
 HEADERS  += mainwindow.h \
     dialogoverdrive1.h \
@@ -32,7 +35,7 @@ HEADERS  += mainwindow.h \
     crimson.h \
     tinyosc.h \
     dialogdelay1.h \
-    crimsontypes.h
+    fx.h
 
 FORMS    += mainwindow.ui \
     dialogoverdrive1.ui \
