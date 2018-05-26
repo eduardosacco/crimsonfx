@@ -67,19 +67,18 @@ typedef struct
 
 }Effect;
 
-//++++++++++ Enumerations ++++++++++
 //All effects
-enum {fxCompressor,fxDistortion,fxOverdrive,fxEqualizer,fxChorus,fxFlanger,fxReverb,fxDelay};
+enum {fxCompressor,fxDistortion,fxOverdrive,fxEqualizer,fxChorus,fxFlanger,fxReverb,fxDelay}; //8 Fx
 
 //Parameters for each effect
-enum {pCompRMSPeak,pCompThreshold,pCompRatio,pCompLookAhead,pCompResp,pCompGain};
-enum {pDistoGain,pDistoDepth,pDistoCutoff};
-enum {pOverGain,pOverDepth,pOverCutoff};
-enum {pEquPreamp,pEquBand1,pEquBand2,pEquBand3,pEquBand4,pEquBand5};
-enum {pChorusFF,pChorusDelay,pChorusFB,pChorusBlend};
-enum {pFlangerFF,pFlangerDelay,pFlangerFB,pFlangerBlend};
-enum {pDelLevel,pDelDelay,pDelFeedback};
-enum {pRevDryWet,pRevDamping,pRevRoomSize};
+enum {pCompThreshold,pCompRatio,pCompLookAhead,pCompResp,pCompGain};   //6
+enum {pDistoGain,pDistoDepth,pDistoCutoff};                                         //3
+enum {pOverGain,pOverDepth,pOverCutoff};                                            //3
+enum {pEquPreamp,pEquBand1,pEquBand2,pEquBand3,pEquBand4,pEquBand5};                //6
+enum {pChorusFF,pChorusDelay,pChorusFB,pChorusBlend};                               //4
+enum {pFlangerFF,pFlangerDelay,pFlangerFB,pFlangerBlend};                           //4
+enum {pDelLevel,pDelDelay,pDelFeedback};                                            //3
+enum {pRevDryWet,pRevRoomSize,pRevDamping};                                         //3
 
 
 

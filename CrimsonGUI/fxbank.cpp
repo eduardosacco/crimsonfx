@@ -13,14 +13,15 @@ FxBank::FxBank()
     //Compressor ++++++++++++++++++++++++++++++++++++++++++++++++++
     fx[fxCompressor].name = "Compressor";
     fx[fxCompressor].state = OFF;
-    fx[fxCompressor].nParam = 6;
+    fx[fxCompressor].nParam = 5;
     fx[fxCompressor].stateAddr = "comp/state";
     fx[fxCompressor].presetAddr = "comp/preset";
 
-    fx[fxCompressor].param[pCompRMSPeak].name = "RMS/Peak";
-    fx[fxCompressor].param[pCompRMSPeak].value = 0;
-    fx[fxCompressor].param[pCompRMSPeak].defValue = 0;
-    fx[fxCompressor].param[pCompRMSPeak].addr = "comp/rp";
+//    //No hace falta que el usuario pueda elegir entre RMS y Peak
+//    fx[fxCompressor].param[pCompRMSPeak].name = "RMS/Peak";
+//    fx[fxCompressor].param[pCompRMSPeak].value = 0;
+//    fx[fxCompressor].param[pCompRMSPeak].defValue = 0;
+//    fx[fxCompressor].param[pCompRMSPeak].addr = "comp/rp";
 
     fx[fxCompressor].param[pCompThreshold].name = "Threshold";
     fx[fxCompressor].param[pCompThreshold].value = 0;
@@ -32,15 +33,15 @@ FxBank::FxBank()
     fx[fxCompressor].param[pCompRatio].defValue = DEFAULTPVALUE;
     fx[fxCompressor].param[pCompRatio].addr = "comp/r";
 
-    fx[fxCompressor].param[pCompRatio].name = "Lookahead";
-    fx[fxCompressor].param[pCompRatio].value = 0;
-    fx[fxCompressor].param[pCompRatio].defValue = DEFAULTPVALUE;
-    fx[fxCompressor].param[pCompRatio].addr = "comp/l";
+    fx[fxCompressor].param[pCompLookAhead].name = "Lookahead";
+    fx[fxCompressor].param[pCompLookAhead].value = 0;
+    fx[fxCompressor].param[pCompLookAhead].defValue = DEFAULTPVALUE;
+    fx[fxCompressor].param[pCompLookAhead].addr = "comp/l";
 
-    fx[fxCompressor].param[pCompRatio].name = "Response";
-    fx[fxCompressor].param[pCompRatio].value = 0;
-    fx[fxCompressor].param[pCompRatio].defValue = DEFAULTPVALUE;
-    fx[fxCompressor].param[pCompRatio].addr = "comp/r";
+    fx[fxCompressor].param[pCompResp].name = "Response";
+    fx[fxCompressor].param[pCompResp].value = 0;
+    fx[fxCompressor].param[pCompResp].defValue = DEFAULTPVALUE;
+    fx[fxCompressor].param[pCompResp].addr = "comp/re";
 
     fx[fxCompressor].param[pCompGain].name = "Gain";
     fx[fxCompressor].param[pCompGain].value = 0;
@@ -94,7 +95,7 @@ FxBank::FxBank()
     //Equalizer ++++++++++++++++++++++++++++++++++++++++++++++++++
     fx[fxEqualizer].name = "Equalizer";
     fx[fxEqualizer].state = OFF;
-    fx[fxEqualizer].nParam = 5;
+    fx[fxEqualizer].nParam = 6;
     fx[fxEqualizer].stateAddr = "equ/state";
     fx[fxEqualizer].presetAddr = "equ/preset";
 
@@ -124,9 +125,9 @@ FxBank::FxBank()
     fx[fxEqualizer].param[pEquBand4].addr = "equ/b4";
 
     fx[fxEqualizer].param[pEquBand5].name = "Band 5";
-    fx[fxEqualizer].param[pEquBand4].value = 0;
-    fx[fxEqualizer].param[pEquBand4].defValue = DEFAULTPVALUE;
-    fx[fxEqualizer].param[pEquBand4].addr = "equ/b5";
+    fx[fxEqualizer].param[pEquBand5].value = 0;
+    fx[fxEqualizer].param[pEquBand5].defValue = DEFAULTPVALUE;
+    fx[fxEqualizer].param[pEquBand5].addr = "equ/b5";
 
     //Chorus ++++++++++++++++++++++++++++++++++++++++++++++++++
     fx[fxChorus].name = "Chorus";

@@ -24,7 +24,7 @@ DialogFx::~DialogFx()
     delete ui;
 }
 
-void DialogFx::dialogSettings(int fxNum,Effect fx)
+void DialogFx::dialogSettings(int fxNum, Effect fx)
 {           
     //Aca hay que inicializar los botones de encendido y apagado de los
     // efectos y del preset en el que esten
@@ -92,7 +92,7 @@ void DialogFx::dialogSettings(int fxNum,Effect fx)
     }
     if(fx.nParam >= 6)
     {
-        lblDial4->setText(QString(fx.param[PARAM5].name));
+        lblDial5->setText(QString(fx.param[PARAM5].name));
         row3->addWidget(dial5);
         row4->addWidget(lblDial5);
         connect(dial5,SIGNAL(valueChanged(int)),
@@ -105,9 +105,7 @@ void DialogFx::dialogSettings(int fxNum,Effect fx)
 void DialogFx::updateFxState(bool state)
 {
     //Actualizar la GUI con los estados de los efectos
-
     setPBtnStyle(ui->btnOnOff,state);
-
 }
 
 void DialogFx::setDialValues(Effect fx)

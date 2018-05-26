@@ -456,7 +456,9 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: resources.qrc \
 		/opt/qtrpi/raspi/qt5/bin/rcc \
+		img/save.png \
 		img/crimsonLogo.png \
+		img/crimsonSplash.png \
 		img/back.png \
 		img/onOff.png \
 		img/settings.png
@@ -1051,8 +1053,11 @@ main.o: main.cpp crimson.h \
 		/opt/qtrpi/raspi/qt5pi/include/QtGui/qguiapplication.h \
 		/opt/qtrpi/raspi/qt5pi/include/QtGui/qinputmethod.h \
 		/opt/qtrpi/raspi/qt5pi/include/QtCore/QFile \
+		/opt/qtrpi/raspi/qt5pi/include/QtCore/QTime \
+		/opt/qtrpi/raspi/qt5pi/include/QtCore/qdatetime.h \
 		/opt/qtrpi/raspi/qt5pi/include/QtCore/QDateTime \
-		/opt/qtrpi/raspi/qt5pi/include/QtCore/qdatetime.h
+		/opt/qtrpi/raspi/qt5pi/include/QtWidgets/QSplashScreen \
+		/opt/qtrpi/raspi/qt5pi/include/QtWidgets/qsplashscreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \

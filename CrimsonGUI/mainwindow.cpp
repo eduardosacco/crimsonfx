@@ -30,7 +30,7 @@ void MainWindow::updateFxState(int fxNum, bool state)
         setPBtnStyle(ui->btnCompressorState,state);
         break;
     case fxDistortion:
-        setPBtnStyle(ui->btnOverdrive1State,state);
+        setPBtnStyle(ui->btnDistortionState,state);
         break;
     case fxOverdrive:
         setPBtnStyle(ui->btnOverdrive1State,state);
@@ -39,10 +39,10 @@ void MainWindow::updateFxState(int fxNum, bool state)
         setPBtnStyle(ui->btnEqualizerState,state);
         break;
     case fxChorus:
-        setPBtnStyle(ui->btnReverb1State,state);
+        setPBtnStyle(ui->btnChorusState,state);
         break;
     case fxFlanger:
-        setPBtnStyle(ui->btnDelay1State,state);
+        setPBtnStyle(ui->btnFlangerState,state);
         break;
     case fxReverb:
         setPBtnStyle(ui->btnReverb1State,state);
@@ -119,6 +119,7 @@ void MainWindow::on_btnDistortionSettings_released()
     emit signal_dialogFx_open(fxDistortion);
 }
 
+//++++++++++ Flanger ++++++++++
 void MainWindow::on_btnFlangerState_released()
 {
     emit signal_fx_state_toggled(fxFlanger);
@@ -129,6 +130,7 @@ void MainWindow::on_btnFlangerSettings_released()
     emit signal_dialogFx_open(fxFlanger);
 }
 
+//++++++++++ Chorus ++++++++++
 void MainWindow::on_btnChorusState_released()
 {
     emit signal_fx_state_toggled(fxChorus);
@@ -139,6 +141,7 @@ void MainWindow::on_btnChorusSettings_released()
     emit signal_dialogFx_open(fxChorus);
 }
 
+//++++++++++ Presets ++++++++++
 void MainWindow::on_btnPreset1_released()
 {
     bankPresetSelector(1);

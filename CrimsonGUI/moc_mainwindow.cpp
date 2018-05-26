@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[25];
-    char stringdata0[571];
+    QByteArrayData data[31];
+    char stringdata0[757];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,21 +39,27 @@ QT_MOC_LITERAL(6, 82, 6), // "preset"
 QT_MOC_LITERAL(7, 89, 19), // "signal_preset_saved"
 QT_MOC_LITERAL(8, 109, 30), // "on_btnCompressorState_released"
 QT_MOC_LITERAL(9, 140, 33), // "on_btnCompressorSettings_rele..."
-QT_MOC_LITERAL(10, 174, 30), // "on_btnOverdrive1State_released"
-QT_MOC_LITERAL(11, 205, 33), // "on_btnOverdrive1Settings_rele..."
-QT_MOC_LITERAL(12, 239, 29), // "on_btnEqualizerState_released"
-QT_MOC_LITERAL(13, 269, 27), // "on_btnEqualizerSet_released"
-QT_MOC_LITERAL(14, 297, 27), // "on_btnReverb1State_released"
-QT_MOC_LITERAL(15, 325, 30), // "on_btnReverb1Settings_released"
-QT_MOC_LITERAL(16, 356, 26), // "on_btnDelay1State_released"
-QT_MOC_LITERAL(17, 383, 29), // "on_btnDelay1Settings_released"
-QT_MOC_LITERAL(18, 413, 22), // "on_btnPreset1_released"
-QT_MOC_LITERAL(19, 436, 22), // "on_btnPreset2_released"
-QT_MOC_LITERAL(20, 459, 22), // "on_btnPreset3_released"
-QT_MOC_LITERAL(21, 482, 22), // "on_btnPreset4_released"
-QT_MOC_LITERAL(22, 505, 22), // "on_btnPreset5_released"
-QT_MOC_LITERAL(23, 528, 22), // "on_btnPreset6_released"
-QT_MOC_LITERAL(24, 551, 19) // "on_btnSave_released"
+QT_MOC_LITERAL(10, 174, 30), // "on_btnDistortionState_released"
+QT_MOC_LITERAL(11, 205, 33), // "on_btnDistortionSettings_rele..."
+QT_MOC_LITERAL(12, 239, 30), // "on_btnOverdrive1State_released"
+QT_MOC_LITERAL(13, 270, 33), // "on_btnOverdrive1Settings_rele..."
+QT_MOC_LITERAL(14, 304, 29), // "on_btnEqualizerState_released"
+QT_MOC_LITERAL(15, 334, 32), // "on_btnEqualizerSettings_released"
+QT_MOC_LITERAL(16, 367, 27), // "on_btnReverb1State_released"
+QT_MOC_LITERAL(17, 395, 30), // "on_btnReverb1Settings_released"
+QT_MOC_LITERAL(18, 426, 26), // "on_btnChorusState_released"
+QT_MOC_LITERAL(19, 453, 29), // "on_btnChorusSettings_released"
+QT_MOC_LITERAL(20, 483, 27), // "on_btnFlangerState_released"
+QT_MOC_LITERAL(21, 511, 30), // "on_btnFlangerSettings_released"
+QT_MOC_LITERAL(22, 542, 26), // "on_btnDelay1State_released"
+QT_MOC_LITERAL(23, 569, 29), // "on_btnDelay1Settings_released"
+QT_MOC_LITERAL(24, 599, 22), // "on_btnPreset1_released"
+QT_MOC_LITERAL(25, 622, 22), // "on_btnPreset2_released"
+QT_MOC_LITERAL(26, 645, 22), // "on_btnPreset3_released"
+QT_MOC_LITERAL(27, 668, 22), // "on_btnPreset4_released"
+QT_MOC_LITERAL(28, 691, 22), // "on_btnPreset5_released"
+QT_MOC_LITERAL(29, 714, 22), // "on_btnPreset6_released"
+QT_MOC_LITERAL(30, 737, 19) // "on_btnSave_released"
 
     },
     "MainWindow\0signal_fx_state_toggled\0\0"
@@ -61,12 +67,18 @@ QT_MOC_LITERAL(24, 551, 19) // "on_btnSave_released"
     "preset\0signal_preset_saved\0"
     "on_btnCompressorState_released\0"
     "on_btnCompressorSettings_released\0"
+    "on_btnDistortionState_released\0"
+    "on_btnDistortionSettings_released\0"
     "on_btnOverdrive1State_released\0"
     "on_btnOverdrive1Settings_released\0"
     "on_btnEqualizerState_released\0"
-    "on_btnEqualizerSet_released\0"
+    "on_btnEqualizerSettings_released\0"
     "on_btnReverb1State_released\0"
     "on_btnReverb1Settings_released\0"
+    "on_btnChorusState_released\0"
+    "on_btnChorusSettings_released\0"
+    "on_btnFlangerState_released\0"
+    "on_btnFlangerSettings_released\0"
     "on_btnDelay1State_released\0"
     "on_btnDelay1Settings_released\0"
     "on_btnPreset1_released\0on_btnPreset2_released\0"
@@ -82,7 +94,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      21,   14, // methods
+      27,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -90,29 +102,35 @@ static const uint qt_meta_data_MainWindow[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  119,    2, 0x06 /* Public */,
-       4,    1,  122,    2, 0x06 /* Public */,
-       5,    1,  125,    2, 0x06 /* Public */,
-       7,    0,  128,    2, 0x06 /* Public */,
+       1,    1,  149,    2, 0x06 /* Public */,
+       4,    1,  152,    2, 0x06 /* Public */,
+       5,    1,  155,    2, 0x06 /* Public */,
+       7,    0,  158,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,  129,    2, 0x08 /* Private */,
-       9,    0,  130,    2, 0x08 /* Private */,
-      10,    0,  131,    2, 0x08 /* Private */,
-      11,    0,  132,    2, 0x08 /* Private */,
-      12,    0,  133,    2, 0x08 /* Private */,
-      13,    0,  134,    2, 0x08 /* Private */,
-      14,    0,  135,    2, 0x08 /* Private */,
-      15,    0,  136,    2, 0x08 /* Private */,
-      16,    0,  137,    2, 0x08 /* Private */,
-      17,    0,  138,    2, 0x08 /* Private */,
-      18,    0,  139,    2, 0x08 /* Private */,
-      19,    0,  140,    2, 0x08 /* Private */,
-      20,    0,  141,    2, 0x08 /* Private */,
-      21,    0,  142,    2, 0x08 /* Private */,
-      22,    0,  143,    2, 0x08 /* Private */,
-      23,    0,  144,    2, 0x08 /* Private */,
-      24,    0,  145,    2, 0x08 /* Private */,
+       8,    0,  159,    2, 0x08 /* Private */,
+       9,    0,  160,    2, 0x08 /* Private */,
+      10,    0,  161,    2, 0x08 /* Private */,
+      11,    0,  162,    2, 0x08 /* Private */,
+      12,    0,  163,    2, 0x08 /* Private */,
+      13,    0,  164,    2, 0x08 /* Private */,
+      14,    0,  165,    2, 0x08 /* Private */,
+      15,    0,  166,    2, 0x08 /* Private */,
+      16,    0,  167,    2, 0x08 /* Private */,
+      17,    0,  168,    2, 0x08 /* Private */,
+      18,    0,  169,    2, 0x08 /* Private */,
+      19,    0,  170,    2, 0x08 /* Private */,
+      20,    0,  171,    2, 0x08 /* Private */,
+      21,    0,  172,    2, 0x08 /* Private */,
+      22,    0,  173,    2, 0x08 /* Private */,
+      23,    0,  174,    2, 0x08 /* Private */,
+      24,    0,  175,    2, 0x08 /* Private */,
+      25,    0,  176,    2, 0x08 /* Private */,
+      26,    0,  177,    2, 0x08 /* Private */,
+      27,    0,  178,    2, 0x08 /* Private */,
+      28,    0,  179,    2, 0x08 /* Private */,
+      29,    0,  180,    2, 0x08 /* Private */,
+      30,    0,  181,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -121,6 +139,12 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -154,21 +178,27 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->signal_preset_saved(); break;
         case 4: _t->on_btnCompressorState_released(); break;
         case 5: _t->on_btnCompressorSettings_released(); break;
-        case 6: _t->on_btnOverdrive1State_released(); break;
-        case 7: _t->on_btnOverdrive1Settings_released(); break;
-        case 8: _t->on_btnEqualizerState_released(); break;
-        case 9: _t->on_btnEqualizerSet_released(); break;
-        case 10: _t->on_btnReverb1State_released(); break;
-        case 11: _t->on_btnReverb1Settings_released(); break;
-        case 12: _t->on_btnDelay1State_released(); break;
-        case 13: _t->on_btnDelay1Settings_released(); break;
-        case 14: _t->on_btnPreset1_released(); break;
-        case 15: _t->on_btnPreset2_released(); break;
-        case 16: _t->on_btnPreset3_released(); break;
-        case 17: _t->on_btnPreset4_released(); break;
-        case 18: _t->on_btnPreset5_released(); break;
-        case 19: _t->on_btnPreset6_released(); break;
-        case 20: _t->on_btnSave_released(); break;
+        case 6: _t->on_btnDistortionState_released(); break;
+        case 7: _t->on_btnDistortionSettings_released(); break;
+        case 8: _t->on_btnOverdrive1State_released(); break;
+        case 9: _t->on_btnOverdrive1Settings_released(); break;
+        case 10: _t->on_btnEqualizerState_released(); break;
+        case 11: _t->on_btnEqualizerSettings_released(); break;
+        case 12: _t->on_btnReverb1State_released(); break;
+        case 13: _t->on_btnReverb1Settings_released(); break;
+        case 14: _t->on_btnChorusState_released(); break;
+        case 15: _t->on_btnChorusSettings_released(); break;
+        case 16: _t->on_btnFlangerState_released(); break;
+        case 17: _t->on_btnFlangerSettings_released(); break;
+        case 18: _t->on_btnDelay1State_released(); break;
+        case 19: _t->on_btnDelay1Settings_released(); break;
+        case 20: _t->on_btnPreset1_released(); break;
+        case 21: _t->on_btnPreset2_released(); break;
+        case 22: _t->on_btnPreset3_released(); break;
+        case 23: _t->on_btnPreset4_released(); break;
+        case 24: _t->on_btnPreset5_released(); break;
+        case 25: _t->on_btnPreset6_released(); break;
+        case 26: _t->on_btnSave_released(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -230,13 +260,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 21)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 27;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 21)
+        if (_id < 27)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 21;
+        _id -= 27;
     }
     return _id;
 }
