@@ -5,9 +5,8 @@
 #-------------------------------------------------
 
 QMAKE_CFLAGS += -std=gnu99
+QMAKE_LFLAGS += -no-pie
 QMAKE_CXXFLAGS += -std=gnu++11
-
-LIBS += -lwsock32
 
 QT       += core gui
 QT       += network
@@ -22,16 +21,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     comms.cpp \
     crimson.cpp \
-    tinyosc.c \
     fxbank.cpp \
-    dialogfx.cpp
+    dialogfx.cpp \
+    tinyosc.c
 
 HEADERS  += mainwindow.h \
     comms.h \
     crimson.h \
-    tinyosc.h \
     fxbank.h \
-    dialogfx.h
+    dialogfx.h \
+    tinyosc.h
 
 FORMS    += mainwindow.ui \
     dialogfx.ui
