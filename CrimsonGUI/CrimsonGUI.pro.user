@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.5.0, 2018-04-20T14:34:45. -->
+<!-- Written by QtCreator 4.5.0, 2018-04-20T14:33:43. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -242,7 +242,7 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">CrimsonGUI</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">CrimsonGUI2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/nacho/Google Drive/CRIMSON EFFECTS/Qt/CrimsonGUI 2.1.x PRE MOD TINYOSC/CrimsonGUI.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/nacho/Google Drive/CRIMSON EFFECTS/Qt/CrimsonGUI 2.2 QT ENDIANNESS/CrimsonGUI.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">CrimsonGUI.pro</value>

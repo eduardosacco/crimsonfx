@@ -19,23 +19,30 @@
 #include <string.h>
 #include <stdio.h>
 
-#if _WIN32
-#include <winsock2.h>
-#define tosc_strncpy(_dst, _src, _len) strncpy_s(_dst, _len, _src, _TRUNCATE)
-#define htonll(x) ((1==htonl(1)) ? (x) : (((uint64_t)htonl((x) & 0xFFFFFFFFUL)) << 32) | htonl((uint32_t)((x) >> 32)))
-#define ntohll(x) ((1==ntohl(1)) ? (x) : (((uint64_t)ntohl((x) & 0xFFFFFFFFUL)) << 32) | ntohl((uint32_t)((x) >> 32)))
+//#if _WIN32
+//#include <winsock2.h>
+//#define tosc_strncpy(_dst, _src, _len) strncpy_s(_dst, _len, _src, _TRUNCATE)
+//#define htonll(x) ((1==htonl(1)) ? (x) : (((uint64_t)htonl((x) & 0xFFFFFFFFUL)) << 32) | htonl((uint32_t)((x) >> 32)))
+//#define ntohll(x) ((1==ntohl(1)) ? (x) : (((uint64_t)ntohl((x) & 0xFFFFFFFFUL)) << 32) | ntohl((uint32_t)((x) >> 32)))
 
-#else
-#include <netinet/in.h>
-#define tosc_strncpy(_dst, _src, _len) strncpy(_dst, _src, _len)
-#endif
-#if __unix__ && !__APPLE__
-#include <endian.h>
-#define htonll(x) htobe64(x)
-#define ntohll(x) be64toh(x)
-#endif
+//#else
+//#include <netinet/in.h>
+//#define tosc_strncpy(_dst, _src, _len) strncpy(_dst, _src, _len)
+//#endif
+//#if __unix__ && !__APPLE__
+//#include <endian.h>
+//#define htonll(x) htobe64(x)
+//#define ntohll(x) be64toh(x)
+//#endif
+
+//htonl qtobigendian
+//ntohl qfrombigendian
+
+#include <qendian.h>
 
 #include "tinyosc.h"
+
+
 
 #define BUNDLE_ID 0x2362756E646C6500L // "#bundle"
 
@@ -63,7 +70,7 @@ int tosc_parseMessage(tosc_message *o, char *buffer, const int len) {
 
 // check if first eight bytes are '#bundle '
 bool tosc_isBundle(const char *buffer) {
-  return ((*(const int64_t *) buffer) == htonll(BUNDLE_ID));
+  return ((*(const int64_t *) buffer) == qToBigEndian(BUNDLE_ID));
 }
 
 void tosc_parseBundle(tosc_bundle *b, char *buffer, const int len) {
@@ -83,7 +90,7 @@ uint32_t tosc_getBundleLength(tosc_bundle *b) {
 
 bool tosc_getNextMessage(tosc_bundle *b, tosc_message *o) {
   if ((b->marker - b->buffer) >= b->bundleLen) return false;
-  uint32_t len = (uint32_t) ntohl(*((int32_t *) b->marker));
+  uint32_t len = (uint32_t) qFromBigEndian(*((int32_t *) b->marker));
   tosc_parseMessage(o, b->marker+4, len);
   b->marker += (4 + len); // move marker to next bundle element
   return true;
@@ -103,13 +110,13 @@ uint32_t tosc_getLength(tosc_message *o) {
 
 int32_t tosc_getNextInt32(tosc_message *o) {
   // convert from big-endian (network btye order)
-  const int32_t i = (int32_t) ntohl(*((uint32_t *) o->marker));
+  const int32_t i = (int32_t) qFromBigEndian(*((uint32_t *) o->marker));
   o->marker += 4;
   return i;
 }
 
 int64_t tosc_getNextInt64(tosc_message *o) {
-  const int64_t i = (int64_t) ntohll(*((uint64_t *) o->marker));
+  const int64_t i = (int64_t) qFromBigEndian(*((uint64_t *) o->marker));
   o->marker += 8;
   return i;
 }
@@ -120,13 +127,13 @@ uint64_t tosc_getNextTimetag(tosc_message *o) {
 
 float tosc_getNextFloat(tosc_message *o) {
   // convert from big-endian (network btye order)
-  const uint32_t i = ntohl(*((uint32_t *) o->marker));
+  const uint32_t i = qFromBigEndian(*((uint32_t *) o->marker));
   o->marker += 4;
   return *((float *) (&i));
 }
 
 double tosc_getNextDouble(tosc_message *o) {
-  const uint64_t i = ntohll(*((uint64_t *) o->marker));
+  const uint64_t i = qFromBigEndian(*((uint64_t *) o->marker));
   o->marker += 8;
   return *((double *) (&i));
 }
@@ -141,7 +148,7 @@ const char *tosc_getNextString(tosc_message *o) {
 }
 
 void tosc_getNextBlob(tosc_message *o, const char **buffer, int *len) {
-  int i = (int) ntohl(*((uint32_t *) o->marker)); // get the blob length
+  int i = (int) qFromBigEndian(*((uint32_t *) o->marker)); // get the blob length
   if (o->marker + 4 + i <= o->buffer + o->len) {
     *len = i; // length of blob
     *buffer = o->marker + 4;
@@ -160,8 +167,8 @@ unsigned char *tosc_getNextMidi(tosc_message *o) {
 }
 
 void tosc_writeBundle(tosc_bundle *b, uint64_t timetag, char *buffer, const int len) {
-  *((uint64_t *) buffer) = htonll(BUNDLE_ID);
-  *((uint64_t *) (buffer + 8)) = htonll(timetag);
+  *((uint64_t *) buffer) = qToBigEndian(BUNDLE_ID);
+  *((uint64_t *) (buffer + 8)) = qToBigEndian(timetag);
 
   b->buffer = buffer;
   b->marker = buffer + 16;
@@ -189,7 +196,7 @@ static uint32_t tosc_vwrite(char *buffer, const int len,
         const uint32_t n = (uint32_t) va_arg(ap, int); // length of blob
         if (i + 4 + n > len) return -3;
         char *b = (char *) va_arg(ap, void *); // pointer to binary data
-        *((uint32_t *) (buffer+i)) = htonl(n); i += 4;
+        *((uint32_t *) (buffer+i)) = qToBigEndian(n); i += 4;
         memcpy(buffer+i, b, n);
         i = (i + 3 + n) & ~0x3;
         break;
@@ -197,21 +204,21 @@ static uint32_t tosc_vwrite(char *buffer, const int len,
       case 'f': {
         if (i + 4 > len) return -3;
         const float f = (float) va_arg(ap, double);
-        *((uint32_t *) (buffer+i)) = htonl(*((uint32_t *) &f));
+        *((uint32_t *) (buffer+i)) = qToBigEndian(*((uint32_t *) &f));
         i += 4;
         break;
       }
       case 'd': {
         if (i + 8 > len) return -3;
         const double f = (double) va_arg(ap, double);
-        *((uint64_t *) (buffer+i)) = htonll(*((uint64_t *) &f));
+        *((uint64_t *) (buffer+i)) = qToBigEndian(*((uint64_t *) &f));
         i += 8;
         break;
       }
       case 'i': {
         if (i + 4 > len) return -3;
         const uint32_t k = (uint32_t) va_arg(ap, int);
-        *((uint32_t *) (buffer+i)) = htonl(k);
+        *((uint32_t *) (buffer+i)) = qToBigEndian(k);
         i += 4;
         break;
       }
@@ -226,7 +233,7 @@ static uint32_t tosc_vwrite(char *buffer, const int len,
       case 'h': {
         if (i + 8 > len) return -3;
         const uint64_t k = (uint64_t) va_arg(ap, long long);
-        *((uint64_t *) (buffer+i)) = htonll(k);
+        *((uint64_t *) (buffer+i)) = qToBigEndian(k);
         i += 8;
         break;
       }
@@ -258,7 +265,7 @@ uint32_t tosc_writeNextMessage(tosc_bundle *b,
   const uint32_t i = tosc_vwrite(
       b->marker+4, b->bufLen-b->bundleLen-4, address, format, ap);
   va_end(ap);
-  *((uint32_t *) b->marker) = htonl(i); // write the length of the message
+  *((uint32_t *) b->marker) = qToBigEndian(i); // write the length of the message
   b->marker += (4 + i);
   b->bundleLen += (4 + i);
   return i;
