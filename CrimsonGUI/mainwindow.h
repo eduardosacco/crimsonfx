@@ -28,17 +28,29 @@ private slots:
     void on_btnCompressorState_released();
     void on_btnCompressorSettings_released();
 
+    //Distortion
+    void on_btnDistortionState_released();
+    void on_btnDistortionSettings_released();
+
     //Overdrive
     void on_btnOverdrive1State_released();
     void on_btnOverdrive1Settings_released();
 
     //8Band Eq
     void on_btnEqualizerState_released();
-    void on_btnEqualizerSet_released();
+    void on_btnEqualizerSettings_released();
 
     //Reverb
     void on_btnReverb1State_released();
     void on_btnReverb1Settings_released();
+
+    //Chorus
+    void on_btnChorusState_released();
+    void on_btnChorusSettings_released();
+
+    //Flanger
+    void on_btnFlangerState_released();
+    void on_btnFlangerSettings_released();
 
     //Delay
     void on_btnDelay1State_released();

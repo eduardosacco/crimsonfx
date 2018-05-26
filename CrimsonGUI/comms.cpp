@@ -7,24 +7,6 @@
 
 //Direcciones OSC para envio de parametros
 
-//OVERDRIVE
- const QString Comms::oscOverdrive1State = "/over/x";
- const QString Comms::oscOverdrive1Gain = "/over/g";
- const QString Comms::oscOverdrive1Depth = "/over/d";
- const QString Comms::oscOverdrive1Cutoff = "/over/c";
-
-//REVERB
- const QString Comms::oscReverb1State = "/rev/x";
- const QString Comms::oscReverb1DryWet = "/rev/dw";
- const QString Comms::oscReverb1Damping = "/rev/d";
- const QString Comms::oscReverb1RoomSize = "/rev/rs";
-
-//DELAY
- const QString Comms::oscDelay1State = "/del/x";
- const QString Comms::oscDelay1Level = "/del/l";
- const QString Comms::oscDelay1Delay = "/del/d";
- const QString Comms::oscDelay1Feedback = "/del/f";
-
 Comms::Comms(QObject *parent) :
     QObject(parent)
 {

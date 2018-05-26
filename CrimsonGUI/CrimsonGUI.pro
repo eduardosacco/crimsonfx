@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QMAKE_CFLAGS += -std=gnu99
-QMAKE_LFLAGS += -no-pie
+#QMAKE_LFLAGS += -no-pie
 QMAKE_CXXFLAGS += -std=gnu++11
 
 QT       += core gui
@@ -39,3 +39,6 @@ OTHER_FILES +=
 
 RESOURCES += \
     resources.qrc
+
+target.path = /home/pi/
+INSTALLS += target

@@ -10,9 +10,10 @@
 #define PARAM2 2
 #define PARAM3 3
 #define PARAM4 4
+#define PARAM5 5
 
-#define MAXEFFECTS 5
-#define MAXPARAM 5
+#define MAXEFFECTS 8
+#define MAXPARAM 6
 
 //Valores por defecto de carga de settings
 #define DEFAULTPRESET 1
@@ -66,13 +67,20 @@ typedef struct
 
 }Effect;
 
-//Enums
-enum {fxCompressor,fxOverdrive,fxEqualizer,fxReverb,fxDelay};
-enum {pCompThreshold,pCompRatio,pCompGain};//faltan, ver dsps
-enum {pEquPreamp,pEquBand1,pEquBand2,pEquBand3,pEquBand4};//faltan, ver dsps
+//++++++++++ Enumerations ++++++++++
+//All effects
+enum {fxCompressor,fxDistortion,fxOverdrive,fxEqualizer,fxChorus,fxFlanger,fxReverb,fxDelay};
+
+//Parameters for each effect
+enum {pCompRMSPeak,pCompThreshold,pCompRatio,pCompLookAhead,pCompResp,pCompGain};
+enum {pDistoGain,pDistoDepth,pDistoCutoff};
 enum {pOverGain,pOverDepth,pOverCutoff};
-enum {pRevDryWet,pRevDamping,pRevRoomSize};
+enum {pEquPreamp,pEquBand1,pEquBand2,pEquBand3,pEquBand4,pEquBand5};
+enum {pChorusFF,pChorusDelay,pChorusFB,pChorusBlend};
+enum {pFlangerFF,pFlangerDelay,pFlangerFB,pFlangerBlend};
 enum {pDelLevel,pDelDelay,pDelFeedback};
+enum {pRevDryWet,pRevDamping,pRevRoomSize};
+
 
 
 //*****************************************************************
@@ -84,7 +92,6 @@ class FxBank
 public:
     FxBank();
 
-//    bool isDirty;
     int preset;
     const char *presetAddr;
     Effect fx[MAXEFFECTS];

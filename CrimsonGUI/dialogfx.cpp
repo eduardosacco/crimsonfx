@@ -14,6 +14,7 @@ DialogFx::DialogFx(QWidget *parent) :
     dial2->setNotchesVisible(true);
     dial3->setNotchesVisible(true);
     dial4->setNotchesVisible(true);
+    dial5->setNotchesVisible(true);
 
     ui->setupUi(this);
 }
@@ -35,6 +36,9 @@ void DialogFx::dialogSettings(int fxNum,Effect fx)
 
     //Esta funcion debe crear dinamicamente
     //los widgets necesarios para cada efecto
+
+    //pongo el nombre del efecto en el gui
+    ui->lblFx->setText(fx.name);
 
     ui->vLayout->addLayout(row1); //hehe rowOne a Star Wars Stwory
     ui->vLayout->addLayout(row2);
@@ -64,8 +68,8 @@ void DialogFx::dialogSettings(int fxNum,Effect fx)
 
         lblDial2->setText(QString(fx.param[PARAM2].name));
         dial2->setValue(fx.param[PARAM2].value);
-        row3->addWidget(dial2);
-        row4->addWidget(lblDial2);
+        row1->addWidget(dial2);
+        row2->addWidget(lblDial2);
         connect(dial2,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial2_valueChanged(int)));
     }
@@ -85,6 +89,14 @@ void DialogFx::dialogSettings(int fxNum,Effect fx)
         row4->addWidget(lblDial4);
         connect(dial4,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial4_valueChanged(int)));
+    }
+    if(fx.nParam >= 6)
+    {
+        lblDial4->setText(QString(fx.param[PARAM5].name));
+        row3->addWidget(dial5);
+        row4->addWidget(lblDial5);
+        connect(dial5,SIGNAL(valueChanged(int)),
+                this,SLOT(slot_dial5_valueChanged(int)));
     }
 
     this->show();
@@ -120,6 +132,10 @@ void DialogFx::setDialValues(Effect fx)
     {
         dial4->setValue(fx.param[PARAM4].value);
     }
+    if(fx.nParam >= 6)
+    {
+        dial5->setValue(fx.param[PARAM5].value);
+    }
 }
 
 void DialogFx::slot_dial0_valueChanged(int position)
@@ -145,6 +161,11 @@ void DialogFx::slot_dial3_valueChanged(int position)
 void DialogFx::slot_dial4_valueChanged(int position)
 {
     emit signal_fx_param_changed(effect,PARAM4,position);
+}
+
+void DialogFx::slot_dial5_valueChanged(int position)
+{
+    emit signal_fx_param_changed(effect,PARAM5,position);
 }
 
 void DialogFx::on_btnOnOff_released()

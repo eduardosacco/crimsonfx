@@ -31,6 +31,7 @@ private slots:
     void slot_dial2_valueChanged(int position);
     void slot_dial3_valueChanged(int position);
     void slot_dial4_valueChanged(int position);
+    void slot_dial5_valueChanged(int position);
 
     void on_btnClose_released();
 
@@ -51,12 +52,14 @@ private:
     QDial *dial2 = new QDial;
     QDial *dial3 = new QDial;
     QDial *dial4 = new QDial;
+    QDial *dial5 = new QDial;
 
     QLabel *lblDial0 = new QLabel;
     QLabel *lblDial1 = new QLabel;
     QLabel *lblDial2 = new QLabel;
     QLabel *lblDial3 = new QLabel;
     QLabel *lblDial4 = new QLabel;
+    QLabel *lblDial5 = new QLabel;
 
 
     QHBoxLayout *row1 = new QHBoxLayout;

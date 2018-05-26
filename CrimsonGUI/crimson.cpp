@@ -169,8 +169,8 @@ void Crimson::slot_dialogFx_open(int fx)
 
     connect(dialogFx,SIGNAL(signal_fx_state_changed(int)),
             this,SLOT(slot_fx_state_changed(int)));
-    connect(dialogFx,SIGNAL(signal_fx_preset_changed(int,int)),
-            this,SLOT(slot_fx_preset_changed(int,int)));
+//    connect(dialogFx,SIGNAL(signal_fx_preset_changed(int,int)),
+//            this,SLOT(slot_fx_preset_changed(int,int))); //Cambio en la mejora
     connect(dialogFx,SIGNAL(signal_fx_param_changed(int,int,int)),
             this,SLOT(slot_fx_param_changed(int,int,int)));
     connect(dialogFx,SIGNAL(signal_destroyed()),
@@ -180,7 +180,7 @@ void Crimson::slot_dialogFx_open(int fx)
 
 void Crimson::slot_dialogFx_closed()
 {
-    dialogFx = NULL;\
+    dialogFx = NULL;//
 }
 
 

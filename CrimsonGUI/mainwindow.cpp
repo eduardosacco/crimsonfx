@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);    
-//    ui->label->setPixmap(*crimsonLogo);
+//    ui->label->setPixmap(*crimsonLogo); //no hace falta por que esta puesto en el ui file
 }
 
 MainWindow::~MainWindow()
@@ -29,11 +29,20 @@ void MainWindow::updateFxState(int fxNum, bool state)
     case fxCompressor:
         setPBtnStyle(ui->btnCompressorState,state);
         break;
+    case fxDistortion:
+        setPBtnStyle(ui->btnOverdrive1State,state);
+        break;
     case fxOverdrive:
         setPBtnStyle(ui->btnOverdrive1State,state);
         break;
     case fxEqualizer:
         setPBtnStyle(ui->btnEqualizerState,state);
+        break;
+    case fxChorus:
+        setPBtnStyle(ui->btnReverb1State,state);
+        break;
+    case fxFlanger:
+        setPBtnStyle(ui->btnDelay1State,state);
         break;
     case fxReverb:
         setPBtnStyle(ui->btnReverb1State,state);
@@ -44,29 +53,10 @@ void MainWindow::updateFxState(int fxNum, bool state)
     }
 }
 
+//++++++++++ Compressor ++++++++++
 void MainWindow::on_btnCompressorState_released()
 {
     emit signal_fx_state_toggled(fxCompressor);
-}
-
-void MainWindow::on_btnOverdrive1State_released()
-{
-    emit signal_fx_state_toggled(fxOverdrive);
-}
-
-void MainWindow::on_btnEqualizerState_released()
-{
-    emit signal_fx_state_toggled(fxEqualizer);
-}
-
-void MainWindow::on_btnReverb1State_released()
-{
-    emit signal_fx_state_toggled(fxReverb);
-}
-
-void MainWindow::on_btnDelay1State_released()
-{
-    emit signal_fx_state_toggled(fxDelay);
 }
 
 void MainWindow::on_btnCompressorSettings_released()
@@ -74,14 +64,32 @@ void MainWindow::on_btnCompressorSettings_released()
     emit signal_dialogFx_open(fxCompressor);
 }
 
+//++++++++++ Overdrive ++++++++++
+void MainWindow::on_btnOverdrive1State_released()
+{
+    emit signal_fx_state_toggled(fxOverdrive);
+}
+
 void MainWindow::on_btnOverdrive1Settings_released()
 {
     emit signal_dialogFx_open(fxOverdrive);
 }
 
-void MainWindow::on_btnEqualizerSet_released()
+//++++++++++ Equalizer ++++++++++
+void MainWindow::on_btnEqualizerState_released()
+{
+    emit signal_fx_state_toggled(fxEqualizer);
+}
+
+void MainWindow::on_btnEqualizerSettings_released()
 {
     emit signal_dialogFx_open(fxEqualizer);
+}
+
+//++++++++++ Reverb ++++++++++
+void MainWindow::on_btnReverb1State_released()
+{
+    emit signal_fx_state_toggled(fxReverb);
 }
 
 void MainWindow::on_btnReverb1Settings_released()
@@ -89,9 +97,46 @@ void MainWindow::on_btnReverb1Settings_released()
     emit signal_dialogFx_open(fxReverb);
 }
 
+//++++++++++ Delay ++++++++++
+void MainWindow::on_btnDelay1State_released()
+{
+    emit signal_fx_state_toggled(fxDelay);
+}
+
 void MainWindow::on_btnDelay1Settings_released()
 {
     emit signal_dialogFx_open(fxDelay);
+}
+
+//++++++++++ Disto ++++++++++
+void MainWindow::on_btnDistortionState_released()
+{
+    emit signal_fx_state_toggled(fxDistortion);
+}
+
+void MainWindow::on_btnDistortionSettings_released()
+{
+    emit signal_dialogFx_open(fxDistortion);
+}
+
+void MainWindow::on_btnFlangerState_released()
+{
+    emit signal_fx_state_toggled(fxFlanger);
+}
+
+void MainWindow::on_btnFlangerSettings_released()
+{
+    emit signal_dialogFx_open(fxFlanger);
+}
+
+void MainWindow::on_btnChorusState_released()
+{
+    emit signal_fx_state_toggled(fxChorus);
+}
+
+void MainWindow::on_btnChorusSettings_released()
+{
+    emit signal_dialogFx_open(fxChorus);
 }
 
 void MainWindow::on_btnPreset1_released()
@@ -177,5 +222,4 @@ void MainWindow::setPBtnStyle(QPushButton *button, bool checked)
     else
         button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
 }
-
 

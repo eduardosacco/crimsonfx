@@ -2,23 +2,9 @@
 
 #include <QApplication>
 #include <QFile>
+#include <QTime>
 #include <QDateTime>
-
-//void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
-//{
-//     QString txt;
-//     QDateTime date;
-
-//     txt = msg;
-//     txt.prepend(" - ");
-//     txt.prepend(date.currentDateTime().toString());
-
-//     QFile outFile("log.txt");
-//     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-//     QTextStream ts(&outFile);
-//     ts << txt <<endl;
-
-//}
+#include <QSplashScreen>
 
 void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -51,16 +37,35 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
 
 int main(int argc, char *argv[])
 {
-    qInstallMessageHandler(myMessageHandler);
+//    //Cambio el gestor de mensajes por uno custom
+//    qInstallMessageHandler(myMessageHandler);
 
-    QFile outFile("log.txt");
-    outFile.resize(0);
+//    //Abro o creo archivo de Log
+//    QFile outFile("log.txt");
+//    //Borro si ahbia un archivo viejo
+//    outFile.resize(0);
 
+    //Creo la aplicacion
     QApplication a(argc, argv);
-
+    //Aviso a la aplicacion los nombres correpondientes
     a.setOrganizationName("Crimson");
     a.setApplicationName("Fx16");
 
+//    //Splash screen
+//    QSplashScreen *splash = new QSplashScreen;
+//    splash->setPixmap(QPixmap(":/img/img/crimsonSplash.png"));
+//    //splash->showFullScreen();
+//    splash->show();
+//    //BLOCKING Delay
+//    QTime dieTime= QTime::currentTime().addSecs(5);
+//    while (QTime::currentTime() < dieTime)
+//    {
+//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+//    }
+//    //cierro el splashscreen
+//    splash->close();
+
+    //Corro el programa principal
     Crimson crimson;
 
     return a.exec();

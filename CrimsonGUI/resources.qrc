@@ -2,5 +2,9 @@
     <qresource prefix="/img">
         <file>img/crimsonLogo.png</file>
         <file>img/settings.png</file>
+        <file>img/back.png</file>
+        <file>img/onOff.png</file>
+        <file>img/crimsonSplash.png</file>
+        <file>img/save.png</file>
     </qresource>
 </RCC>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dialogfx.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.9.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,8 +14,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -25,12 +25,11 @@ QT_BEGIN_NAMESPACE
 class Ui_DialogFx
 {
 public:
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *hLayout;
-    QPushButton *btnClose;
-    QPushButton *btnOnOff;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *vLayout;
+    QPushButton *btnOnOff;
+    QPushButton *btnClose;
+    QLabel *lblFx;
 
     void setupUi(QDialog *DialogFx)
     {
@@ -64,39 +63,46 @@ public:
 "color:#fff;\n"
 "qproperty-alignment:AlignCenter;\n"
 "}"));
-        horizontalLayoutWidget_2 = new QWidget(DialogFx);
-        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
-        horizontalLayoutWidget_2->setGeometry(QRect(0, 10, 191, 51));
-        hLayout = new QHBoxLayout(horizontalLayoutWidget_2);
-        hLayout->setSpacing(10);
-        hLayout->setObjectName(QStringLiteral("hLayout"));
-        hLayout->setContentsMargins(0, 0, 0, 0);
-        btnClose = new QPushButton(horizontalLayoutWidget_2);
-        btnClose->setObjectName(QStringLiteral("btnClose"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(btnClose->sizePolicy().hasHeightForWidth());
-        btnClose->setSizePolicy(sizePolicy);
-        btnClose->setMinimumSize(QSize(80, 40));
-
-        hLayout->addWidget(btnClose);
-
-        btnOnOff = new QPushButton(horizontalLayoutWidget_2);
-        btnOnOff->setObjectName(QStringLiteral("btnOnOff"));
-        sizePolicy.setHeightForWidth(btnOnOff->sizePolicy().hasHeightForWidth());
-        btnOnOff->setSizePolicy(sizePolicy);
-        btnOnOff->setMinimumSize(QSize(80, 40));
-        btnOnOff->setCheckable(true);
-
-        hLayout->addWidget(btnOnOff);
-
         verticalLayoutWidget = new QWidget(DialogFx);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(-1, 69, 601, 331));
         vLayout = new QVBoxLayout(verticalLayoutWidget);
         vLayout->setObjectName(QStringLiteral("vLayout"));
         vLayout->setContentsMargins(0, 0, 0, 0);
+        btnOnOff = new QPushButton(DialogFx);
+        btnOnOff->setObjectName(QStringLiteral("btnOnOff"));
+        btnOnOff->setGeometry(QRect(510, 10, 80, 40));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(btnOnOff->sizePolicy().hasHeightForWidth());
+        btnOnOff->setSizePolicy(sizePolicy);
+        btnOnOff->setMinimumSize(QSize(80, 40));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/img/img/onOff.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnOnOff->setIcon(icon);
+        btnOnOff->setIconSize(QSize(30, 35));
+        btnOnOff->setCheckable(true);
+        btnClose = new QPushButton(DialogFx);
+        btnClose->setObjectName(QStringLiteral("btnClose"));
+        btnClose->setGeometry(QRect(10, 10, 80, 40));
+        sizePolicy.setHeightForWidth(btnClose->sizePolicy().hasHeightForWidth());
+        btnClose->setSizePolicy(sizePolicy);
+        btnClose->setMinimumSize(QSize(80, 40));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/img/img/back.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnClose->setIcon(icon1);
+        btnClose->setIconSize(QSize(40, 20));
+        lblFx = new QLabel(DialogFx);
+        lblFx->setObjectName(QStringLiteral("lblFx"));
+        lblFx->setGeometry(QRect(180, 10, 241, 41));
+        QFont font;
+        font.setFamily(QStringLiteral("Segoe UI"));
+        font.setPointSize(14);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setWeight(50);
+        lblFx->setFont(font);
 
         retranslateUi(DialogFx);
 
@@ -106,8 +112,9 @@ public:
     void retranslateUi(QDialog *DialogFx)
     {
         DialogFx->setWindowTitle(QApplication::translate("DialogFx", "Dialog", Q_NULLPTR));
-        btnClose->setText(QApplication::translate("DialogFx", "CLOSE", Q_NULLPTR));
-        btnOnOff->setText(QApplication::translate("DialogFx", "IO", Q_NULLPTR));
+        btnOnOff->setText(QString());
+        btnClose->setText(QString());
+        lblFx->setText(QApplication::translate("DialogFx", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };
