@@ -20,27 +20,21 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dialogoverdrive1.cpp \
-    dialogreverb1.cpp \
     comms.cpp \
     crimson.cpp \
     tinyosc.c \
-    dialogdelay1.cpp \
-    fx.cpp
+    fxbank.cpp \
+    dialogfx.cpp
 
 HEADERS  += mainwindow.h \
-    dialogoverdrive1.h \
-    dialogreverb1.h \
     comms.h \
     crimson.h \
     tinyosc.h \
-    dialogdelay1.h \
-    fx.h
+    fxbank.h \
+    dialogfx.h
 
 FORMS    += mainwindow.ui \
-    dialogoverdrive1.ui \
-    dialogreverb1.ui \
-    dialogdelay1.ui
+    dialogfx.ui
 
 OTHER_FILES += \
     Log.txt
