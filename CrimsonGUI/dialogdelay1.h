@@ -25,7 +25,6 @@ private slots:
     void on_btnPreset1_released();
     void on_btnPreset2_released();
     void on_btnPreset3_released();
-    void presetSelector(int preset);
 
 signals:
     void signal_level_changed(int position);
@@ -35,6 +34,7 @@ signals:
 
 private:
     Ui::DialogDelay1 *ui;
+    void presetSelector(int preset);
 };
 
 #endif // DIALOGDELAY1_H

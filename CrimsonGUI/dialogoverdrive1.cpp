@@ -25,7 +25,7 @@ void DialogOverdrive1::sendFxOverdrive1Param(Fx::Overdrive1 overdrive1)
 
 void DialogOverdrive1::on_btnClose_released()
 {
-    this->hide();
+    this->close();
 }
 
 void DialogOverdrive1::on_dialGain_sliderMoved(int position)

@@ -7,15 +7,29 @@ Crimson::Crimson(QObject *parent) :
 {
     crimsonSettings.setPath(QSettings::IniFormat,QSettings::UserScope, "crimsonSettings.ini");
     qDebug() << crimsonSettings.fileName();
-
-    //ACA TENGO QUE CONECTAR LA GILADA
     
+    //Settings: Inicializar variables correspondientes
+    initializeFxParameters();
+
     mainWindow = new MainWindow();
     mainWindow->setWindowFlags(Qt::FramelessWindowHint);
     
     //Conexiones con señales de mainWindow
-    connect(mainWindow,SIGNAL(signal_dialogCompressor1_open()),
-            this,SLOT(slot_fxCompressor1_open()));
+    //On off de cada efecto
+    connect(mainWindow,SIGNAL(signal_fxOverdrive1_state_toggled(bool)),
+            this,SLOT(slot_fxOverdrive1_state_changed(bool)));
+    connect(mainWindow,SIGNAL(signal_fxReverb1_state_toggled(bool)),
+            this,SLOT(slot_fxReverb1_state_changed(bool)));
+    connect(mainWindow,SIGNAL(signal_fxDelay1_state_toggled(bool)),
+            this,SLOT(slot_fxReverb1_state_changed(bool)));
+
+    //Presets
+    connect(mainWindow,SIGNAL(signal_bankPreset_changed(int)),
+            this,SLOT(slot_bank_preset_changed(int)));
+
+    //Settings de cada efecto
+    connect(mainWindow,SIGNAL(signal_dialogCompressor_open()),
+            this,SLOT(slot_fxCompressor_open()));
     connect(mainWindow,SIGNAL(signal_dialogOverdrive1_open()),
             this,SLOT(slot_fxOverdrive1_open()));
     connect(mainWindow,SIGNAL(signal_dialog8BandEqualizer_open()),
@@ -26,9 +40,6 @@ Crimson::Crimson(QObject *parent) :
             this,SLOT(slot_exit()));
     connect(mainWindow,SIGNAL(signal_dialogDelay1_open()),
             this,SLOT(slot_fxDelay1_open()));
-
-    //Settings: Inicializar variables correspondientes
-    initializeFxParameters();
     
     mainWindow->show();
 }
@@ -43,35 +54,98 @@ void Crimson::slot_exit()
 //*****************************************************************
 void Crimson::initializeFxParameters()
 {
-    //ACA SOLO HABRIA QUE LEER CUAL FUE EL ULTIMO MAIN PRESET Y CARGARLO
-
-     fx.overdrive1.gain  = crimsonSettings.value(fx.overdrive1.pdAddrGain , OVERDRIVE1DEFAULTG).toInt();
-     fx.overdrive1.depth = crimsonSettings.value(fx.overdrive1.pdAddrDepth,OVERDRIVE1DEFAULTD).toInt();
-     fx.overdrive1.cutoff = crimsonSettings.value(fx.overdrive1.pdAddrCuttof, OVERDRIVE1DEFAULTC).toInt();
-
-     fx.reverb1.dryWet = crimsonSettings.value(fx.reverb1.pdAddrWet,REVERB1DEFAULTDW).toInt();
-     fx.reverb1.roomSize = crimsonSettings.value(fx.reverb1.pdAddrRoomSize,REVERB1DEFAULTRS).toInt();
-     fx.reverb1.damping = crimsonSettings.value(fx.reverb1.pdAddrDamping,REVERB1DEFAULTD).toInt();
+    //inicializo los efectos con el ultimo preset bank cargado
+    //Por defecto es el numero 1.
+    //Al inicial el programa fx.bank.preset comienza en NONINIT
+    int lastPreset = crimsonSettings.value(fx.bank.addrPreset,DEFAULTPRESET).toInt();
+    slot_bank_preset_changed(lastPreset);
 
 }
 
+//***********************************************************************
+// FX BANK
+//***********************************************************************
+void Crimson::slot_bank_preset_changed(int preset)
+{
+    //Si este bank preset ya estaba seleccionado guardo la config actual
+    if(fx.bank.preset == preset)
+    {
+        //guardo los presets de cada efecto
+        crimsonSettings.setValue(QString(fx.bank.addrOverdrive1Preset)+QString::number(preset),
+                                 fx.overdrive1.preset);
+        crimsonSettings.setValue(QString(fx.bank.addrReverb1Preset)+QString::number(preset),
+                                 fx.reverb1.preset);
+        crimsonSettings.setValue(QString(fx.bank.addrDelay1Preset)+QString::number(preset),
+                                 fx.delay1.preset);
+
+        //guardo los estados de cada efecto
+        crimsonSettings.setValue(QString(fx.bank.addrOverdrive1State)+QString::number(preset),
+                                 fx.bank.overdrive1State);
+        crimsonSettings.setValue(QString(fx.bank.addrReverb1State)+QString::number(preset),
+                                 fx.bank.reverb1State);
+        crimsonSettings.setValue(QString(fx.bank.addrDelay1State)+QString::number(preset),
+                                 fx.bank.delay1State);
+    }
+    //si no era el preset seleccionado cargo la configuracion guardada
+    else
+    {
+        fx.bank.preset = preset;
+
+        //Inicializo los presets de los efectos segun el banco cargado
+        int presetOverdrive1 = crimsonSettings.value(
+                    QString(fx.bank.addrOverdrive1Preset)+QString::number(fx.bank.preset),DEFAULTPRESET).toInt();
+        int presetReverb1 = crimsonSettings.value(
+                    QString(fx.bank.addrReverb1Preset)+QString::number(fx.bank.preset),DEFAULTPRESET).toInt();
+        int presetDelay1 = crimsonSettings.value(
+                    QString(fx.bank.addrDelay1Preset)+QString::number(fx.bank.preset),DEFAULTPRESET).toInt();
+
+        //Las variables que almacenan el numero de preset
+        //comienzan en el valor NONINIT
+        slot_fxOverdrive1_preset_changed(presetOverdrive1);
+        slot_fxReverb1_preset_changed(presetReverb1);
+        slot_fxDelay1_preset_changed(presetDelay1);
+
+        //cargo los estados de cada efecto
+        fx.bank.overdrive1State = crimsonSettings.value(
+                    QString(fx.bank.addrOverdrive1State)+QString::number(fx.bank.preset),DEFAULTSTATE).toBool();
+        fx.bank.reverb1State = crimsonSettings.value(
+                    QString(fx.bank.addrReverb1State)+QString::number(fx.bank.preset),DEFAULTSTATE).toBool();
+        fx.bank.delay1State = crimsonSettings.value(
+                    QString(fx.bank.addrDelay1State)+QString::number(fx.bank.preset),DEFAULTSTATE).toBool();
+
+        //Actualizo cues visuales de que efectos estan prendidos
+        if(mainWindow != NULL)
+        {
+            mainWindow->updateFxStates(fx.bank);
+        }
+
+
+    }
+}
+
 //*****************************************************************
-//SLOTS
+//                  SLOTS
 //*****************************************************************
 
-//COMPRESOR *******************************************************
-void Crimson::slot_fxCompressor1_open()
+//*****************************************************************
+//                  COMPRESOR
+//*****************************************************************
+void Crimson::slot_fxCompressor_open()
 {
 
 }
 
-//EQUALIZER *******************************************************
+//*****************************************************************
+//                  EQUALIZER
+//*****************************************************************
 void Crimson::slot_fx8BandEqualizer_open()
 {
 
 }
 
-//REVERB ***********************************************************
+//*****************************************************************
+//                  REVERB
+//*****************************************************************
 void Crimson::slot_fxReverb1_open()
 {
     dialogReverb1 = new DialogReverb1();
@@ -88,6 +162,11 @@ void Crimson::slot_fxReverb1_open()
             this,SLOT(slot_fxReverb1_preset_changed(int)));
 
     dialogReverb1->show();
+}
+
+void Crimson::slot_fxReverb1_destroyed()
+{
+    dialogReverb1 = NULL;
 }
 
 void Crimson::slot_fxReverb1_dryWet_changed(int position)
@@ -108,7 +187,54 @@ void Crimson::slot_fxReverb1_damping_changed(int position)
     comms.oscSendInt(Comms::oscReverb1Damping, position);
 }
 
-//DELAY ***********************************************************
+void Crimson::slot_fxReverb1_state_changed(bool state)
+{
+    fx.bank.reverb1State = state;
+    comms.oscSendInt(Comms::oscReverb1State,(int)state);
+}
+
+void Crimson::slot_fxReverb1_preset_changed(int preset)
+{
+    //Si este preset ya estaba seleccionado guardo la config actual
+    if(fx.reverb1.preset == preset)
+    {
+        crimsonSettings.setValue(QString(fx.reverb1.addrWet)+QString::number(preset),
+                                 fx.reverb1.addrWet);
+        crimsonSettings.setValue(QString(fx.reverb1.addrRoomSize)+QString::number(preset),
+                                 fx.reverb1.addrRoomSize);
+        crimsonSettings.setValue(QString(fx.reverb1.addrDamping)+QString::number(preset),
+                                 fx.reverb1.damping);
+
+    }
+    //si no era el preset seleccionado cargo la configuracion guardada
+    else
+    {
+        fx.reverb1.preset = preset;
+
+        fx.reverb1.dryWet  = crimsonSettings.value(
+                    QString(fx.reverb1.addrWet)+QString::number(preset), DEFAULTOVERDRIVE1G).toInt();
+        fx.reverb1.roomSize = crimsonSettings.value(
+                    QString(fx.reverb1.addrRoomSize)+QString::number(preset),DEFAULTOVERDRIVE1D).toInt();
+        fx.reverb1.damping = crimsonSettings.value(
+                    QString(fx.reverb1.addrDamping)+QString::number(preset),DEFAULTOVERDRIVE1C).toInt();
+
+        //Actualizo los diales
+        if(dialogReverb1!=NULL)
+        {
+            dialogReverb1->sendFxReverb1Param(fx.reverb1);
+        }
+
+        //envio parametros a pd
+        comms.oscSendInt(fx.reverb1.addrWet,fx.reverb1.dryWet);
+        comms.oscSendInt(fx.reverb1.addrRoomSize,fx.reverb1.roomSize);
+        comms.oscSendInt(fx.reverb1.addrDamping,fx.reverb1.damping);
+
+    }
+
+}
+//*****************************************************************
+//                  DELAY
+//*****************************************************************
 void Crimson::slot_fxDelay1_open()
 {
     dialogDelay1 = new DialogDelay1();
@@ -127,9 +253,13 @@ void Crimson::slot_fxDelay1_open()
     dialogDelay1->show();
 }
 
+void Crimson::slot_fxDelay1_destroyed()
+{
+    dialogDelay1 = NULL;
+}
+
 void Crimson::slot_fxDelay1_level_changed(int position)
 {
-//    float value = pos2Value(position,fx.delay1.)
     fx.delay1.level = position;
     comms.oscSendInt(Comms::oscDelay1Level,position);
 }
@@ -146,27 +276,53 @@ void Crimson::slot_fxDelay1_feedback_changed(int position)
     comms.oscSendInt(Comms::oscDelay1Feedback,position);
 }
 
+void Crimson::slot_fxDelay1_state_changed(bool state)
+{
+    fx.bank.delay1State = state;
+    comms.oscSendInt(Comms::oscDelay1State,(int)state);
+}
+
 void Crimson::slot_fxDelay1_preset_changed(int preset)
 {
     //Si este preset ya estaba seleccionado guardo la config actual
     if(fx.delay1.preset == preset)
     {
-        fx.delay1.level = crimsonSettings.setValue(
-                    QString(fx.delay1.pdAddrLevel).arg(preset),DELAY1DEFAULTL);
-        fx.delay1.level = crimsonSettings.setValue(
-                    QString(fx.delay1.pdAddrDelay).arg(preset),DELAY1DEFAULTD);
-        fx.delay1.feedback = crimsonSettings.value(
-                    QString(fx.delay1.pdAddrFeedback).arg(preset),DELAY1DEFAULTF).toInt());
+        crimsonSettings.setValue(QString(fx.delay1.addrLevel)+QString::number(preset),
+                                 fx.delay1.level);
+        crimsonSettings.setValue(QString(fx.delay1.addrDelay)+QString::number(preset),
+                                 fx.delay1.delay);
+        crimsonSettings.setValue(QString(fx.delay1.addrFeedback)+QString::number(preset),
+                                 fx.delay1.feedback);
 
     }
     //si no era el preset seleccionado cargo la configuracion guardada
     else
     {
+        fx.delay1.preset = preset;
 
+        fx.delay1.level = crimsonSettings.value(
+                    QString(fx.delay1.addrLevel)+QString::number(preset),DEFAULTDELAY1L).toInt();
+        fx.delay1.delay = crimsonSettings.value(
+                    QString(fx.delay1.addrDelay)+QString::number(preset),DEFAULTDELAY1D).toInt();
+        fx.delay1.feedback = crimsonSettings.value(
+                    QString(fx.delay1.addrFeedback)+QString::number(preset),DEFAULTDELAY1F).toInt();
+
+        //Actualizo los diales
+        if(dialogDelay1!=NULL)
+        {
+            dialogDelay1->sendFxDelay1Param(fx.delay1);
+        }
+
+        //envio parametros a pd
+        comms.oscSendInt(fx.delay1.addrLevel ,fx.delay1.level);
+        comms.oscSendInt(fx.delay1.addrDelay,fx.delay1.delay);
+        comms.oscSendInt(fx.delay1.addrFeedback,fx.delay1.feedback);
     }
 }
 
-//OVERDRIVE ***********************************************************
+//*****************************************************************
+//                  OVERDRIVE
+//*****************************************************************
 void Crimson::slot_fxOverdrive1_open()
 {
     dialogOverdrive1 = new DialogOverdrive1();
@@ -181,37 +337,83 @@ void Crimson::slot_fxOverdrive1_open()
             this,SLOT(slot_fxOverdrive1_cutoff_changed(int)));
     connect(dialogOverdrive1,SIGNAL(signal_preset_changed(int)),
             this,SLOT(slot_fxOverdrive_preset_changed(int)));
+    connect(dialogOverdrive1,SIGNAL(destroyed()),
+            this,SLOT(slot_fxOverdrive1_destroyed()));
 
     dialogOverdrive1->show();
 }
 
+void Crimson::slot_fxOverdrive1_destroyed()
+{
+    dialogOverdrive1 = NULL;
+}
+
 void Crimson::slot_fxOverdrive1_gain_changed(int position)
 {
-//    float value = pos2Value(position,fx.overdrive1.minGain,fx.overdrive1.maxGain);
     fx.overdrive1.gain = position;
     comms.oscSendInt(Comms::oscOverdrive1Gain,position);
 }
 
 void Crimson::slot_fxOverdrive1_depth_changed(int position)
 {
-//    float value = pos2Value(position,fx.overdrive1.minDepth,fx.overdrive1.maxDepth);
     fx.overdrive1.depth = position;
     comms.oscSendInt(Comms::oscOverdrive1Depth, position);
 }
 
 void Crimson::slot_fxOverdrive1_cutoff_changed(int position)
 {
-//    float value = pos2Value(position,fx.overdrive1.minCutoff,fx.overdrive1.maxCutoff);
     fx.overdrive1.cutoff = position;
     comms.oscSendInt(Comms::oscOverdrive1Cutoff,position);
 }
 
-void Crimson::changeMainPreset(int preset)
+void Crimson::slot_fxOverdrive1_state_changed(bool state)
 {
-//    if(1)
-//        else
-
+    fx.bank.overdrive1State = state;
+    comms.oscSendInt(Comms::oscOverdrive1State,(int)state);
 }
+
+void Crimson::slot_fxOverdrive1_preset_changed(int preset)
+{
+    //Si este preset ya estaba seleccionado guardo la config actual
+    if(fx.overdrive1.preset == preset)
+    {
+        crimsonSettings.setValue(QString(fx.overdrive1.addrGain)+QString::number(preset),
+                                 fx.overdrive1.gain);
+        crimsonSettings.setValue(QString(fx.overdrive1.addrDepth)+QString::number(preset),
+                                 fx.overdrive1.depth);
+        crimsonSettings.setValue(QString(fx.overdrive1.addrCuttof)+QString::number(preset),
+                                 fx.overdrive1.cutoff);
+
+    }
+    //si no era el preset seleccionado cargo la configuracion guardada
+    else
+    {
+        fx.overdrive1.preset = preset;
+
+        fx.overdrive1.gain  = crimsonSettings.value(
+                    QString(fx.overdrive1.addrGain)+QString::number(preset), DEFAULTOVERDRIVE1G).toInt();
+        fx.overdrive1.depth = crimsonSettings.value(
+                    QString(fx.overdrive1.addrDepth)+QString::number(preset),DEFAULTOVERDRIVE1D).toInt();
+        fx.overdrive1.cutoff = crimsonSettings.value(
+                    QString(fx.overdrive1.addrCuttof)+QString::number(preset),DEFAULTOVERDRIVE1C).toInt();
+
+        //Actualizo los diales
+        if(dialogOverdrive1!=NULL)
+        {
+            dialogOverdrive1->sendFxOverdrive1Param(fx.overdrive1);
+        }
+
+        //envio parametros a pd
+        comms.oscSendInt(fx.overdrive1.addrGain,fx.overdrive1.gain);
+        comms.oscSendInt(fx.overdrive1.addrDepth,fx.overdrive1.depth);
+        comms.oscSendInt(fx.overdrive1.addrCuttof,fx.overdrive1.cutoff);
+
+    }
+}
+
+//*****************************************************************
+//                  Misc
+//*****************************************************************
 
 //Convertidor de posicion del dial de Qt a valor del efecto de Pd
 float Crimson::pos2Value(int pos, float minValue,float maxValue)

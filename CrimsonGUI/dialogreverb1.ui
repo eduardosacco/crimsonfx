@@ -203,10 +203,6 @@ qproperty-alignment:AlignCenter;
     </item>
    </layout>
   </widget>
-  <zorder>horizontalLayoutWidget</zorder>
-  <zorder>gridLayoutWidget</zorder>
-  <zorder>horizontalLayoutWidget_2</zorder>
-  <zorder>lblGain</zorder>
  </widget>
  <resources/>
  <connections/>

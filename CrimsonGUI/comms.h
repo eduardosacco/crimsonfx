@@ -23,17 +23,21 @@ public:
     explicit Comms(QObject *parent = 0);
 
     //Direcciones OSC para envio de parametros
+
     //OVERDRIVE
+    static const QString oscOverdrive1State;
     static const QString oscOverdrive1Gain;
     static const QString oscOverdrive1Depth;
     static const QString oscOverdrive1Cutoff;
 
     //REVERB
+    static const QString oscReverb1State;
     static const QString oscReverb1DryWet;
-    static const QString oscReverb1RoomSize;
     static const QString oscReverb1Damping;
+    static const QString oscReverb1RoomSize;
 
     //DELAY
+    static const QString oscDelay1State;
     static const QString oscDelay1Level;
     static const QString oscDelay1Delay;
     static const QString oscDelay1Feedback;

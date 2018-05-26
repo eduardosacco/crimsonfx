@@ -25,7 +25,6 @@ private slots:
     void on_btnPreset1_released();
     void on_btnPreset2_released();
     void on_btnPreset3_released();
-    void presetSelector(int preset);
 
 signals:
     void signal_dryWet_changed(int position);
@@ -33,9 +32,9 @@ signals:
     void signal_damping_changed(int position);
     void signal_preset_changed(int preset);
 
-
 private:
     Ui::DialogReverb1 *ui;
+    void presetSelector(int preset);
 };
 
 #endif // DIALOGREVERB1_H
