@@ -7,7 +7,6 @@ DialogFx::DialogFx(QWidget *parent) :
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
-
 }
 
 DialogFx::~DialogFx()
@@ -15,9 +14,32 @@ DialogFx::~DialogFx()
     delete ui;
 }
 
-void DialogFx::dialogSettings(int fx)
+void DialogFx::dialogSettings(int fxNum,Effect fx)
 {           
-    effect = fx;
+    //Aca hay que inicializar los botones de encendido y apagado de los
+    // efectos y del preset en el que esten
+
+    effect = fxNum;
+
+    ui->btnOnOff->setChecked(fx.state);
+
+    //Esto se podria evitar haciendo un for
+    //si es que se usaran arreglos de punteros a botones
+    switch(fx.preset)
+    {
+    case PRESET1:
+        setPBtnStyle(ui->btnPreset1,true);
+        break;
+    case PRESET2:
+        setPBtnStyle(ui->btnPreset2,true);
+        break;
+    case PRESET3:
+        setPBtnStyle(ui->btnPreset3,true);
+        break;
+    }
+
+    if(fx.state)
+        ui->btnOnOff->setChecked(true);
 
     //Esta funcion debe crear dinamicamente
     //los widgets necesarios para cada efecto
@@ -27,8 +49,6 @@ void DialogFx::dialogSettings(int fx)
     dial2->setNotchesVisible(true);
     dial3->setNotchesVisible(true);
     dial4->setNotchesVisible(true);
-
-
 
 //    rowOne->setAlignment(Qt::AlignJustify);
 //    row2->setAlignment(Qt::AlignJustify);
@@ -49,7 +69,6 @@ void DialogFx::dialogSettings(int fx)
     row4->addWidget(lblDial3);
     row4->addWidget(lblDial4);
 
-
     connect(dial0,SIGNAL(valueChanged(int)),
             this,SLOT(slot_dial0_valueChanged(int)));
     connect(dial1,SIGNAL(valueChanged(int)),
@@ -62,6 +81,10 @@ void DialogFx::dialogSettings(int fx)
             this,SLOT(slot_dial4_valueChanged(int)));
 
     this->show();
+}
+
+void DialogFx::setDialValues(Effect fx)
+{
 
 }
 
@@ -110,32 +133,46 @@ void DialogFx::presetSelector(int preset)
     switch(preset)
     {
         case 1:
-        ui->btnPreset1->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #dc143c, stop: 1 #a60f2d)");
-        ui->btnPreset2->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
-        ui->btnPreset3->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
-        emit signal_preset_changed(effect,preset);
+        setPBtnStyle(ui->btnPreset1,true);
+        setPBtnStyle(ui->btnPreset2,false);
+        setPBtnStyle(ui->btnPreset3,false);
+        emit signal_fx_preset_changed(effect,preset);
 
         break;
 
         case 2:
-        ui->btnPreset2->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #dc143c, stop: 1 #a60f2d)");
-        ui->btnPreset1->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
-        ui->btnPreset3->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
-        emit signal_preset_changed(effect,preset);
+        setPBtnStyle(ui->btnPreset1,false);
+        setPBtnStyle(ui->btnPreset2,true);
+        setPBtnStyle(ui->btnPreset3,false);
+        emit signal_fx_preset_changed(effect,preset);
         break;
 
         case 3:
-        ui->btnPreset3->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #dc143c, stop: 1 #a60f2d)");
-        ui->btnPreset1->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
-        ui->btnPreset2->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
-        emit signal_preset_changed(effect,preset);
+        setPBtnStyle(ui->btnPreset1,false);
+        setPBtnStyle(ui->btnPreset2,false);
+        setPBtnStyle(ui->btnPreset3,true);
+        emit signal_fx_preset_changed(effect,preset);
         break;
 
     }
+}
 
+void DialogFx::on_btnOnOff_toggled(bool checked)
+{
+    setPBtnStyle(ui->btnOnOff,checked);
+    emit signal_fx_state_changed(effect,checked);
 }
 
 void DialogFx::on_btnClose_released()
 {
     this->close();
 }
+
+void DialogFx::setPBtnStyle(QPushButton *button, bool checked)
+{
+    if(checked)
+        button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #dc143c, stop: 1 #a60f2d)");
+    else
+        button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
+}
+

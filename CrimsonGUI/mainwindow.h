@@ -19,6 +19,7 @@ public:
 
     void initPulse(int bankPreset);
     void updateFxStates(FxBank fxBank);
+    void setPBtnStyle(QPushButton *button, bool checked);
 
 private slots:
     //Compressor
@@ -55,7 +56,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     void bankPresetSelector(int preset);
-    void setPBtnStyle(QPushButton *button, bool checked);
+
 
 };
 

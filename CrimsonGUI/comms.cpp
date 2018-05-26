@@ -46,7 +46,6 @@ void Comms::readyRead()
     qDebug() << "Message: " << buffer;
 }
 
-//void Comms::oscSendInt(QString oscAddress, int position )
 void Comms::oscSendInt(QString oscAddress, int position )
 {
 

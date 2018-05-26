@@ -20,15 +20,18 @@ public:
     explicit DialogFx(QWidget *parent = 0);
     ~DialogFx();
 
-    void dialogSettings(int fx);
+    void dialogSettings(int fxNum,Effect fx);
+    void setDialValues(Effect fx);
 
 private slots:
+    //Diales
     void slot_dial0_valueChanged(int position);
     void slot_dial1_valueChanged(int position);
     void slot_dial2_valueChanged(int position);
     void slot_dial3_valueChanged(int position);
     void slot_dial4_valueChanged(int position);
 
+    //Botones de los presets
     void on_btnPreset1_released();
     void on_btnPreset2_released();
     void on_btnPreset3_released();
@@ -37,13 +40,12 @@ private slots:
 
     void presetSelector(int preset);
 
+    void on_btnOnOff_toggled(bool checked);
+
 signals:
-    void signal_state_changed(int fx, int param, bool state);
-    void signal_param_changed(int fx, int param, int value);
-    void signal_preset_changed(int fx, int preset);
-
+    void signal_fx_state_changed(int fx, bool state);
+    void signal_fx_preset_changed(int fx, int preset);
     void signal_fx_param_changed(int fx, int param,int position);
-
     void signal_destroyed();
 
 private:
@@ -68,6 +70,8 @@ private:
     QHBoxLayout *row2 = new QHBoxLayout;
     QHBoxLayout *row3 = new QHBoxLayout;
     QHBoxLayout *row4 = new QHBoxLayout;
+
+    void setPBtnStyle(QPushButton *button, bool checked);
 
 
 };

@@ -42,6 +42,7 @@
 //NEWTYPES Y ENUMS
 typedef struct
 {
+    const char * name;
     int value;
     int defValue;
     const char *addr;
@@ -50,6 +51,7 @@ typedef struct
 
 typedef struct
 {
+    const char *name;
     //Estado del efecto On o OFF
     bool state;
     //Preset en el cual se encuentra seteado el efecto

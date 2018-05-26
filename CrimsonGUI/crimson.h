@@ -32,13 +32,13 @@ public slots:
 
 private slots:
     void slot_bank_preset_changed(int bankPreset);
+    void slot_dialogFx_closed();
 
 private:
 
     //OBJETOS **********************************************
 
     //Efectos
-//    Fx fx;
     FxBank fxBank;
     
     //Comunicaciones
@@ -50,9 +50,8 @@ private:
     //Ventana principal
     MainWindow *mainWindow = NULL;
     //Dialogos efectos 
-//    DialogOverdrive1 *dialogOverdrive1 = NULL;
-//    DialogReverb1 *dialogReverb1 = NULL;
-//    DialogDelay1 *dialogDelay1 = NULL;
+    DialogFx *dialogFx;
+
 
     //Private Functions
     void initializeFxParameters(void);
