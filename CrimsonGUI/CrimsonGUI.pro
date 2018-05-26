@@ -36,5 +36,4 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     dialogfx.ui
 
-OTHER_FILES += \
-    Log.txt
+OTHER_FILES +=

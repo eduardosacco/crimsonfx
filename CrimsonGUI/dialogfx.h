@@ -23,6 +23,8 @@ public:
     void dialogSettings(int fxNum,Effect fx);
     void setDialValues(Effect fx);
 
+    void updateFxState(bool state);
+
 private slots:
     //Diales
     void slot_dial0_valueChanged(int position);
@@ -40,10 +42,10 @@ private slots:
 
     void presetSelector(int preset);
 
-    void on_btnOnOff_toggled(bool checked);
+    void on_btnOnOff_released();
 
 signals:
-    void signal_fx_state_changed(int fx, bool state);
+    void signal_fx_state_changed(int fx);
     void signal_fx_preset_changed(int fx, int preset);
     void signal_fx_param_changed(int fx, int param,int position);
     void signal_destroyed();

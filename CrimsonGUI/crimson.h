@@ -23,8 +23,8 @@ public slots:
     void slot_dialogFx_open(int fx);
 
     //EFECTOS
-    void slot_fx_state_changed(int fx,bool state);
-    void slot_fx_param_changed(int fx,int param, int v);
+    void slot_fx_state_changed(int fx);
+    void slot_fx_param_changed(int fx,int param, int value);
     void slot_fx_preset_changed(int fx, int preset);
 
     //Salida del programa
@@ -50,7 +50,7 @@ private:
     //Ventana principal
     MainWindow *mainWindow = NULL;
     //Dialogos efectos 
-    DialogFx *dialogFx;
+    DialogFx *dialogFx = NULL;
 
 
     //Private Functions

@@ -20,23 +20,52 @@ void MainWindow::initPulse(int bankPreset)
 
 //Es usada cuando el cambio no se produce desde mainwindow sino de crimson
 //basicamente cuando se carga un nuevo bank preset
-void MainWindow::updateFxStates(FxBank fxBank)
+void MainWindow::updateFxState(int fxNum, bool state)
 {
     //Actualizar la GUI con los estados de los efectos
-
-    //DESPUES HABRIA QUE HACER UN FOR LOOP
-    //Si tuviesemos un arreglo de punteros a pBtns
-    setPBtnStyle(ui->btnCompressorState,fxBank.fx[fxCompressor].state);
-    setPBtnStyle(ui->btnOverdrive1State,fxBank.fx[fxOverdrive].state);
-    setPBtnStyle(ui->btnEqualizerState,fxBank.fx[fxEqualizer].state);
-    setPBtnStyle(ui->btnReverb1State,fxBank.fx[fxReverb].state);
-    setPBtnStyle(ui->btnDelay1State,fxBank.fx[fxDelay].state);
+    switch(fxNum)
+    {
+    case fxCompressor:
+        setPBtnStyle(ui->btnCompressorState,state);
+        break;
+    case fxOverdrive:
+        setPBtnStyle(ui->btnOverdrive1State,state);
+        break;
+    case fxEqualizer:
+        setPBtnStyle(ui->btnEqualizerState,state);
+        break;
+    case fxReverb:
+        setPBtnStyle(ui->btnReverb1State,state);
+        break;
+    case fxDelay:
+        setPBtnStyle(ui->btnDelay1State,state);
+        break;
+    }
 }
 
-void MainWindow::on_btnCompressorState_toggled(bool checked)
+void MainWindow::on_btnCompressorState_released()
 {
-    setPBtnStyle(ui->btnCompressorState,checked);
-    emit signal_fx_state_toggled(fxCompressor,checked);
+    emit signal_fx_state_toggled(fxCompressor);
+}
+
+void MainWindow::on_btnOverdrive1State_released()
+{
+    emit signal_fx_state_toggled(fxOverdrive);
+}
+
+void MainWindow::on_btnEqualizerState_released()
+{
+    emit signal_fx_state_toggled(fxEqualizer);
+}
+
+void MainWindow::on_btnReverb1State_released()
+{
+    emit signal_fx_state_toggled(fxReverb);
+}
+
+void MainWindow::on_btnDelay1State_released()
+{
+    emit signal_fx_state_toggled(fxDelay);
 }
 
 void MainWindow::on_btnCompressorSettings_released()
@@ -44,21 +73,9 @@ void MainWindow::on_btnCompressorSettings_released()
     emit signal_dialogFx_open(fxCompressor);
 }
 
-void MainWindow::on_btnOverdrive1State_toggled(bool checked)
-{
-    setPBtnStyle(ui->btnOverdrive1State,checked);
-    emit signal_fx_state_toggled(fxOverdrive,checked);
-}
-
 void MainWindow::on_btnOverdrive1Settings_released()
 {
     emit signal_dialogFx_open(fxOverdrive);
-}
-
-void MainWindow::on_btnEqualizerState_toggled(bool checked)
-{
-    setPBtnStyle(ui->btnEqualizerState,checked);
-    emit signal_fx_state_toggled(fxEqualizer,checked);
 }
 
 void MainWindow::on_btnEqualizerSet_released()
@@ -66,21 +83,9 @@ void MainWindow::on_btnEqualizerSet_released()
     emit signal_dialogFx_open(fxEqualizer);
 }
 
-void MainWindow::on_btnReverb1State_toggled(bool checked)
-{
-    setPBtnStyle(ui->btnReverb1State,checked);
-    emit signal_fx_state_toggled(fxReverb,checked);
-}
-
 void MainWindow::on_btnReverb1Settings_released()
 {
     emit signal_dialogFx_open(fxReverb);
-}
-
-void MainWindow::on_btnDelay1State_toggled(bool checked)
-{
-    setPBtnStyle(ui->btnDelay1State,checked);
-    emit signal_fx_state_toggled(fxDelay,checked);
 }
 
 void MainWindow::on_btnDelay1Settings_released()
@@ -138,3 +143,5 @@ void MainWindow::setPBtnStyle(QPushButton *button, bool checked)
     else
         button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
 }
+
+

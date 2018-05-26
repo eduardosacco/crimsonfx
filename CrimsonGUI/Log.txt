@@ -1,4 +1,0 @@
-Se agrega funcion para componer mensajes OSC hay una libreria hecha para Qt pero no la meti toda por que
-es un bardo
-
-PD recibe

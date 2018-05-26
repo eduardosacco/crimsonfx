@@ -69,6 +69,7 @@ FxBank::FxBank()
     fx[fxEqualizer].param[pEquPreamp].defValue = DEFAULTPVALUE;
     fx[fxEqualizer].param[pEquPreamp].addr = "equ/p";
 
+    fx[fxEqualizer].param[pEquBand1].name = "Band 1";
     fx[fxEqualizer].param[pEquBand1].value = 0;
     fx[fxEqualizer].param[pEquBand1].defValue = DEFAULTPVALUE;
     fx[fxEqualizer].param[pEquBand1].addr = "equ/b1";
