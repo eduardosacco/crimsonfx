@@ -1,0 +1,33 @@
+#N canvas 0 50 450 397 10;
+#X obj 218 65 inlet;
+#X text 45 53 Signal;
+#X text 220 41 0 1;
+#X obj 85 236 *~;
+#X obj 153 236 *~;
+#X text 14 10 sw2: switchea entre dos señales con 0 elige la primera
+con 1 elige la segunda;
+#X obj 196 137 == 0;
+#X msg 196 159 \$1 20;
+#X msg 251 160 \$1 20;
+#X obj 251 138 == 1;
+#X obj 251 182 line~;
+#X obj 196 182 line~;
+#X obj 112 284 outlet~;
+#X obj 51 78 inlet~;
+#X obj 113 78 inlet~;
+#X obj 218 103 hradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
+-1 -1 0;
+#X connect 0 0 15 0;
+#X connect 3 0 12 0;
+#X connect 4 0 12 0;
+#X connect 6 0 7 0;
+#X connect 7 0 11 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 10 0 4 1;
+#X connect 11 0 3 1;
+#X connect 13 0 3 0;
+#X connect 14 0 4 0;
+#X connect 15 0 6 0;
+#X connect 15 0 9 0;
+#X coords 0 -1 1 1 60 20 1 190 100;
