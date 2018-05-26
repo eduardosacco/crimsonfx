@@ -3,6 +3,7 @@
 #include "tinyosc.h"    //Funciones para escritura y parseo de mensajes en protocolo OSC
 #include <math.h>
 #include <string.h>
+#include <qdatetime.h>
 
 //Direcciones OSC para envio de parametros
 

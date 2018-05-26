@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/crimsonLogo.png</file>
+        <file>img/settings.png</file>
+    </qresource>
+</RCC>

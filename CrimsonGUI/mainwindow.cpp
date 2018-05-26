@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);    
+//    ui->label->setPixmap(*crimsonLogo);
 }
 
 MainWindow::~MainWindow()
@@ -134,9 +135,9 @@ void MainWindow::bankPresetSelector(int preset)
     setPBtnStyle(ui->btnPreset1,false);
     setPBtnStyle(ui->btnPreset2,false);
     setPBtnStyle(ui->btnPreset3,false);
-//    setPBtnStyle(ui->btnPreset4,false);
-//    setPBtnStyle(ui->btnPreset5,false);
-//    setPBtnStyle(ui->btnPreset6,false);
+    setPBtnStyle(ui->btnPreset4,false);
+    setPBtnStyle(ui->btnPreset5,false);
+    setPBtnStyle(ui->btnPreset6,false);
 
     //prendo el boton que corresponda
     switch(preset)
@@ -154,15 +155,15 @@ void MainWindow::bankPresetSelector(int preset)
         break;
 
         case 4:
-//        setPBtnStyle(ui->btnPreset4,true);
+        setPBtnStyle(ui->btnPreset4,true);
         break;
 
         case 5:
-//        setPBtnStyle(ui->btnPreset5,true);
+        setPBtnStyle(ui->btnPreset5,true);
         break;
 
         case 6:
-//        setPBtnStyle(ui->btnPreset6,true);
+        setPBtnStyle(ui->btnPreset6,true);
         break;
     }
     //emito la señal

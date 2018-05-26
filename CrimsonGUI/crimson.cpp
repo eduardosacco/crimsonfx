@@ -5,10 +5,9 @@
 Crimson::Crimson(QObject *parent) :
     QObject(parent)
 {
-    crimsonSettings.setPath(QSettings::IniFormat,QSettings::UserScope, "crimsonSettings.ini");
-//    crimsonSettings.clear();
-
-    qDebug() << crimsonSettings.fileName();
+    qDebug() << "CRIMSON FX 2018";
+    qDebug() << "Config File in: " << crimsonSettings.fileName() << endl;
+    qDebug() << "Debug Log:";
 
     mainWindow = new MainWindow();
     //SETEAR EN FRAMELESS DSPS

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <qpixmap.h>
+
 #include "fxbank.h"
 
 namespace Ui {
@@ -62,6 +64,7 @@ signals:
 private:
     Ui::MainWindow *ui;
     void bankPresetSelector(int preset);
+//    QPixmap *crimsonLogo = new QPixmap(":/img/crimsonLogo.png");
 
 
 };

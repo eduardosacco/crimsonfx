@@ -16,6 +16,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -32,12 +33,12 @@ public:
     QPushButton *btnEqualizerSet;
     QPushButton *btnEqualizerState;
     QPushButton *btnOverdrive1State;
-    QPushButton *btnCompressorSettings;
     QPushButton *btnCompressorState;
     QPushButton *btnDelay1State;
     QPushButton *btnReverb1State;
     QPushButton *btnReverb1Settings;
     QPushButton *btnDelay1Settings;
+    QPushButton *btnCompressorSettings;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnPreset1;
@@ -46,10 +47,9 @@ public:
     QPushButton *btnPreset4;
     QPushButton *btnPreset5;
     QPushButton *btnPreset6;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *btnDSPOnOff;
+    QLabel *label;
     QPushButton *btnSave;
+    QPushButton *btnDSPOnOff;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -87,7 +87,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(10, 196, 581, 181));
+        gridLayoutWidget->setGeometry(QRect(10, 196, 581, 191));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -96,12 +96,18 @@ public:
         btnOverdrive1Settings = new QPushButton(gridLayoutWidget);
         btnOverdrive1Settings->setObjectName(QStringLiteral("btnOverdrive1Settings"));
         btnOverdrive1Settings->setMinimumSize(QSize(0, 40));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/img/img/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
+        btnOverdrive1Settings->setIcon(icon);
+        btnOverdrive1Settings->setIconSize(QSize(35, 35));
 
         gridLayout->addWidget(btnOverdrive1Settings, 1, 1, 1, 1);
 
         btnEqualizerSet = new QPushButton(gridLayoutWidget);
         btnEqualizerSet->setObjectName(QStringLiteral("btnEqualizerSet"));
         btnEqualizerSet->setMinimumSize(QSize(0, 40));
+        btnEqualizerSet->setIcon(icon);
+        btnEqualizerSet->setIconSize(QSize(35, 35));
 
         gridLayout->addWidget(btnEqualizerSet, 1, 2, 1, 1);
 
@@ -125,12 +131,6 @@ public:
         btnOverdrive1State->setCheckable(true);
 
         gridLayout->addWidget(btnOverdrive1State, 0, 1, 1, 1);
-
-        btnCompressorSettings = new QPushButton(gridLayoutWidget);
-        btnCompressorSettings->setObjectName(QStringLiteral("btnCompressorSettings"));
-        btnCompressorSettings->setMinimumSize(QSize(0, 40));
-
-        gridLayout->addWidget(btnCompressorSettings, 1, 0, 1, 1);
 
         btnCompressorState = new QPushButton(gridLayoutWidget);
         btnCompressorState->setObjectName(QStringLiteral("btnCompressorState"));
@@ -162,18 +162,30 @@ public:
         btnReverb1Settings = new QPushButton(gridLayoutWidget);
         btnReverb1Settings->setObjectName(QStringLiteral("btnReverb1Settings"));
         btnReverb1Settings->setMinimumSize(QSize(0, 40));
+        btnReverb1Settings->setIcon(icon);
+        btnReverb1Settings->setIconSize(QSize(35, 35));
 
         gridLayout->addWidget(btnReverb1Settings, 1, 3, 1, 1);
 
         btnDelay1Settings = new QPushButton(gridLayoutWidget);
         btnDelay1Settings->setObjectName(QStringLiteral("btnDelay1Settings"));
         btnDelay1Settings->setMinimumSize(QSize(0, 40));
+        btnDelay1Settings->setIcon(icon);
+        btnDelay1Settings->setIconSize(QSize(35, 35));
 
         gridLayout->addWidget(btnDelay1Settings, 1, 4, 1, 1);
 
+        btnCompressorSettings = new QPushButton(gridLayoutWidget);
+        btnCompressorSettings->setObjectName(QStringLiteral("btnCompressorSettings"));
+        btnCompressorSettings->setMinimumSize(QSize(40, 40));
+        btnCompressorSettings->setIcon(icon);
+        btnCompressorSettings->setIconSize(QSize(35, 35));
+
+        gridLayout->addWidget(btnCompressorSettings, 1, 0, 1, 1);
+
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(20, 110, 561, 71));
+        horizontalLayoutWidget->setGeometry(QRect(10, 100, 581, 91));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -230,30 +242,23 @@ public:
 
         horizontalLayout->addWidget(btnPreset6);
 
-        horizontalLayoutWidget_2 = new QWidget(centralWidget);
-        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
-        horizontalLayoutWidget_2->setGeometry(QRect(190, 0, 221, 101));
-        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        btnDSPOnOff = new QPushButton(horizontalLayoutWidget_2);
-        btnDSPOnOff->setObjectName(QStringLiteral("btnDSPOnOff"));
-        sizePolicy1.setHeightForWidth(btnDSPOnOff->sizePolicy().hasHeightForWidth());
-        btnDSPOnOff->setSizePolicy(sizePolicy1);
-        btnDSPOnOff->setMinimumSize(QSize(80, 80));
-
-        horizontalLayout_2->addWidget(btnDSPOnOff);
-
-        btnSave = new QPushButton(horizontalLayoutWidget_2);
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(190, 10, 221, 81));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/img/img/crimsonLogo.png")));
+        label->setScaledContents(true);
+        btnSave = new QPushButton(centralWidget);
         btnSave->setObjectName(QStringLiteral("btnSave"));
+        btnSave->setGeometry(QRect(500, 10, 80, 80));
         sizePolicy1.setHeightForWidth(btnSave->sizePolicy().hasHeightForWidth());
         btnSave->setSizePolicy(sizePolicy1);
         btnSave->setMinimumSize(QSize(80, 80));
-
-        horizontalLayout_2->addWidget(btnSave);
-
+        btnDSPOnOff = new QPushButton(centralWidget);
+        btnDSPOnOff->setObjectName(QStringLiteral("btnDSPOnOff"));
+        btnDSPOnOff->setGeometry(QRect(20, 10, 80, 80));
+        sizePolicy1.setHeightForWidth(btnDSPOnOff->sizePolicy().hasHeightForWidth());
+        btnDSPOnOff->setSizePolicy(sizePolicy1);
+        btnDSPOnOff->setMinimumSize(QSize(80, 80));
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -264,24 +269,25 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
-        btnOverdrive1Settings->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
-        btnEqualizerSet->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
+        btnOverdrive1Settings->setText(QString());
+        btnEqualizerSet->setText(QString());
         btnEqualizerState->setText(QApplication::translate("MainWindow", "Equalizer", Q_NULLPTR));
         btnOverdrive1State->setText(QApplication::translate("MainWindow", "Overdrive", Q_NULLPTR));
-        btnCompressorSettings->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
         btnCompressorState->setText(QApplication::translate("MainWindow", "Compressor", Q_NULLPTR));
         btnDelay1State->setText(QApplication::translate("MainWindow", "Delay", Q_NULLPTR));
         btnReverb1State->setText(QApplication::translate("MainWindow", "Reverb", Q_NULLPTR));
-        btnReverb1Settings->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
-        btnDelay1Settings->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
+        btnReverb1Settings->setText(QString());
+        btnDelay1Settings->setText(QString());
+        btnCompressorSettings->setText(QString());
         btnPreset1->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
         btnPreset2->setText(QApplication::translate("MainWindow", "B", Q_NULLPTR));
         btnPreset3->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
         btnPreset4->setText(QApplication::translate("MainWindow", "X", Q_NULLPTR));
         btnPreset5->setText(QApplication::translate("MainWindow", "Y", Q_NULLPTR));
         btnPreset6->setText(QApplication::translate("MainWindow", "Z", Q_NULLPTR));
-        btnDSPOnOff->setText(QApplication::translate("MainWindow", "DSP", Q_NULLPTR));
+        label->setText(QString());
         btnSave->setText(QApplication::translate("MainWindow", "SAVE", Q_NULLPTR));
+        btnDSPOnOff->setText(QApplication::translate("MainWindow", "DSP", Q_NULLPTR));
     } // retranslateUi
 
 };

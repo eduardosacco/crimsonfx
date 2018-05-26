@@ -36,3 +36,6 @@ FORMS    += mainwindow.ui \
     dialogfx.ui
 
 OTHER_FILES +=
+
+RESOURCES += \
+    resources.qrc
