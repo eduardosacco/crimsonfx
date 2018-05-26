@@ -17,7 +17,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void initPulse(int bankPreset);
+    void initPulse(int preset);
     void updateFxState(int fxNum,bool state);
     void setPBtnStyle(QPushButton *button, bool checked);
 
@@ -46,12 +46,18 @@ private slots:
     void on_btnPreset1_released();
     void on_btnPreset2_released();
     void on_btnPreset3_released();
-    
+    void on_btnPreset4_released();
+    void on_btnPreset5_released();
+    void on_btnPreset6_released();
+
+    void on_btnSave_released();
+
 signals:
     //Señales ON OFF Switches
     void signal_fx_state_toggled(int fx);
     void signal_dialogFx_open(int fx);
-    void signal_bankPreset_changed(int preset);
+    void signal_preset_changed(int preset);
+    void signal_preset_saved();
     
 private:
     Ui::MainWindow *ui;

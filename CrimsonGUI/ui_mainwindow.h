@@ -40,10 +40,16 @@ public:
     QPushButton *btnDelay1Settings;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
-    QPushButton *btnDSPOnOff;
     QPushButton *btnPreset1;
     QPushButton *btnPreset2;
     QPushButton *btnPreset3;
+    QPushButton *btnPreset4;
+    QPushButton *btnPreset5;
+    QPushButton *btnPreset6;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *btnDSPOnOff;
+    QPushButton *btnSave;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -81,7 +87,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(10, 140, 581, 161));
+        gridLayoutWidget->setGeometry(QRect(10, 196, 581, 181));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -89,11 +95,13 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         btnOverdrive1Settings = new QPushButton(gridLayoutWidget);
         btnOverdrive1Settings->setObjectName(QStringLiteral("btnOverdrive1Settings"));
+        btnOverdrive1Settings->setMinimumSize(QSize(0, 40));
 
         gridLayout->addWidget(btnOverdrive1Settings, 1, 1, 1, 1);
 
         btnEqualizerSet = new QPushButton(gridLayoutWidget);
         btnEqualizerSet->setObjectName(QStringLiteral("btnEqualizerSet"));
+        btnEqualizerSet->setMinimumSize(QSize(0, 40));
 
         gridLayout->addWidget(btnEqualizerSet, 1, 2, 1, 1);
 
@@ -120,6 +128,7 @@ public:
 
         btnCompressorSettings = new QPushButton(gridLayoutWidget);
         btnCompressorSettings->setObjectName(QStringLiteral("btnCompressorSettings"));
+        btnCompressorSettings->setMinimumSize(QSize(0, 40));
 
         gridLayout->addWidget(btnCompressorSettings, 1, 0, 1, 1);
 
@@ -152,38 +161,32 @@ public:
 
         btnReverb1Settings = new QPushButton(gridLayoutWidget);
         btnReverb1Settings->setObjectName(QStringLiteral("btnReverb1Settings"));
+        btnReverb1Settings->setMinimumSize(QSize(0, 40));
 
         gridLayout->addWidget(btnReverb1Settings, 1, 3, 1, 1);
 
         btnDelay1Settings = new QPushButton(gridLayoutWidget);
         btnDelay1Settings->setObjectName(QStringLiteral("btnDelay1Settings"));
+        btnDelay1Settings->setMinimumSize(QSize(0, 40));
 
         gridLayout->addWidget(btnDelay1Settings, 1, 4, 1, 1);
 
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 10, 581, 101));
+        horizontalLayoutWidget->setGeometry(QRect(20, 110, 561, 71));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        btnDSPOnOff = new QPushButton(horizontalLayoutWidget);
-        btnDSPOnOff->setObjectName(QStringLiteral("btnDSPOnOff"));
+        btnPreset1 = new QPushButton(horizontalLayoutWidget);
+        btnPreset1->setObjectName(QStringLiteral("btnPreset1"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(btnDSPOnOff->sizePolicy().hasHeightForWidth());
-        btnDSPOnOff->setSizePolicy(sizePolicy1);
-        btnDSPOnOff->setMinimumSize(QSize(80, 80));
-
-        horizontalLayout->addWidget(btnDSPOnOff);
-
-        btnPreset1 = new QPushButton(horizontalLayoutWidget);
-        btnPreset1->setObjectName(QStringLiteral("btnPreset1"));
         sizePolicy1.setHeightForWidth(btnPreset1->sizePolicy().hasHeightForWidth());
         btnPreset1->setSizePolicy(sizePolicy1);
-        btnPreset1->setMinimumSize(QSize(80, 80));
+        btnPreset1->setMinimumSize(QSize(80, 40));
 
         horizontalLayout->addWidget(btnPreset1);
 
@@ -191,7 +194,7 @@ public:
         btnPreset2->setObjectName(QStringLiteral("btnPreset2"));
         sizePolicy1.setHeightForWidth(btnPreset2->sizePolicy().hasHeightForWidth());
         btnPreset2->setSizePolicy(sizePolicy1);
-        btnPreset2->setMinimumSize(QSize(80, 80));
+        btnPreset2->setMinimumSize(QSize(80, 40));
 
         horizontalLayout->addWidget(btnPreset2);
 
@@ -199,9 +202,57 @@ public:
         btnPreset3->setObjectName(QStringLiteral("btnPreset3"));
         sizePolicy1.setHeightForWidth(btnPreset3->sizePolicy().hasHeightForWidth());
         btnPreset3->setSizePolicy(sizePolicy1);
-        btnPreset3->setMinimumSize(QSize(80, 80));
+        btnPreset3->setMinimumSize(QSize(80, 40));
 
         horizontalLayout->addWidget(btnPreset3);
+
+        btnPreset4 = new QPushButton(horizontalLayoutWidget);
+        btnPreset4->setObjectName(QStringLiteral("btnPreset4"));
+        sizePolicy1.setHeightForWidth(btnPreset4->sizePolicy().hasHeightForWidth());
+        btnPreset4->setSizePolicy(sizePolicy1);
+        btnPreset4->setMinimumSize(QSize(80, 40));
+
+        horizontalLayout->addWidget(btnPreset4);
+
+        btnPreset5 = new QPushButton(horizontalLayoutWidget);
+        btnPreset5->setObjectName(QStringLiteral("btnPreset5"));
+        sizePolicy1.setHeightForWidth(btnPreset5->sizePolicy().hasHeightForWidth());
+        btnPreset5->setSizePolicy(sizePolicy1);
+        btnPreset5->setMinimumSize(QSize(80, 40));
+
+        horizontalLayout->addWidget(btnPreset5);
+
+        btnPreset6 = new QPushButton(horizontalLayoutWidget);
+        btnPreset6->setObjectName(QStringLiteral("btnPreset6"));
+        sizePolicy1.setHeightForWidth(btnPreset6->sizePolicy().hasHeightForWidth());
+        btnPreset6->setSizePolicy(sizePolicy1);
+        btnPreset6->setMinimumSize(QSize(80, 40));
+
+        horizontalLayout->addWidget(btnPreset6);
+
+        horizontalLayoutWidget_2 = new QWidget(centralWidget);
+        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(190, 0, 221, 101));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        btnDSPOnOff = new QPushButton(horizontalLayoutWidget_2);
+        btnDSPOnOff->setObjectName(QStringLiteral("btnDSPOnOff"));
+        sizePolicy1.setHeightForWidth(btnDSPOnOff->sizePolicy().hasHeightForWidth());
+        btnDSPOnOff->setSizePolicy(sizePolicy1);
+        btnDSPOnOff->setMinimumSize(QSize(80, 80));
+
+        horizontalLayout_2->addWidget(btnDSPOnOff);
+
+        btnSave = new QPushButton(horizontalLayoutWidget_2);
+        btnSave->setObjectName(QStringLiteral("btnSave"));
+        sizePolicy1.setHeightForWidth(btnSave->sizePolicy().hasHeightForWidth());
+        btnSave->setSizePolicy(sizePolicy1);
+        btnSave->setMinimumSize(QSize(80, 80));
+
+        horizontalLayout_2->addWidget(btnSave);
 
         MainWindow->setCentralWidget(centralWidget);
 
@@ -223,10 +274,14 @@ public:
         btnReverb1State->setText(QApplication::translate("MainWindow", "Reverb", Q_NULLPTR));
         btnReverb1Settings->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
         btnDelay1Settings->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
+        btnPreset1->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
+        btnPreset2->setText(QApplication::translate("MainWindow", "B", Q_NULLPTR));
+        btnPreset3->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
+        btnPreset4->setText(QApplication::translate("MainWindow", "X", Q_NULLPTR));
+        btnPreset5->setText(QApplication::translate("MainWindow", "Y", Q_NULLPTR));
+        btnPreset6->setText(QApplication::translate("MainWindow", "Z", Q_NULLPTR));
         btnDSPOnOff->setText(QApplication::translate("MainWindow", "DSP", Q_NULLPTR));
-        btnPreset1->setText(QApplication::translate("MainWindow", "P1", Q_NULLPTR));
-        btnPreset2->setText(QApplication::translate("MainWindow", "P2", Q_NULLPTR));
-        btnPreset3->setText(QApplication::translate("MainWindow", "P3", Q_NULLPTR));
+        btnSave->setText(QApplication::translate("MainWindow", "SAVE", Q_NULLPTR));
     } // retranslateUi
 
 };

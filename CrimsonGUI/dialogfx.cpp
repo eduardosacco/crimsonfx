@@ -33,20 +33,6 @@ void DialogFx::dialogSettings(int fxNum,Effect fx)
     //Seteo el estado del boton on off
     updateFxState(fx.state);
 
-    //Seteo el estado de preset
-    switch(fx.preset)
-    {
-    case PRESET1:
-        setPBtnStyle(ui->btnPreset1,true);
-        break;
-    case PRESET2:
-        setPBtnStyle(ui->btnPreset2,true);
-        break;
-    case PRESET3:
-        setPBtnStyle(ui->btnPreset3,true);
-        break;
-    }
-
     //Esta funcion debe crear dinamicamente
     //los widgets necesarios para cada efecto
 
@@ -159,50 +145,6 @@ void DialogFx::slot_dial3_valueChanged(int position)
 void DialogFx::slot_dial4_valueChanged(int position)
 {
     emit signal_fx_param_changed(effect,PARAM4,position);
-}
-
-void DialogFx::on_btnPreset1_released()
-{
-    presetSelector(PRESET1);
-}
-
-void DialogFx::on_btnPreset2_released()
-{
-    presetSelector(PRESET2);
-}
-
-void DialogFx::on_btnPreset3_released()
-{
-    presetSelector(PRESET3);
-}
-
-void DialogFx::presetSelector(int preset)
-{
-    switch(preset)
-    {
-        case 1:
-        setPBtnStyle(ui->btnPreset1,true);
-        setPBtnStyle(ui->btnPreset2,false);
-        setPBtnStyle(ui->btnPreset3,false);
-        emit signal_fx_preset_changed(effect,preset);
-
-        break;
-
-        case 2:
-        setPBtnStyle(ui->btnPreset1,false);
-        setPBtnStyle(ui->btnPreset2,true);
-        setPBtnStyle(ui->btnPreset3,false);
-        emit signal_fx_preset_changed(effect,preset);
-        break;
-
-        case 3:
-        setPBtnStyle(ui->btnPreset1,false);
-        setPBtnStyle(ui->btnPreset2,false);
-        setPBtnStyle(ui->btnPreset3,true);
-        emit signal_fx_preset_changed(effect,preset);
-        break;
-
-    }
 }
 
 void DialogFx::on_btnOnOff_released()

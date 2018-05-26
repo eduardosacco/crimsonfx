@@ -5,7 +5,7 @@
 Crimson::Crimson(QObject *parent) :
     QObject(parent)
 {
-//    crimsonSettings.setPath(QSettings::IniFormat,QSettings::UserScope, "crimsonSettings.ini");
+    crimsonSettings.setPath(QSettings::IniFormat,QSettings::UserScope, "crimsonSettings.ini");
 //    crimsonSettings.clear();
 
     qDebug() << crimsonSettings.fileName();
@@ -21,12 +21,15 @@ Crimson::Crimson(QObject *parent) :
             this,SLOT(slot_fx_state_changed(int)));
 
     //Presets
-    connect(mainWindow,SIGNAL(signal_bankPreset_changed(int)),
+    connect(mainWindow,SIGNAL(signal_preset_changed(int)),
             this,SLOT(slot_bank_preset_changed(int)));
 
     //Settings de cada efecto
     connect(mainWindow,SIGNAL(signal_dialogFx_open(int)),
             this,SLOT(slot_dialogFx_open(int)));
+
+    connect(mainWindow,SIGNAL(signal_preset_saved()),
+            this,SLOT(slot_fx_preset_saved()));
 
     //INICIALIZAR EVERYTHING
     initializeFxParameters(); //Simula apretar un boton de presetBank
@@ -52,75 +55,62 @@ void Crimson::initializeFxParameters()
     mainWindow->initPulse(lastBankPreset); //desde mainwindow emite signal de vuelta a crimson
 }
 
-//***********************************************************************
-//                  FX BANK
-//***********************************************************************
-void Crimson::slot_bank_preset_changed(int bankPreset)
+//*****************************************************************
+//                  SLOTS
+//*****************************************************************
+
+void Crimson::slot_bank_preset_changed(int preset)
 {
-    int k,fxPreset;
+    int fx,param;      //para ciclar los for
+
     QString addr = QString(fxBank.presetAddr);
     //Primero guardo el preset al cual se cambio para que quede almacenado
     //como lastPreset para cuando se inicialice el programa de nuevo
-    crimsonSettings.setValue(addr,bankPreset);
+    crimsonSettings.setValue(addr,preset);
 
-
-    //Si este bank preset ya estaba seleccionado guardo la config actual
-    if(fxBank.preset == bankPreset)
+    //Si no es el preset seleccionado cargo la configuracion guardada
+    if(fxBank.preset != preset)
     {
-        for(k=0;k<MAXEFFECTS;k++)
-        {
-            //guardo los estados de cada efecto
-            addr = QString(fxBank.fx[k].stateAddr).append(QString::number(bankPreset));
-            crimsonSettings.setValue(addr,fxBank.fx[k].state);
+        fxBank.preset = preset;
 
-            qDebug() << "Saved" << addr << " " << QString::number(fxBank.fx[k].state);
-
-            //guardo los presets de cada efecto
-            addr = QString(fxBank.fx[k].presetAddr).append(QString::number(bankPreset));
-            crimsonSettings.setValue(addr,fxBank.fx[k].preset);
-
-            qDebug() << "Saved" << addr << " " << QString::number(fxBank.fx[k].preset);
-
-        }
-    }
-    //si no era el preset seleccionado cargo la configuracion guardada
-    else
-    {
-        fxBank.preset = bankPreset;
-
-        for(k=0;k<MAXEFFECTS;k++)
+        for(fx=0;fx<MAXEFFECTS;fx++)
         {
             //cargo los estados de cada efecto
-            addr = QString(fxBank.fx[k].stateAddr).append(QString::number(bankPreset));
-            fxBank.fx[k].state = crimsonSettings.value(addr,DEFAULTSTATE).toBool();
-            qDebug() << "Loaded" << addr << " " << QString::number(fxBank.fx[k].state);
+            addr = QString(fxBank.fx[fx].stateAddr).append(QString::number(preset));
+            //armo dir ej: over/state1
+            fxBank.fx[fx].state = crimsonSettings.value(addr,DEFAULTSTATE).toBool();
+            qDebug() << "Loaded" << addr << " " << QString::number(fxBank.fx[fx].state);
 
             //Envio el nuevo estado a Pd
-            QString addr = QString(fxBank.fx[k].stateAddr).prepend("/");
-            comms.oscSendInt(addr,fxBank.fx[k].state);
-
-            //Inicializo los presets de los efectos segun el banco cargado
-            addr = QString(fxBank.fx[k].presetAddr).append(QString::number(bankPreset));
-            fxPreset = crimsonSettings.value(addr,DEFAULTPRESET).toInt();
+            QString addr = QString(fxBank.fx[fx].stateAddr).prepend("/");
+            comms.oscSendInt(addr,fxBank.fx[fx].state);
 
             //Actualizo cues visuales de que efectos estan prendidos
             if(mainWindow != NULL)
-                mainWindow->updateFxState(k,fxBank.fx[k].state);
+                mainWindow->updateFxState(fx,fxBank.fx[fx].state);
 
-            qDebug() << "Loaded" << addr << " " << QString::number(fxPreset);
 
-            //Las variables que almacenan el numero de preset
-            //comienzan en el valor NONINIT por eso esta funcion
-            //tambien sirve para inicializar
-            slot_fx_preset_changed(k,fxPreset);
+            int nParam = fxBank.fx[fx].nParam;
+            //Inicializo los valores de los parametros de los efectos
+            for(param=0;param<nParam;param++)
+            {
+                addr = QString(fxBank.fx[fx].param[param].addr).append(QString::number(preset));
+                fxBank.fx[fx].param[param].value = crimsonSettings.value(
+                            addr,fxBank.fx[fx].param[param].defValue).toInt();
+
+                //envio parametros a pd
+                addr = QString(fxBank.fx[fx].param[param].addr).prepend("/");
+                comms.oscSendInt(addr,fxBank.fx[fx].param[param].value);
+            }
+
+            //Actualizo los diales
+            if(dialogFx != NULL)
+                dialogFx->setDialValues(fxBank.fx[fx]);
 
         }
     }
 }
 
-//*****************************************************************
-//                  SLOTS
-//*****************************************************************
 void Crimson::slot_fx_state_changed(int fx)
 {
     //Actualizo el nuevo estado del efecto
@@ -145,41 +135,26 @@ void Crimson::slot_fx_param_changed(int fx, int param, int value)
     comms.oscSendInt(addr, value);
 }
 
-void Crimson::slot_fx_preset_changed(int fx, int preset)
+//Habria que implementar el dirty bit asi no guardo todo en el reg al pedo
+void Crimson::slot_fx_preset_saved()
 {
-    int k;
-    int nParam = fxBank.fx[fx].nParam;
-    QString addr;
+    int fx,param;
 
-    //Si este preset ya estaba seleccionado guardo la config actual
-    if(fxBank.fx[fx].preset == preset)
+    for(fx=0;fx<MAXEFFECTS;fx++)
     {
-        for(k=0;k<nParam;k++)
+        //guardo los estados de cada efecto
+        QString addr = QString(fxBank.fx[fx].stateAddr).append(QString::number(fxBank.preset));
+        crimsonSettings.setValue(addr,fxBank.fx[fx].state);
+
+        qDebug() << "Saved" << addr << " " << QString::number(fxBank.fx[fx].state);
+
+        int nParam = fxBank.fx[fx].nParam;
+
+        for(param=0;param<nParam;param++)
         {
-            addr = QString(fxBank.fx[fx].param[k].addr).append(QString::number(preset));
-            crimsonSettings.setValue(addr,fxBank.fx[fx].param[k].value);
+            addr = QString(fxBank.fx[fx].param[param].addr).append(QString::number(fxBank.preset));
+            crimsonSettings.setValue(addr,fxBank.fx[fx].param[param].value);
         }
-
-    }
-    //si no era el preset seleccionado cargo la configuracion guardada
-    else
-    {
-        fxBank.fx[fx].preset = preset;
-
-        for(k=0;k<nParam;k++)
-        {
-            addr = QString(fxBank.fx[fx].param[k].addr).append(QString::number(preset));
-            fxBank.fx[fx].param[k].value = crimsonSettings.value(
-                        addr,fxBank.fx[fx].param[k].defValue).toInt();
-
-            //envio parametros a pd
-            addr = QString(fxBank.fx[fx].param[k].addr).prepend("/");
-            comms.oscSendInt(addr,fxBank.fx[fx].param[k].value);
-        }
-
-        //Actualizo los diales
-        if(dialogFx != NULL)
-            dialogFx->setDialValues(fxBank.fx[fx]);
     }
 }
 

@@ -25,7 +25,7 @@ public slots:
     //EFECTOS
     void slot_fx_state_changed(int fx);
     void slot_fx_param_changed(int fx,int param, int value);
-    void slot_fx_preset_changed(int fx, int preset);
+    void slot_fx_preset_saved();
 
     //Salida del programa
     void slot_exit();

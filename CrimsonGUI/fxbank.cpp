@@ -13,7 +13,6 @@ FxBank::FxBank()
     //Compressor
     fx[fxCompressor].name = "Compressor";
     fx[fxCompressor].state = OFF;
-    fx[fxCompressor].preset = NONINIT;
     fx[fxCompressor].nParam = 3;
     fx[fxCompressor].stateAddr = "comp/state";
     fx[fxCompressor].presetAddr = "comp/preset";
@@ -36,7 +35,6 @@ FxBank::FxBank()
     //Overdrive
     fx[fxOverdrive].name = "Overdrive";
     fx[fxOverdrive].state = OFF;
-    fx[fxOverdrive].preset = NONINIT;
     fx[fxOverdrive].nParam = 3;
     fx[fxOverdrive].stateAddr = "over/state";
     fx[fxOverdrive].presetAddr = "over/preset";
@@ -59,7 +57,6 @@ FxBank::FxBank()
     //Equalizer
 
     fx[fxEqualizer].state = OFF;
-    fx[fxEqualizer].preset = NONINIT;
     fx[fxEqualizer].nParam = 5;
     fx[fxEqualizer].stateAddr = "equ/state";
     fx[fxEqualizer].presetAddr = "equ/preset";
@@ -92,7 +89,6 @@ FxBank::FxBank()
     //Reverb
     fx[fxReverb].name = "Reverb";
     fx[fxReverb].state = OFF;
-    fx[fxReverb].preset = NONINIT;
     fx[fxReverb].nParam = 3;
     fx[fxReverb].stateAddr = "rev/state"; //state quizas pasa a x
     fx[fxReverb].presetAddr = "rev/preset";
@@ -115,7 +111,6 @@ FxBank::FxBank()
     //Delay
     fx[fxDelay].name = "Delay";
     fx[fxDelay].state = OFF;
-    fx[fxDelay].preset = NONINIT;
     fx[fxDelay].nParam = 3;
     fx[fxDelay].stateAddr = "del/state"; //state quizas pasa a x
     fx[fxDelay].presetAddr = "del/preset";

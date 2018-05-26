@@ -13,9 +13,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initPulse(int bankPreset)
+void MainWindow::initPulse(int preset)
 {
-    bankPresetSelector(bankPreset);
+    bankPresetSelector(preset);
 }
 
 //Es usada cuando el cambio no se produce desde mainwindow sino de crimson
@@ -108,32 +108,65 @@ void MainWindow::on_btnPreset3_released()
     bankPresetSelector(3);
 }
 
+void MainWindow::on_btnPreset4_released()
+{
+    bankPresetSelector(4);
+}
+
+void MainWindow::on_btnPreset5_released()
+{
+    bankPresetSelector(5);
+}
+
+void MainWindow::on_btnPreset6_released()
+{
+    bankPresetSelector(6);
+}
+
+void MainWindow::on_btnSave_released()
+{
+    emit signal_preset_saved();
+}
+
 void MainWindow::bankPresetSelector(int preset)
 {
+    //Apago todos los botones
+    setPBtnStyle(ui->btnPreset1,false);
+    setPBtnStyle(ui->btnPreset2,false);
+    setPBtnStyle(ui->btnPreset3,false);
+//    setPBtnStyle(ui->btnPreset4,false);
+//    setPBtnStyle(ui->btnPreset5,false);
+//    setPBtnStyle(ui->btnPreset6,false);
+
+    //prendo el boton que corresponda
     switch(preset)
     {
         case 1:
         setPBtnStyle(ui->btnPreset1,true);
-        setPBtnStyle(ui->btnPreset2,false);
-        setPBtnStyle(ui->btnPreset3,false);
-        emit signal_bankPreset_changed(1);
         break;
 
         case 2:
-        setPBtnStyle(ui->btnPreset1,false);
         setPBtnStyle(ui->btnPreset2,true);
-        setPBtnStyle(ui->btnPreset3,false);
-        emit signal_bankPreset_changed(2);
         break;
 
         case 3:
-        setPBtnStyle(ui->btnPreset1,false);
-        setPBtnStyle(ui->btnPreset2,false);
         setPBtnStyle(ui->btnPreset3,true);
-        emit signal_bankPreset_changed(3);
+        break;
+
+        case 4:
+//        setPBtnStyle(ui->btnPreset4,true);
+        break;
+
+        case 5:
+//        setPBtnStyle(ui->btnPreset5,true);
+        break;
+
+        case 6:
+//        setPBtnStyle(ui->btnPreset6,true);
         break;
     }
-
+    //emito la señal
+    emit signal_preset_changed(preset);
 }
 
 void MainWindow::setPBtnStyle(QPushButton *button, bool checked)

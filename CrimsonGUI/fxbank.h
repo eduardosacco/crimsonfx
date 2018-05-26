@@ -54,8 +54,6 @@ typedef struct
     const char *name;
     //Estado del efecto On o OFF
     bool state;
-    //Preset en el cual se encuentra seteado el efecto
-    int preset;
     //Numero de parametros del efecto
     int nParam;
     //Para acceder a crimsonSettings se usa concatenando el numero del banco N
@@ -86,6 +84,7 @@ class FxBank
 public:
     FxBank();
 
+//    bool isDirty;
     int preset;
     const char *presetAddr;
     Effect fx[MAXEFFECTS];
