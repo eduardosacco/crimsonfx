@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.5
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -341,29 +341,29 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         btnEqualizerSettings->setText(QString());
-        btnReverb1State->setText(QApplication::translate("MainWindow", "Reverb", Q_NULLPTR));
-        btnCompressorState->setText(QApplication::translate("MainWindow", "Compressor", Q_NULLPTR));
+        btnReverb1State->setText(QApplication::translate("MainWindow", "Reverb", 0));
+        btnCompressorState->setText(QApplication::translate("MainWindow", "Compressor", 0));
         btnReverb1Settings->setText(QString());
-        btnEqualizerState->setText(QApplication::translate("MainWindow", "Equalizer", Q_NULLPTR));
-        btnDelay1State->setText(QApplication::translate("MainWindow", "Delay", Q_NULLPTR));
+        btnEqualizerState->setText(QApplication::translate("MainWindow", "Equalizer", 0));
+        btnDelay1State->setText(QApplication::translate("MainWindow", "Delay", 0));
         btnOverdrive1Settings->setText(QString());
-        btnOverdrive1State->setText(QApplication::translate("MainWindow", "Overdrive", Q_NULLPTR));
+        btnOverdrive1State->setText(QApplication::translate("MainWindow", "Overdrive", 0));
         btnCompressorSettings->setText(QString());
         btnDelay1Settings->setText(QString());
-        btnDistortionState->setText(QApplication::translate("MainWindow", "Distortion", Q_NULLPTR));
+        btnDistortionState->setText(QApplication::translate("MainWindow", "Distortion", 0));
         btnDistortionSettings->setText(QString());
-        btnFlangerState->setText(QApplication::translate("MainWindow", "Flanger", Q_NULLPTR));
+        btnFlangerState->setText(QApplication::translate("MainWindow", "Flanger", 0));
         btnFlangerSettings->setText(QString());
-        btnChorusState->setText(QApplication::translate("MainWindow", "Chorus", Q_NULLPTR));
+        btnChorusState->setText(QApplication::translate("MainWindow", "Chorus", 0));
         btnChorusSettings->setText(QString());
-        btnPreset1->setText(QApplication::translate("MainWindow", "A", Q_NULLPTR));
-        btnPreset2->setText(QApplication::translate("MainWindow", "B", Q_NULLPTR));
-        btnPreset3->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
-        btnPreset4->setText(QApplication::translate("MainWindow", "X", Q_NULLPTR));
-        btnPreset5->setText(QApplication::translate("MainWindow", "Y", Q_NULLPTR));
-        btnPreset6->setText(QApplication::translate("MainWindow", "Z", Q_NULLPTR));
+        btnPreset1->setText(QApplication::translate("MainWindow", "A", 0));
+        btnPreset2->setText(QApplication::translate("MainWindow", "B", 0));
+        btnPreset3->setText(QApplication::translate("MainWindow", "C", 0));
+        btnPreset4->setText(QApplication::translate("MainWindow", "X", 0));
+        btnPreset5->setText(QApplication::translate("MainWindow", "Y", 0));
+        btnPreset6->setText(QApplication::translate("MainWindow", "Z", 0));
         btnSave->setText(QString());
         label->setText(QString());
     } // retranslateUi
