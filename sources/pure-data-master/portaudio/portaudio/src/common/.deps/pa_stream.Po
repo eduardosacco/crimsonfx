@@ -1,0 +1,9 @@
+portaudio/src/common/pa_stream.o: portaudio/src/common/pa_stream.c \
+ /usr/include/stdc-predef.h portaudio/src/common/pa_stream.h \
+ ../portaudio/portaudio/include/portaudio.h
+
+/usr/include/stdc-predef.h:
+
+portaudio/src/common/pa_stream.h:
+
+../portaudio/portaudio/include/portaudio.h:

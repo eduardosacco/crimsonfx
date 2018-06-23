@@ -1,0 +1,18 @@
+portaudio/src/common/pa_converters.o: \
+ portaudio/src/common/pa_converters.c /usr/include/stdc-predef.h \
+ portaudio/src/common/pa_converters.h \
+ ../portaudio/portaudio/include/portaudio.h \
+ portaudio/src/common/pa_dither.h portaudio/src/common/pa_types.h \
+ portaudio/src/common/pa_endianness.h
+
+/usr/include/stdc-predef.h:
+
+portaudio/src/common/pa_converters.h:
+
+../portaudio/portaudio/include/portaudio.h:
+
+portaudio/src/common/pa_dither.h:
+
+portaudio/src/common/pa_types.h:
+
+portaudio/src/common/pa_endianness.h:
