@@ -51,19 +51,19 @@ int main(int argc, char *argv[])
     a.setOrganizationName("Crimson");
     a.setApplicationName("Fx16");
 
-//    //Splash screen
-//    QSplashScreen *splash = new QSplashScreen;
-//    splash->setPixmap(QPixmap(":/img/img/crimsonSplash.png"));
-//    //splash->showFullScreen();
-//    splash->show();
-//    //BLOCKING Delay
-//    QTime dieTime= QTime::currentTime().addSecs(5);
-//    while (QTime::currentTime() < dieTime)
-//    {
-//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-//    }
-//    //cierro el splashscreen
-//    splash->close();
+    //Splash screen
+    QSplashScreen *splash = new QSplashScreen;
+    splash->setPixmap(QPixmap(":/img/img/crimsonSplash.png"));
+    //splash->showFullScreen();
+    splash->show();
+    //BLOCKING Delay
+    QTime dieTime= QTime::currentTime().addSecs(5);
+    while (QTime::currentTime() < dieTime)
+    {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+    //cierro el splashscreen
+    splash->close();
 
     //Corro el programa principal
     Crimson crimson;
