@@ -6,7 +6,7 @@
 #include <QDateTime>
 #include <QSplashScreen>
 
-void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void myMessageHandler( const QString &msg)
 {
     QFile outFile("log.txt");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
@@ -14,24 +14,7 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &context, const Q
     QTextStream ts(&outFile);
 
     QByteArray localMsg = msg.toLocal8Bit();
-//    switch (type)
-//    {
-//        case QtDebugMsg:
-//            fprintf(outFile, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-//            break;
-//        case QtInfoMsg:
-//            fprintf(outFile, "Info: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-//            break;
-//        case QtWarningMsg:
-//            fprintf(outFile, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-//            break;
-//        case QtCriticalMsg:
-//            fprintf(outFile, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-//            break;
-//        case QtFatalMsg:
-//            fprintf(outFile, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
-//            abort();
-//    }
+
     ts << date.currentDateTime().toString() << ": " <<localMsg.constData() << endl;
 }
 
@@ -51,19 +34,19 @@ int main(int argc, char *argv[])
     a.setOrganizationName("Crimson");
     a.setApplicationName("Fx16");
 
-    //Splash screen
-    QSplashScreen *splash = new QSplashScreen;
-    splash->setPixmap(QPixmap(":/img/img/crimsonSplash.png"));
-    //splash->showFullScreen();
-    splash->show();
-    //BLOCKING Delay
-    QTime dieTime= QTime::currentTime().addSecs(5);
-    while (QTime::currentTime() < dieTime)
-    {
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-    }
-    //cierro el splashscreen
-    splash->close();
+//    //Splash screen
+//    QSplashScreen *splash = new QSplashScreen;
+//    splash->setPixmap(QPixmap(":/img/img/crimsonSplash.png"));
+//    splash->showFullScreen();
+//    splash->show();
+//    //BLOCKING Delay
+//    QTime dieTime= QTime::currentTime().addSecs(5);
+//    while (QTime::currentTime() < dieTime)
+//    {
+//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+//    }
+//    //cierro el splashscreen
+//    splash->close();
 
     //Corro el programa principal
     Crimson crimson;
