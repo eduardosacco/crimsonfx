@@ -23,14 +23,16 @@ SOURCES += main.cpp\
     crimson.cpp \
     fxbank.cpp \
     dialogfx.cpp \
-    tinyosc.c
+    tinyosc.c \
+    mmapgpio.cpp
 
 HEADERS  += mainwindow.h \
     comms.h \
     crimson.h \
     fxbank.h \
     dialogfx.h \
-    tinyosc.h
+    tinyosc.h \
+    mmapgpio.h
 
 FORMS    += mainwindow.ui \
     dialogfx.ui

@@ -9,30 +9,29 @@ Crimson::Crimson(QObject *parent) :
     qDebug() << "Config File in: " << crimsonSettings.fileName() << endl;
     qDebug() << "Debug Log:";
 
+    timer = new QTimer();
+    rpiGpio = new mmapGpio();
     mainWindow = new MainWindow();
-    //SETEAR EN FRAMELESS DSPS
-    //mainWindow->setWindowFlags(Qt::FramelessWindowHint);
 
-    //Conexiones con señales de mainWindow
+    connect(mainWindow, SIGNAL(signal_fx_state_toggled(int)),
+            this, SLOT(slot_fx_state_changed(int)));
+    connect(mainWindow, SIGNAL(signal_preset_changed(int)),
+            this, SLOT(slot_bank_preset_changed(int)));
+    connect(mainWindow, SIGNAL(signal_dialogFx_open(int)),
+            this, SLOT(slot_dialogFx_open(int)));
+    connect(mainWindow, SIGNAL(signal_preset_saved()),
+            this, SLOT(slot_fx_preset_saved()));
 
-    //On off de cada efecto
-    connect(mainWindow,SIGNAL(signal_fx_state_toggled(int)),
-            this,SLOT(slot_fx_state_changed(int)));
+    connect(timer,SIGNAL(timeout()),
+            this, SLOT(slot_pedals_read()));
 
-    //Presets
-    connect(mainWindow,SIGNAL(signal_preset_changed(int)),
-            this,SLOT(slot_bank_preset_changed(int)));
-
-    //Settings de cada efecto
-    connect(mainWindow,SIGNAL(signal_dialogFx_open(int)),
-            this,SLOT(slot_dialogFx_open(int)));
-
-    connect(mainWindow,SIGNAL(signal_preset_saved()),
-            this,SLOT(slot_fx_preset_saved()));
-
-    //INICIALIZAR EVERYTHING
+    //init
     initializeFxParameters(); //Simula apretar un boton de presetBank
+    initializeGPIO();
 
+    slot_led_on();
+
+    timer->start(POLLING_TIME);
     mainWindow->show();
 }
 
@@ -42,7 +41,7 @@ void Crimson::slot_exit()
 }
 
 //*****************************************************************
-//                  INIT ALL FX PARAMETERS!!!
+//                  INIT
 //*****************************************************************
 void Crimson::initializeFxParameters()
 {
@@ -52,6 +51,13 @@ void Crimson::initializeFxParameters()
     QString addr = QString(fxBank.presetAddr);
     int lastBankPreset = crimsonSettings.value(addr,DEFAULTPRESET).toInt();
     mainWindow->initPulse(lastBankPreset); //desde mainwindow emite signal de vuelta a crimson
+}
+
+void Crimson::initializeGPIO()
+{
+    rpiGpio->setPinDir(PIN_POWER_LED, mmapGpio::OUTPUT);
+    rpiGpio->setPinDir(PIN_LEFT_PEDAL, mmapGpio::INPUT);
+    rpiGpio->setPinDir(PIN_RIGHT_PEDAL, mmapGpio::INPUT);
 }
 
 //*****************************************************************
@@ -85,7 +91,7 @@ void Crimson::slot_bank_preset_changed(int preset)
             comms.oscSendInt(addr,fxBank.fx[fx].state);
 
             //Actualizo cues visuales de que efectos estan prendidos
-            if(mainWindow != NULL)
+            if(mainWindow != nullptr)
                 mainWindow->updateFxState(fx,fxBank.fx[fx].state);
 
 
@@ -103,7 +109,7 @@ void Crimson::slot_bank_preset_changed(int preset)
             }
 
             //Actualizo los diales
-            if(dialogFx != NULL)
+            if(dialogFx != nullptr)
                 dialogFx->setDialValues(fxBank.fx[fx]);
 
         }
@@ -117,7 +123,7 @@ void Crimson::slot_fx_state_changed(int fx)
     //Actualizar estado de botones de mainwindow
     //y de dialogfx si es que esta activo
     mainWindow->updateFxState(fx,fxBank.fx[fx].state);
-    if(dialogFx != NULL)
+    if(dialogFx != nullptr)
         dialogFx->updateFxState(fxBank.fx[fx].state);
 
     //Envio el nuevo estado a Pd
@@ -160,17 +166,15 @@ void Crimson::slot_fx_preset_saved()
 //*****************************************************************
 //                  FX DIALOG
 //*****************************************************************
+
 void Crimson::slot_dialogFx_open(int fx)
 {
     dialogFx = new DialogFx;
-    //Para framelessiar
-//    dialogFx->setWindowFlags(Qt::FramelessWindowHint);
+
     dialogFx->dialogSettings(fx,fxBank.fx[fx]);
 
     connect(dialogFx,SIGNAL(signal_fx_state_changed(int)),
             this,SLOT(slot_fx_state_changed(int)));
-//    connect(dialogFx,SIGNAL(signal_fx_preset_changed(int,int)),
-//            this,SLOT(slot_fx_preset_changed(int,int))); //Cambio en la mejora
     connect(dialogFx,SIGNAL(signal_fx_param_changed(int,int,int)),
             this,SLOT(slot_fx_param_changed(int,int,int)));
     connect(dialogFx,SIGNAL(signal_destroyed()),
@@ -180,7 +184,40 @@ void Crimson::slot_dialogFx_open(int fx)
 
 void Crimson::slot_dialogFx_closed()
 {
-    dialogFx = NULL;//
+    dialogFx = nullptr;
 }
 
+//*****************************************************************
+//                  GPIO
+//*****************************************************************
+
+void Crimson::slot_pedals_read()
+{
+    static bool prevLeftValue = false;
+    static bool prevRightValue = false;
+
+    //ACTIVE LOW
+    bool leftValue = rpiGpio->readPin(PIN_LEFT_PEDAL) == mmapGpio::LOW;
+    bool rightValue = rpiGpio->readPin(PIN_RIGHT_PEDAL) == mmapGpio::LOW;
+
+    if((leftValue || rightValue) && (leftValue != rightValue)) {
+        if((leftValue && (leftValue != prevLeftValue)) || (rightValue && (rightValue != prevRightValue))) {
+            if(leftValue) {
+                slot_bank_preset_changed((fxBank.preset-1)>0 ? fxBank.preset-1 : MAXPRESETS-1);
+            } else {
+                slot_bank_preset_changed((fxBank.preset+1)<MAXPRESETS-1 ? fxBank.preset+1 : 0);
+            }
+        }
+    }
+}
+
+void Crimson::slot_led_on()
+{
+    rpiGpio->writePinHigh(PIN_POWER_LED);
+}
+
+void Crimson::slot_led_off()
+{
+    rpiGpio->writePinLow(PIN_POWER_LED);
+}
 

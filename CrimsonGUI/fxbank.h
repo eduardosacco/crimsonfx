@@ -12,6 +12,7 @@
 #define PARAM4 4
 #define PARAM5 5
 
+#define MAXPRESETS 6
 #define MAXEFFECTS 8
 #define MAXPARAM 6
 
@@ -71,7 +72,7 @@ typedef struct
 enum {fxCompressor,fxDistortion,fxOverdrive,fxEqualizer,fxChorus,fxFlanger,fxReverb,fxDelay}; //8 Fx
 
 //Parameters for each effect
-enum {pCompThreshold,pCompRatio,pCompLookAhead,pCompResp,pCompGain};   //6
+enum {pCompThreshold,pCompRatio,pCompLookAhead,pCompResp,pCompGain};                //6
 enum {pDistoGain,pDistoDepth,pDistoCutoff};                                         //3
 enum {pOverGain,pOverDepth,pOverCutoff};                                            //3
 enum {pEquPreamp,pEquBand1,pEquBand2,pEquBand3,pEquBand4,pEquBand5};                //6
