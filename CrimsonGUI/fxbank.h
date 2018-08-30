@@ -12,7 +12,6 @@
 #define PARAM4 4
 #define PARAM5 5
 
-#define MAXPRESETS 6
 #define MAXEFFECTS 8
 #define MAXPARAM 6
 
@@ -67,6 +66,8 @@ typedef struct
     Parameter param[MAXPARAM];
 
 }Effect;
+
+enum {bPreset1, bPreset2, bPreset3, bPreset4, bPreset5, bPreset6};
 
 //All effects
 enum {fxCompressor,fxDistortion,fxOverdrive,fxEqualizer,fxChorus,fxFlanger,fxReverb,fxDelay}; //8 Fx

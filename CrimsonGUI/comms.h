@@ -20,7 +20,7 @@ class Comms : public QObject
     Q_OBJECT
 
 public:
-    explicit Comms(QObject *parent = 0);
+    explicit Comms(QObject *parent = nullptr);
 
     //Direcciones OSC para envio de parametros
 

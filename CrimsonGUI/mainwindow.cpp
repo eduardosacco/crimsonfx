@@ -14,11 +14,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initPulse(int preset)
-{
-    bankPresetSelector(preset);
-}
-
 //Es usada cuando el cambio no se produce desde mainwindow sino de crimson
 //basicamente cuando se carga un nuevo bank preset
 void MainWindow::updateFxState(int fxNum, bool state)
@@ -144,32 +139,32 @@ void MainWindow::on_btnChorusSettings_released()
 //++++++++++ Presets ++++++++++
 void MainWindow::on_btnPreset1_released()
 {
-    bankPresetSelector(1);
+    bankPresetSelector(bPreset1);
 }
 
 void MainWindow::on_btnPreset2_released()
 {
-    bankPresetSelector(2);
+    bankPresetSelector(bPreset2);
 }
 
 void MainWindow::on_btnPreset3_released()
 {
-    bankPresetSelector(3);
+    bankPresetSelector(bPreset3);
 }
 
 void MainWindow::on_btnPreset4_released()
 {
-    bankPresetSelector(4);
+    bankPresetSelector(bPreset4);
 }
 
 void MainWindow::on_btnPreset5_released()
 {
-    bankPresetSelector(5);
+    bankPresetSelector(bPreset5);
 }
 
 void MainWindow::on_btnPreset6_released()
 {
-    bankPresetSelector(6);
+    bankPresetSelector(bPreset6);
 }
 
 void MainWindow::on_btnSave_released()
@@ -190,27 +185,27 @@ void MainWindow::bankPresetSelector(int preset)
     //prendo el boton que corresponda
     switch(preset)
     {
-        case 1:
+        case bPreset1:
         setPBtnStyle(ui->btnPreset1,true);
         break;
 
-        case 2:
+        case bPreset2:
         setPBtnStyle(ui->btnPreset2,true);
         break;
 
-        case 3:
+        case bPreset3:
         setPBtnStyle(ui->btnPreset3,true);
         break;
 
-        case 4:
+        case bPreset4:
         setPBtnStyle(ui->btnPreset4,true);
         break;
 
-        case 5:
+        case bPreset5:
         setPBtnStyle(ui->btnPreset5,true);
         break;
 
-        case 6:
+        case bPreset6:
         setPBtnStyle(ui->btnPreset6,true);
         break;
     }

@@ -19,7 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void initPulse(int preset);
+    void bankPresetSelector(int preset);
     void updateFxState(int fxNum,bool state);
     void setPBtnStyle(QPushButton *button, bool checked);
 
@@ -75,8 +75,6 @@ signals:
     
 private:
     Ui::MainWindow *ui;
-    void bankPresetSelector(int preset);
-//    QPixmap *crimsonLogo = new QPixmap(":/img/crimsonLogo.png");
 
 
 };

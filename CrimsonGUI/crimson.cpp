@@ -50,7 +50,7 @@ void Crimson::initializeFxParameters()
     //Al inicial el programa fx.bank.preset comienza en NONINIT
     QString addr = QString(fxBank.presetAddr);
     int lastBankPreset = crimsonSettings.value(addr,DEFAULTPRESET).toInt();
-    mainWindow->initPulse(lastBankPreset); //desde mainwindow emite signal de vuelta a crimson
+    mainWindow->bankPresetSelector(lastBankPreset); //desde mainwindow emite signal de vuelta a crimson
 }
 
 void Crimson::initializeGPIO()
@@ -68,14 +68,14 @@ void Crimson::slot_bank_preset_changed(int preset)
 {
     int fx,param;      //para ciclar los for
 
-    QString addr = QString(fxBank.presetAddr);
-    //Primero guardo el preset al cual se cambio para que quede almacenado
-    //como lastPreset para cuando se inicialice el programa de nuevo
-    crimsonSettings.setValue(addr,preset);
-
     //Si no es el preset seleccionado cargo la configuracion guardada
     if(fxBank.preset != preset)
     {
+        QString addr = QString(fxBank.presetAddr);
+        //Primero guardo el preset al cual se cambio para que quede almacenado
+        //como lastPreset para cuando se inicialice el programa de nuevo
+        crimsonSettings.setValue(addr,preset);
+
         fxBank.preset = preset;
 
         for(fx=0;fx<MAXEFFECTS;fx++)
@@ -203,9 +203,11 @@ void Crimson::slot_pedals_read()
     if((leftValue || rightValue) && (leftValue != rightValue)) {
         if((leftValue && (leftValue != prevLeftValue)) || (rightValue && (rightValue != prevRightValue))) {
             if(leftValue) {
-                slot_bank_preset_changed((fxBank.preset-1)>0 ? fxBank.preset-1 : MAXPRESETS-1);
+                qDebug() << "Left pedal pressed";
+                mainWindow->bankPresetSelector((fxBank.preset-1)>=bPreset1 ? fxBank.preset-1 : bPreset6);
             } else {
-                slot_bank_preset_changed((fxBank.preset+1)<MAXPRESETS-1 ? fxBank.preset+1 : 0);
+                qDebug() << "Right pedal pressed";
+                mainWindow->bankPresetSelector((fxBank.preset+1)<=bPreset6 ? fxBank.preset+1 : bPreset1);
             }
         }
     }
