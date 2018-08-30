@@ -64,7 +64,7 @@ qproperty-alignment:AlignCenter;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/img/img/back.png</normaloff>:/img/img/back.png</iconset>
+         <normaloff>:/img/back.png</normaloff>:/img/back.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -109,7 +109,7 @@ qproperty-alignment:AlignCenter;
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/img/img/onOff.png</normaloff>:/img/img/onOff.png</iconset>
+         <normaloff>:/img/onOff.png</normaloff>:/img/onOff.png</iconset>
        </property>
        <property name="iconSize">
         <size>

@@ -60,6 +60,15 @@ qproperty-alignment:AlignCenter;
           <height>80</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>1</string>
         </property>
@@ -78,6 +87,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>80</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>2</string>
@@ -98,6 +116,15 @@ qproperty-alignment:AlignCenter;
           <height>80</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>3</string>
         </property>
@@ -116,6 +143,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>80</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>4</string>
@@ -136,6 +172,15 @@ qproperty-alignment:AlignCenter;
           <height>80</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>5</string>
         </property>
@@ -154,6 +199,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>80</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>6</string>
@@ -179,7 +233,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/save.png</normaloff>:/img/img/save.png</iconset>
+          <normaloff>:/img/save.png</normaloff>:/img/save.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -205,7 +259,7 @@ qproperty-alignment:AlignCenter;
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="resources.qrc">:/img/img/crimsonLogo.png</pixmap>
+         <pixmap resource="resources.qrc">:/img/crimsonLogo.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -238,7 +292,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -261,6 +315,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>Compressor</string>
@@ -289,7 +352,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -313,6 +376,15 @@ qproperty-alignment:AlignCenter;
           <height>60</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Reverb</string>
         </property>
@@ -335,6 +407,15 @@ qproperty-alignment:AlignCenter;
           <height>60</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Equalizer</string>
         </property>
@@ -356,6 +437,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>Delay</string>
@@ -384,7 +474,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -407,6 +497,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>Overdrive</string>
@@ -435,7 +534,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -464,7 +563,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -487,6 +586,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>Distortion</string>
@@ -515,7 +623,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -544,7 +652,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -568,6 +676,15 @@ qproperty-alignment:AlignCenter;
           <height>60</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Flanger</string>
         </property>
@@ -589,6 +706,15 @@ qproperty-alignment:AlignCenter;
           <width>80</width>
           <height>60</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>14</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="text">
          <string>Chorus</string>
@@ -617,7 +743,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/img/settings.png</normaloff>:/img/img/settings.png</iconset>
+          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>

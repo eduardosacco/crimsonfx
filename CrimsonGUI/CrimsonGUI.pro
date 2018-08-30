@@ -44,3 +44,5 @@ RESOURCES += \
 
 target.path = /home/pi/
 INSTALLS += target
+
+DISTFILES +=

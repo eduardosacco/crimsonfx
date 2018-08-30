@@ -5,6 +5,7 @@
 #include <QTime>
 #include <QDateTime>
 #include <QSplashScreen>
+#include <QFontDatabase>
 
 void myMessageHandler( const QString &msg)
 {
@@ -28,25 +29,19 @@ int main(int argc, char *argv[])
 //    //Borro si ahbia un archivo viejo
 //    outFile.resize(0);
 
-    //Creo la aplicacion
     QApplication a(argc, argv);
+
+    int fontId = QFontDatabase::addApplicationFont(":/fonts/DejaVuSans.ttf");
+    if(fontId != -1){
+        QFont font = QFont("DejaVu Sans Book");
+        a.setFont(font);
+        qDebug() << "Loaded font correctly";
+    }
+
     //Aviso a la aplicacion los nombres correpondientes
     a.setOrganizationName("Crimson");
     a.setApplicationName("Fx16");
 
-//    //Splash screen
-//    QSplashScreen *splash = new QSplashScreen;
-//    splash->setPixmap(QPixmap(":/img/img/crimsonSplash.png"));
-//    splash->showFullScreen();
-//    splash->show();
-//    //BLOCKING Delay
-//    QTime dieTime= QTime::currentTime().addSecs(5);
-//    while (QTime::currentTime() < dieTime)
-//    {
-//        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-//    }
-//    //cierro el splashscreen
-//    splash->close();
 
     //Corro el programa principal
     Crimson crimson;

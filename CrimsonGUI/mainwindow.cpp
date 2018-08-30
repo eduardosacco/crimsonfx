@@ -5,8 +5,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);    
-//    ui->label->setPixmap(*crimsonLogo); //no hace falta por que esta puesto en el ui file
+    ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
