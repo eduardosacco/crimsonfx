@@ -52,16 +52,16 @@ typedef struct
 
 typedef struct
 {
+    bool state;
     const char *name;
     //Estado del efecto On o OFF
-    bool state;
     //Numero de parametros del efecto
+
     int nParam;
     //Para acceder a crimsonSettings se usa concatenando el numero del banco N
     //Refiere al estado del efecto guardado en el banco N
     const char *stateAddr;
-    //Refiere al preset del efecto guardado en el banco N
-    const char *presetAddr;
+
     //Parametros de cada efecto
     Parameter param[MAXPARAM];
 

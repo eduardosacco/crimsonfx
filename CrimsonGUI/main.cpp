@@ -1,5 +1,6 @@
-#include "crimson.h"
+//#define LOG
 
+#include "crimson.h"
 #include <QApplication>
 #include <QFile>
 #include <QTime>
@@ -7,6 +8,7 @@
 #include <QSplashScreen>
 #include <QFontDatabase>
 
+#ifdef LOG
 void myMessageHandler( const QString &msg)
 {
     QFile outFile("log.txt");
@@ -18,20 +20,23 @@ void myMessageHandler( const QString &msg)
 
     ts << date.currentDateTime().toString() << ": " <<localMsg.constData() << endl;
 }
+#endif
 
 int main(int argc, char *argv[])
 {
-//    //Cambio el gestor de mensajes por uno custom
-//    qInstallMessageHandler(myMessageHandler);
 
-//    //Abro o creo archivo de Log
-//    QFile outFile("log.txt");
-//    //Borro si ahbia un archivo viejo
-//    outFile.resize(0);
+#ifdef LOG
+    //Cambio el gestor de mensajes por uno custom
+    qInstallMessageHandler(myMessageHandler);
+    //Abro o creo archivo de Log
+    QFile outFile("log.txt");
+    //Borro si ahbia un archivo viejo
+    outFile.resize(0);
+#endif
 
     QApplication a(argc, argv);
 
-    int fontId = QFontDatabase::addApplicationFont(":/fonts/DejaVuSans.ttf");
+    int fontId = QFontDatabase::addApplicationFont(":/resources/DejaVuSans.ttf");
     if(fontId != -1){
         QFont font = QFont("DejaVu Sans Book");
         a.setFont(font);
@@ -41,7 +46,6 @@ int main(int argc, char *argv[])
     //Aviso a la aplicacion los nombres correpondientes
     a.setOrganizationName("Crimson");
     a.setApplicationName("Fx16");
-
 
     //Corro el programa principal
     Crimson crimson;

@@ -10,7 +10,9 @@
 #include "mainwindow.h"
 #include "dialogfx.h"
 
+#ifdef RPI
 #include "mmapgpio.h"
+#endif
 
 #define PIN_POWER_LED 4
 #define PIN_LEFT_PEDAL 17
@@ -38,26 +40,30 @@ private slots:
     //Salida del programa
     void slot_exit();
 
-//private slots:
+    //private slots:
     void slot_bank_preset_changed(int bankPreset);
     void slot_dialogFx_closed();
 
+#ifdef RPI
     void slot_pedals_read();
     void slot_led_on();
     void slot_led_off();
+#endif
 
 private:
-    //OBJETOS **********************************************
+    //OBJETOS Y METODOS PRIVADOS **********************************************
     FxBank fxBank;                      //Efectos
     Comms comms;                        //Comunicaciones
     QSettings crimsonSettings;          //Settings: guardado de presets y otros
     MainWindow *mainWindow = nullptr;   //Ventana principal
     DialogFx *dialogFx = nullptr;       //Dialogos efectos
     QTimer *timer;                      //Timer for polling pin inputs
-    mmapGpio *rpiGpio;                  //mmapGpio class to control the GPIO
 
-    //Private Functions
+#ifdef RPI
     void initializeGPIO(void);
+    mmapGpio *rpiGpio;                  //mmapGpio class to control the GPIO
+#endif
+
     void initializeFxParameters(void);
 
 };

@@ -233,7 +233,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/save.png</normaloff>:/img/save.png</iconset>
+          <normaloff>:/resources/save.png</normaloff>:/resources/save.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -255,11 +255,14 @@ qproperty-alignment:AlignCenter;
           <height>40</height>
          </size>
         </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="resources.qrc">:/img/crimsonLogo.png</pixmap>
+         <pixmap resource="resources.qrc">:/resources/crimsonLogo.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -292,7 +295,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -352,7 +355,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -474,7 +477,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -534,7 +537,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -563,7 +566,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -623,7 +626,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -652,7 +655,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -743,7 +746,7 @@ qproperty-alignment:AlignCenter;
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/img/settings.png</normaloff>:/img/settings.png</iconset>
+          <normaloff>:/resources/settings.png</normaloff>:/resources/settings.png</iconset>
         </property>
         <property name="iconSize">
          <size>

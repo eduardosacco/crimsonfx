@@ -15,7 +15,6 @@ FxBank::FxBank()
     fx[fxCompressor].state = OFF;
     fx[fxCompressor].nParam = 5;
     fx[fxCompressor].stateAddr = "comp/state";
-    fx[fxCompressor].presetAddr = "comp/preset";
 
 //    //No hace falta que el usuario pueda elegir entre RMS y Peak
 //    fx[fxCompressor].param[pCompRMSPeak].name = "RMS/Peak";
@@ -53,7 +52,6 @@ FxBank::FxBank()
     fx[fxOverdrive].state = OFF;
     fx[fxOverdrive].nParam = 3;
     fx[fxOverdrive].stateAddr = "over/state";
-    fx[fxOverdrive].presetAddr = "over/preset";
 
     fx[fxOverdrive].param[pOverGain].name = "Gain";
     fx[fxOverdrive].param[pOverGain].value = 0;
@@ -75,7 +73,6 @@ FxBank::FxBank()
     fx[fxDistortion].state = OFF;
     fx[fxDistortion].nParam = 3;
     fx[fxDistortion].stateAddr = "dist/state";
-    fx[fxDistortion].presetAddr = "dist/preset";
 
     fx[fxDistortion].param[pDistoGain].name = "Gain";
     fx[fxDistortion].param[pDistoGain].value = 0;
@@ -97,7 +94,6 @@ FxBank::FxBank()
     fx[fxEqualizer].state = OFF;
     fx[fxEqualizer].nParam = 6;
     fx[fxEqualizer].stateAddr = "equ/state";
-    fx[fxEqualizer].presetAddr = "equ/preset";
 
     fx[fxEqualizer].param[pEquPreamp].name = "Preamp";
     fx[fxEqualizer].param[pEquPreamp].value = 0;
@@ -134,7 +130,6 @@ FxBank::FxBank()
     fx[fxChorus].state = OFF;
     fx[fxChorus].nParam = 4;
     fx[fxChorus].stateAddr = "cho/state"; //state quizas pasa a x
-    fx[fxChorus].presetAddr = "cho/preset";
 
     fx[fxChorus].param[pChorusFF].name = "Feedforward";
     fx[fxChorus].param[pChorusFF].value = 0;
@@ -161,7 +156,6 @@ FxBank::FxBank()
     fx[fxFlanger].state = OFF;
     fx[fxFlanger].nParam = 4;
     fx[fxFlanger].stateAddr = "fla/state";
-    fx[fxFlanger].presetAddr = "fla/preset";
 
     fx[fxFlanger].param[pFlangerFF].name = "Feedforward";
     fx[fxFlanger].param[pFlangerFF].value = 0;
@@ -188,7 +182,6 @@ FxBank::FxBank()
     fx[fxReverb].state = OFF;
     fx[fxReverb].nParam = 3;
     fx[fxReverb].stateAddr = "rev/state"; //state quizas pasa a x
-    fx[fxReverb].presetAddr = "rev/preset";
 
     fx[fxReverb].param[pRevDryWet].name = "Dry/Wet";
     fx[fxReverb].param[pRevDryWet].value = 0;
@@ -210,7 +203,6 @@ FxBank::FxBank()
     fx[fxDelay].state = OFF;
     fx[fxDelay].nParam = 3;
     fx[fxDelay].stateAddr = "del/state"; //state quizas pasa a x
-    fx[fxDelay].presetAddr = "del/preset";
 
     fx[fxDelay].param[pDelLevel].name = "Level";
     fx[fxDelay].param[pDelLevel].value = 0;

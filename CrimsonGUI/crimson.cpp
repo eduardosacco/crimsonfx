@@ -1,5 +1,5 @@
+//#define RPI
 #include "crimson.h"
-
 #include <QDebug>
 
 Crimson::Crimson(QObject *parent) :
@@ -10,7 +10,7 @@ Crimson::Crimson(QObject *parent) :
     qDebug() << "Debug Log:";
 
     timer = new QTimer();
-    rpiGpio = new mmapGpio();
+
     mainWindow = new MainWindow();
 
     connect(mainWindow, SIGNAL(signal_fx_state_toggled(int)),
@@ -25,11 +25,15 @@ Crimson::Crimson(QObject *parent) :
     connect(timer,SIGNAL(timeout()),
             this, SLOT(slot_pedals_read()));
 
-    //init
+    //FX INIT
     initializeFxParameters(); //Simula apretar un boton de presetBank
-    initializeGPIO();
 
+    //GPIO
+#ifdef RPI
+    rpiGpio = new mmapGpio();
+    initializeGPIO();
     slot_led_on();
+#endif
 
     timer->start(POLLING_TIME);
     mainWindow->show();
@@ -51,13 +55,6 @@ void Crimson::initializeFxParameters()
     QString addr = QString(fxBank.presetAddr);
     int lastBankPreset = crimsonSettings.value(addr,DEFAULTPRESET).toInt();
     mainWindow->bankPresetSelector(lastBankPreset); //desde mainwindow emite signal de vuelta a crimson
-}
-
-void Crimson::initializeGPIO()
-{
-    rpiGpio->setPinDir(PIN_POWER_LED, mmapGpio::OUTPUT);
-    rpiGpio->setPinDir(PIN_LEFT_PEDAL, mmapGpio::INPUT);
-    rpiGpio->setPinDir(PIN_RIGHT_PEDAL, mmapGpio::INPUT);
 }
 
 //*****************************************************************
@@ -191,6 +188,15 @@ void Crimson::slot_dialogFx_closed()
 //                  GPIO
 //*****************************************************************
 
+#ifdef RPI
+
+void Crimson::initializeGPIO()
+{
+    rpiGpio->setPinDir(PIN_POWER_LED, mmapGpio::OUTPUT);
+    rpiGpio->setPinDir(PIN_LEFT_PEDAL, mmapGpio::INPUT);
+    rpiGpio->setPinDir(PIN_RIGHT_PEDAL, mmapGpio::INPUT);
+}
+
 void Crimson::slot_pedals_read()
 {
     static bool prevLeftValue = false;
@@ -223,3 +229,4 @@ void Crimson::slot_led_off()
     rpiGpio->writePinLow(PIN_POWER_LED);
 }
 
+#endif
