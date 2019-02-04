@@ -2,3 +2,11 @@
 build-CrimsonGUI-Desktop_Qt_5_7_1_GCC_64bit-Debug/
 *.log
 *.o
+CrimsonGUI/moc_comms.cpp
+CrimsonGUI/moc_crimson.cpp
+CrimsonGUI/moc_comms.cpp
+CrimsonGUI/moc_dialogfx.cpp
+CrimsonGUI/moc_mainwindow.cpp
+CrimsonGUI/moc_dialogfx.cpp
+CrimsonGUI/ui_dialogfx.h
+CrimsonGUI/ui_mainwindow.h

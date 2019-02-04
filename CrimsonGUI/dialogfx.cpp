@@ -28,7 +28,6 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
 {           
     //Aca hay que inicializar los botones de encendido y apagado de los
     // efectos y del preset en el que esten
-
     effect = fxNum;
 
     //Seteo el estado del boton on off

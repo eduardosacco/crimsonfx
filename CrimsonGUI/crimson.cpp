@@ -22,20 +22,21 @@ Crimson::Crimson(QObject *parent) :
     connect(mainWindow, SIGNAL(signal_preset_saved()),
             this, SLOT(slot_fx_preset_saved()));
 
-    connect(timer,SIGNAL(timeout()),
-            this, SLOT(slot_pedals_read()));
-
     //FX INIT
     initializeFxParameters(); //Simula apretar un boton de presetBank
 
-    //GPIO
+    // GPIO HARDWARE
 #ifdef RPI
     rpiGpio = new mmapGpio();
     initializeGPIO();
     slot_led_on();
-#endif
+
+    connect(timer,SIGNAL(timeout()),
+            this, SLOT(slot_pedals_read()));
 
     timer->start(POLLING_TIME);
+#endif
+
     mainWindow->show();
 }
 

@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setFocusPolicy(Qt::StrongFocus);
 }
 
 MainWindow::~MainWindow()
@@ -220,3 +221,77 @@ void MainWindow::setPBtnStyle(QPushButton *button, bool checked)
         button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
 }
 
+void MainWindow::on_btnQuit_released()
+{
+    this->close();
+}
+
+void MainWindow::on_btnLock_pressed()
+{
+    timer->start(5000);
+}
+
+void MainWindow::on_btnLock_released()
+{
+    int remaining = timer->interval();
+    timer->stop();
+
+    if (remaining == 0)
+    {
+        toggleLockDownMode();
+    }
+    else
+    {
+        toggleDebugMode();
+    }
+}
+
+void MainWindow::toggleLockDownMode()
+{
+    if (lockDownMode)
+    {
+        lockDownMode = false;
+        setEnableBtns(false);
+    }
+    else
+    {
+        lockDownMode = true;
+        setEnableBtns(true);
+    }
+}
+
+void MainWindow::toggleDebugMode()
+{
+    if (debugMode)
+    {
+        ui->btn
+    }
+
+}
+
+void MainWindow::setEnableBtns(bool enabled)
+{
+    ui->btnCompressorState->setEnabled(enabled);
+    ui->btnCompressorSettings->setEnabled(enabled);
+
+    ui->btnDistortionState->setEnabled(enabled);
+    ui->btnDistortionSettings->setEnabled(enabled);
+
+    ui->btnOverdrive1State->setEnabled(enabled);
+    ui->btnOverdrive1Settings->setEnabled(enabled);
+
+    ui->btnEqualizerState->setEnabled(enabled);
+    ui->btnEqualizerSettings->setEnabled(enabled);
+
+    ui->btnChorusState->setEnabled(enabled);
+    ui->btnChorusSettings->setEnabled(enabled);
+
+    ui->btnFlangerState->setEnabled(enabled);
+    ui->btnFlangerSettings->setEnabled(enabled);
+
+    ui->btnReverb1State->setEnabled(enabled);
+    ui->btnReverb1Settings->setEnabled(enabled);
+
+    ui->btnDelay1State->setEnabled(enabled);
+    ui->btnDelay1Settings->setEnabled(enabled);
+}

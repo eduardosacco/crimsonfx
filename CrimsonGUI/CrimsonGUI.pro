@@ -19,12 +19,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    comms.cpp \
     crimson.cpp \
     fxbank.cpp \
     dialogfx.cpp \
     tinyosc.c \
-    mmapgpio.cpp
+    mmapgpio.cpp \
+    comms.cpp
 
 HEADERS  += mainwindow.h \
     comms.h \

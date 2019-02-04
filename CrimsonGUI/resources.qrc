@@ -8,27 +8,5 @@
         <file>resources/onOff.png</file>
         <file>resources/save.png</file>
         <file>resources/settings.png</file>
-        <file>comms.cpp</file>
-        <file>comms.h</file>
-        <file>crimson.cpp</file>
-        <file>crimson.h</file>
-        <file>dialogfx.cpp</file>
-        <file>dialogfx.h</file>
-        <file>fxbank.cpp</file>
-        <file>fxbank.h</file>
-        <file>main.cpp</file>
-        <file>mainwindow.cpp</file>
-        <file>mainwindow.h</file>
-        <file>mmapgpio.cpp</file>
-        <file>mmapgpio.h</file>
-        <file>moc_comms.cpp</file>
-        <file>moc_crimson.cpp</file>
-        <file>moc_dialogfx.cpp</file>
-        <file>moc_mainwindow.cpp</file>
-        <file>qrc_resources.cpp</file>
-        <file>tinyosc.c</file>
-        <file>tinyosc.h</file>
-        <file>ui_dialogfx.h</file>
-        <file>ui_mainwindow.h</file>
     </qresource>
 </RCC>

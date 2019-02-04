@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <qpixmap.h>
+#include <QTimer>
 
 #include "fxbank.h"
 
@@ -15,6 +16,15 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+private:
+    Ui::MainWindow *ui;
+    QTimer *timer = new QTimer();
+    bool lockDownMode = false;
+    bool debugMode = false;
+    void toggleLockDownMode();
+    void toggleDebugMode();
+    void setEnableBtns(bool enabled);
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -22,6 +32,14 @@ public:
     void bankPresetSelector(int preset);
     void updateFxState(int fxNum,bool state);
     void setPBtnStyle(QPushButton *button, bool checked);
+
+signals:
+    //Señales ON OFF Switches
+    void signal_fx_state_toggled(int fx);
+    void signal_dialogFx_open(int fx);
+    void signal_preset_changed(int preset);
+    void signal_preset_saved();
+    void signal_debug_menu_toggled();
 
 private slots:
     //Compressor
@@ -66,17 +84,9 @@ private slots:
 
     void on_btnSave_released();
 
-signals:
-    //Señales ON OFF Switches
-    void signal_fx_state_toggled(int fx);
-    void signal_dialogFx_open(int fx);
-    void signal_preset_changed(int preset);
-    void signal_preset_saved();
-    
-private:
-    Ui::MainWindow *ui;
-
-
+    void on_btnQuit_released();
+    void on_btnLock_pressed();
+    void on_btnLock_released();
 };
 
 #endif // MAINWINDOW_H
