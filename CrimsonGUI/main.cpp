@@ -9,8 +9,9 @@
 #include <QFontDatabase>
 
 #ifdef LOG
-void myMessageHandler( const QString &msg)
+void myMessageHandler( const QString &msg, Crimson *crimson)
 {
+    crimson->getDebugMode();
     QFile outFile("log.txt");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
     QDateTime date;

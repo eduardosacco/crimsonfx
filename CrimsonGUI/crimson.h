@@ -22,8 +22,26 @@
 class Crimson : public QObject
 {
     Q_OBJECT
+
+private:
+    //OBJETOS Y METODOS PRIVADOS **********************************************
+    FxBank fxBank;                      //Efectos
+    Comms comms;                        //Comunicaciones
+    QSettings crimsonSettings;          //Settings: guardado de presets y otros
+    MainWindow *mainWindow = nullptr;   //Ventana principal
+    DialogFx *dialogFx = nullptr;       //Dialogos efectos
+    QTimer *timer;                      //Timer for polling pin inputs
+
+#ifdef RPI
+    void initializeGPIO(void);
+    mmapGpio *rpiGpio;                  //mmapGpio class to control the GPIO
+#endif
+
+    void initializeFxParameters(void);
+
 public:
     explicit Crimson(QObject *parent = nullptr);
+    bool getDebugMode();
 
 signals:
 
@@ -49,22 +67,6 @@ private slots:
     void slot_led_on();
     void slot_led_off();
 #endif
-
-private:
-    //OBJETOS Y METODOS PRIVADOS **********************************************
-    FxBank fxBank;                      //Efectos
-    Comms comms;                        //Comunicaciones
-    QSettings crimsonSettings;          //Settings: guardado de presets y otros
-    MainWindow *mainWindow = nullptr;   //Ventana principal
-    DialogFx *dialogFx = nullptr;       //Dialogos efectos
-    QTimer *timer;                      //Timer for polling pin inputs
-
-#ifdef RPI
-    void initializeGPIO(void);
-    mmapGpio *rpiGpio;                  //mmapGpio class to control the GPIO
-#endif
-
-    void initializeFxParameters(void);
 
 };
 

@@ -6,7 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFocusPolicy(Qt::StrongFocus);
+    ui->textBrowser->hide();
+    timer->setSingleShot(true);
 }
 
 MainWindow::~MainWindow()
@@ -233,10 +234,7 @@ void MainWindow::on_btnLock_pressed()
 
 void MainWindow::on_btnLock_released()
 {
-    int remaining = timer->interval();
-    timer->stop();
-
-    if (remaining == 0)
+    if (timer->isActive())
     {
         toggleLockDownMode();
     }
@@ -251,22 +249,34 @@ void MainWindow::toggleLockDownMode()
     if (lockDownMode)
     {
         lockDownMode = false;
-        setEnableBtns(false);
+        setEnableBtns(true);
+        setPBtnStyle(ui->btnLock, false);
     }
     else
     {
         lockDownMode = true;
-        setEnableBtns(true);
+        setEnableBtns(false);
+        setPBtnStyle(ui->btnLock, true);
     }
+}
+
+bool MainWindow::getDebugMode()
+{
+    return debugMode;
 }
 
 void MainWindow::toggleDebugMode()
 {
     if (debugMode)
     {
-        ui->btn
+        debugMode = false;
+        ui->textBrowser->hide();
     }
-
+    else
+    {
+        debugMode = true;
+        ui->textBrowser->show();
+    }
 }
 
 void MainWindow::setEnableBtns(bool enabled)
@@ -294,4 +304,14 @@ void MainWindow::setEnableBtns(bool enabled)
 
     ui->btnDelay1State->setEnabled(enabled);
     ui->btnDelay1Settings->setEnabled(enabled);
+
+    ui->btnPreset1->setEnabled(enabled);
+    ui->btnPreset2->setEnabled(enabled);
+    ui->btnPreset3->setEnabled(enabled);
+    ui->btnPreset3->setEnabled(enabled);
+    ui->btnPreset4->setEnabled(enabled);
+    ui->btnPreset5->setEnabled(enabled);
+    ui->btnPreset6->setEnabled(enabled);
+
+    ui->btnSave->setEnabled(enabled);
 }

@@ -32,6 +32,7 @@ public:
     void bankPresetSelector(int preset);
     void updateFxState(int fxNum,bool state);
     void setPBtnStyle(QPushButton *button, bool checked);
+    bool getDebugMode();
 
 signals:
     //Señales ON OFF Switches

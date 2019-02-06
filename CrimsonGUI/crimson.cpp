@@ -180,6 +180,11 @@ void Crimson::slot_dialogFx_open(int fx)
 
 }
 
+bool Crimson::getDebugMode()
+{
+    return mainWindow->getDebugMode();
+}
+
 void Crimson::slot_dialogFx_closed()
 {
     dialogFx = nullptr;
