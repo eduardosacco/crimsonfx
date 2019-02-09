@@ -185,6 +185,14 @@ bool Crimson::getDebugMode()
     return mainWindow->getDebugMode();
 }
 
+void Crimson::sendDebugMes(QString msg)
+{
+    if (getDebugMode())
+    {
+        mainWindow->showDebugMsg(msg);
+    }
+}
+
 void Crimson::slot_dialogFx_closed()
 {
     dialogFx = nullptr;

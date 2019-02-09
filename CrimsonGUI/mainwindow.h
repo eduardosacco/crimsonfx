@@ -18,7 +18,8 @@ class MainWindow : public QMainWindow
 
 private:
     Ui::MainWindow *ui;
-    QTimer *timer = new QTimer();
+    QTimer *timerLockBtn = new QTimer();
+    QTimer *timerSaveBtn = new QTimer();
     bool lockDownMode = false;
     bool debugMode = false;
     void toggleLockDownMode();
@@ -33,6 +34,7 @@ public:
     void updateFxState(int fxNum,bool state);
     void setPBtnStyle(QPushButton *button, bool checked);
     bool getDebugMode();
+    void showDebugMsg(QString msg);
 
 signals:
     //Señales ON OFF Switches
@@ -83,9 +85,8 @@ private slots:
     void on_btnPreset5_released();
     void on_btnPreset6_released();
 
+    void on_btnSave_pressed();
     void on_btnSave_released();
-
-    void on_btnQuit_released();
     void on_btnLock_pressed();
     void on_btnLock_released();
 };

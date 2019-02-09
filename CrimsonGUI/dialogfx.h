@@ -34,7 +34,6 @@ private slots:
     void slot_dial5_valueChanged(int position);
 
     void on_btnClose_released();
-
     void on_btnOnOff_released();
 
 signals:
@@ -68,6 +67,7 @@ private:
     QHBoxLayout *row4 = new QHBoxLayout;
 
     void setPBtnStyle(QPushButton *button, bool checked);
+    void showDebugMsg(char *msg);
 
 
 };

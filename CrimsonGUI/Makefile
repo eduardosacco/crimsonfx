@@ -735,6 +735,9 @@ moc_mainwindow.cpp: ../../Qt/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.7/gcc_64/include/QtWidgets/QPushButton \
 		../../Qt/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../Qt/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.7/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.7/gcc_64/include/QtCore/qbasictimer.h \
 		fxbank.h \
 		../../Qt/5.7/gcc_64/include/QtCore/QString \
 		mainwindow.h \
@@ -1339,10 +1342,12 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../Qt/5.7/gcc_64/include/QtWidgets/QPushButton \
 		../../Qt/5.7/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../Qt/5.7/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.7/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.7/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.7/gcc_64/include/QtCore/qbasictimer.h \
 		fxbank.h \
 		../../Qt/5.7/gcc_64/include/QtCore/QString \
-		ui_mainwindow.h \
-		../../Qt/5.7/gcc_64/include/QtGui/QKeyEvent
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 crimson.o: crimson.cpp crimson.h \

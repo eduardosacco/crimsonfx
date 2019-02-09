@@ -7,7 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->textBrowser->hide();
-    timer->setSingleShot(true);
+    timerLockBtn->setSingleShot(true);
+    timerSaveBtn->setSingleShot(true);
 }
 
 MainWindow::~MainWindow()
@@ -168,9 +169,21 @@ void MainWindow::on_btnPreset6_released()
     bankPresetSelector(bPreset6);
 }
 
+void MainWindow::on_btnSave_pressed()
+{
+    timerSaveBtn->start(10000);
+}
+
 void MainWindow::on_btnSave_released()
 {
-    emit signal_preset_saved();
+    if (timerSaveBtn->isActive())
+    {
+        emit signal_preset_saved();
+    }
+    else
+    {
+        this->close();
+    }
 }
 
 void MainWindow::bankPresetSelector(int preset)
@@ -222,19 +235,14 @@ void MainWindow::setPBtnStyle(QPushButton *button, bool checked)
         button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
 }
 
-void MainWindow::on_btnQuit_released()
-{
-    this->close();
-}
-
 void MainWindow::on_btnLock_pressed()
 {
-    timer->start(5000);
+    timerLockBtn->start(5000);
 }
 
 void MainWindow::on_btnLock_released()
 {
-    if (timer->isActive())
+    if (timerLockBtn->isActive())
     {
         toggleLockDownMode();
     }
@@ -276,6 +284,14 @@ void MainWindow::toggleDebugMode()
     {
         debugMode = true;
         ui->textBrowser->show();
+    }
+}
+
+void MainWindow::showDebugMsg(QString msg)
+{
+    if (debugMode)
+    {
+        this->ui->textBrowser->append(msg);
     }
 }
 

@@ -42,13 +42,7 @@ public:
     static const QString oscDelay1Delay;
     static const QString oscDelay1Feedback;
 
-
     void oscSendInt(QString oscAddress, int position);
-
-signals:
-
-public slots:
-    void readyRead();
 
 private:
     QUdpSocket *socket;

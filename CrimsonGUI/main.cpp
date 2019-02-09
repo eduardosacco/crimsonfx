@@ -1,4 +1,4 @@
-//#define LOG
+#define LOG
 
 #include "crimson.h"
 #include <QApplication>
@@ -9,9 +9,11 @@
 #include <QFontDatabase>
 
 #ifdef LOG
-void myMessageHandler( const QString &msg, Crimson *crimson)
+
+Crimson *crimson;
+
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    crimson->getDebugMode();
     QFile outFile("log.txt");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
     QDateTime date;
@@ -20,7 +22,12 @@ void myMessageHandler( const QString &msg, Crimson *crimson)
     QByteArray localMsg = msg.toLocal8Bit();
 
     ts << date.currentDateTime().toString() << ": " <<localMsg.constData() << endl;
+    if (crimson)
+    {
+        crimson->sendDebugMes(date.currentDateTime().toString() + " : " +msg);
+    }
 }
+
 #endif
 
 int main(int argc, char *argv[])
@@ -28,7 +35,7 @@ int main(int argc, char *argv[])
 
 #ifdef LOG
     //Cambio el gestor de mensajes por uno custom
-    qInstallMessageHandler(myMessageHandler);
+    qInstallMessageHandler(myMessageOutput);
     //Abro o creo archivo de Log
     QFile outFile("log.txt");
     //Borro si ahbia un archivo viejo
@@ -49,7 +56,7 @@ int main(int argc, char *argv[])
     a.setApplicationName("Fx16");
 
     //Corro el programa principal
-    Crimson crimson;
+    crimson = new Crimson;
 
     return a.exec();
 }

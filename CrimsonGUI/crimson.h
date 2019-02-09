@@ -42,6 +42,7 @@ private:
 public:
     explicit Crimson(QObject *parent = nullptr);
     bool getDebugMode();
+    void sendDebugMes(QString msg);
 
 signals:
 

@@ -10,3 +10,6 @@ CrimsonGUI/moc_mainwindow.cpp
 CrimsonGUI/moc_dialogfx.cpp
 CrimsonGUI/ui_dialogfx.h
 CrimsonGUI/ui_mainwindow.h
+CrimsonGUI/log.txt
+CrimsonGUI/Makefile
+CrimsonGUI/Makefile
