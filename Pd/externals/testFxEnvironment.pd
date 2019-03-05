@@ -1,0 +1,54 @@
+#N canvas 453 298 673 501 10;
+#X obj 59 324 fxDelay1;
+#N canvas 487 143 549 448 mainControl 0;
+#X obj 24 344 openpanel;
+#X obj 24 388 soundfiler;
+#X text 34 30 DSP ON/OFF;
+#X text 34 323 Open Audio for testing;
+#X obj 55 107 tgl 20 0 empty dspOnOff DSP_ON/OFF 25 10 0 16 -262144
+-1 -1 0 1;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array testSound 2e+006 float 4;
+#X coords 0 1 2e+006 -1 200 70 1 0 0;
+#X restore 55 206 graph;
+#X obj 55 135 bng 20 250 50 0 empty empty Open_Audio 25 10 0 16 -262144
+-1 -1;
+#X obj 55 164 bng 20 250 50 0 empty play Play 25 10 0 16 -4034 -33289
+-1;
+#X obj 340 335 dac~;
+#X text 339 209 Out Stage;
+#X obj 351 47 tabplay~ testSound;
+#X obj 339 258 clip~ -1 1;
+#X obj 342 164 s~ fxChainIn;
+#X obj 339 231 r~ fxChainOut;
+#X msg 24 366 read -resize -maxsize 2e+006 \$1 testSound;
+#X msg 158 61 \; pd dsp \$1;
+#X obj 291 58 adc~;
+#X obj 342 122 sw2;
+#X obj 127 165 tgl 20 1 empty empty ADC/SAMPLE 25 10 0 16 -262144 -1
+-1 1 1;
+#X obj 30 69 loadbang;
+#X connect 0 0 14 0;
+#X connect 4 0 15 0;
+#X connect 6 0 0 0;
+#X connect 7 0 10 0;
+#X connect 10 0 17 1;
+#X connect 11 0 8 0;
+#X connect 11 0 8 1;
+#X connect 13 0 11 0;
+#X connect 14 0 1 0;
+#X connect 16 0 17 0;
+#X connect 16 1 17 0;
+#X connect 17 0 12 0;
+#X connect 18 0 17 2;
+#X connect 19 0 4 0;
+#X coords 0 -1 1 1 210 180 2 50 100;
+#X restore 14 62 pd mainControl;
+#X obj 79 443 s~ fxChainOut;
+#X obj 78 271 r~ fxChainIn;
+#X obj 271 48 debugGraphs;
+#X text 10 35 Load test Audio;
+#X text 9 11 Test Environment for Crimson Audio Effects;
+#X text 159 295 Place effect to test;
+#X connect 0 0 2 0;
+#X connect 3 0 0 0;
