@@ -1,10 +1,15 @@
+// WARNING: Define TESTMODE only to grant public access to every member of Crimson in order to test
+#define TESTMODE
+
+// Define RPI to have full RPI HW functionality
+//#define RPI
+
 #ifndef CRIMSON_H
 #define CRIMSON_H
 
 #include <QObject>
 #include <QSettings>
 #include <QTimer>
-
 #include "fxbank.h"
 #include "comms.h"
 #include "mainwindow.h"
@@ -23,7 +28,11 @@ class Crimson : public QObject
 {
     Q_OBJECT
 
+#ifdef TESTMODE
+public:
+#else
 private:
+#endif
     //OBJETOS Y METODOS PRIVADOS **********************************************
     FxBank fxBank;                      //Efectos
     Comms comms;                        //Comunicaciones
@@ -46,8 +55,11 @@ public:
 
 signals:
 
+#ifdef TESTMODE
+public slots:
+#else
 private slots:
-
+#endif
     //DIALOGOS *************************************
     void slot_dialogFx_open(int fx);
 

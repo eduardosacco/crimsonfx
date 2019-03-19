@@ -1,15 +1,74 @@
+# This file is used to ignore files which are generated
+# ----------------------------------------------------------------------------
 
-build-CrimsonGUI-Desktop_Qt_5_7_1_GCC_64bit-Debug/
-*.log
+*~
+*.autosave
+*.a
+*.core
+*.moc
 *.o
-CrimsonGUI/moc_comms.cpp
-CrimsonGUI/moc_crimson.cpp
-CrimsonGUI/moc_comms.cpp
-CrimsonGUI/moc_dialogfx.cpp
-CrimsonGUI/moc_mainwindow.cpp
-CrimsonGUI/moc_dialogfx.cpp
-CrimsonGUI/ui_dialogfx.h
-CrimsonGUI/ui_mainwindow.h
-CrimsonGUI/log.txt
-CrimsonGUI/Makefile
-CrimsonGUI/Makefile
+*.obj
+*.orig
+*.rej
+*.so
+*.so.*
+*_pch.h.cpp
+*_resource.rc
+*.qm
+.#*
+*.*#
+core
+!core/
+tags
+.DS_Store
+.directory
+*.debug
+Makefile*
+*.prl
+*.app
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Thumbs.db
+*.res
+*.rc
+/.qmake.cache
+/.qmake.stash
+log.txt
+
+# qtcreator generated files
+*.pro.user*
+
+# xemacs temporary files
+*.flc
+
+# Vim temporary files
+.*.swp
+
+# Visual Studio generated files
+*.ib_pdb_index
+*.idb
+*.ilk
+*.pdb
+*.sln
+*.suo
+*.vcproj
+*vcproj.*.*.user
+*.ncb
+*.sdf
+*.opensdf
+*.vcxproj
+*vcxproj.*
+
+# MinGW generated files
+*.Debug
+*.Release
+
+# Python byte code
+*.pyc
+
+# Binaries
+# --------
+*.dll
+*.exe
+
