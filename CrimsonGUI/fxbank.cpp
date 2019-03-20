@@ -1,6 +1,8 @@
-#include "fxbank.h"
+//--------------------------------------------------------------------------------------------------
+//              FXBANK.CPP
+//--------------------------------------------------------------------------------------------------
 
-//const
+#include "fxbank.h"
 
 FxBank::FxBank()
 {
@@ -15,12 +17,6 @@ FxBank::FxBank()
     fx[fxCompressor].state = OFF;
     fx[fxCompressor].nParam = 5;
     fx[fxCompressor].stateAddr = "comp/state";
-
-//    //No hace falta que el usuario pueda elegir entre RMS y Peak
-//    fx[fxCompressor].param[pCompRMSPeak].name = "RMS/Peak";
-//    fx[fxCompressor].param[pCompRMSPeak].value = 0;
-//    fx[fxCompressor].param[pCompRMSPeak].defValue = 0;
-//    fx[fxCompressor].param[pCompRMSPeak].addr = "comp/rp";
 
     fx[fxCompressor].param[pCompThreshold].name = "Threshold";
     fx[fxCompressor].param[pCompThreshold].value = 0;
@@ -218,6 +214,4 @@ FxBank::FxBank()
     fx[fxDelay].param[pDelFeedback].value = 0;
     fx[fxDelay].param[pDelFeedback].defValue = DEFAULTDELAY1F;
     fx[fxDelay].param[pDelFeedback].addr = "del/f";
-    
-    
 };

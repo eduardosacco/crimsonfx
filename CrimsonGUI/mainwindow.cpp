@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------------------
+//              MAINWINDOW.CPP
+//--------------------------------------------------------------------------------------------------
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -16,11 +20,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//Es usada cuando el cambio no se produce desde mainwindow sino de crimson
-//basicamente cuando se carga un nuevo bank preset
+// Es usada cuando el cambio no se produce desde mainwindow sino de crimson
+// basicamente cuando se carga un nuevo bank preset
 void MainWindow::updateFxState(int fxNum, bool state)
 {
-    //Actualizar la GUI con los estados de los efectos
+    // Actualizar la GUI con los estados de los efectos
     switch(fxNum)
     {
     case fxCompressor:
@@ -188,7 +192,7 @@ void MainWindow::on_btnSave_released()
 
 void MainWindow::bankPresetSelector(int preset)
 {
-    //Apago todos los botones
+    // Apago todos los botones
     setPBtnStyle(ui->btnPreset1,false);
     setPBtnStyle(ui->btnPreset2,false);
     setPBtnStyle(ui->btnPreset3,false);
@@ -196,7 +200,7 @@ void MainWindow::bankPresetSelector(int preset)
     setPBtnStyle(ui->btnPreset5,false);
     setPBtnStyle(ui->btnPreset6,false);
 
-    //prendo el boton que corresponda
+    // prendo el boton que corresponda
     switch(preset)
     {
         case bPreset1:
@@ -223,13 +227,14 @@ void MainWindow::bankPresetSelector(int preset)
         setPBtnStyle(ui->btnPreset6,true);
         break;
     }
-    //emito la señal
+
+    // emito la señal
     emit signal_preset_changed(preset);
 }
 
 void MainWindow::setPBtnStyle(QPushButton *button, bool checked)
 {
-    if(checked)
+    if (checked)
         button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #dc143c, stop: 1 #a60f2d)");
     else
         button->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 0.67, stop: 0 #4a4a4a, stop: 1 #3d3d3d)");
@@ -287,6 +292,7 @@ void MainWindow::toggleDebugMode()
     }
 }
 
+// Añade mensaje al debug window
 void MainWindow::showDebugMsg(QString msg)
 {
     if (debugMode)
@@ -295,6 +301,7 @@ void MainWindow::showDebugMsg(QString msg)
     }
 }
 
+// Habilita o desabilita los botones
 void MainWindow::setEnableBtns(bool enabled)
 {
     ui->btnCompressorState->setEnabled(enabled);

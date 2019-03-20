@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------------------
+//              CRIMSON.CPP
+//--------------------------------------------------------------------------------------------------
+
 //#define RPI
 #include "crimson.h"
 #include <QDebug>
@@ -22,8 +26,8 @@ Crimson::Crimson(QObject *parent) :
     connect(mainWindow, SIGNAL(signal_preset_saved()),
             this, SLOT(slot_fx_preset_saved()));
 
-    //FX INIT
-    initializeFxParameters(); //Simula apretar un boton de presetBank
+    // FX INIT
+    initializeFxParameters(); // Simula apretar un boton de presetBank
 
     // GPIO HARDWARE
 #ifdef RPI
@@ -50,102 +54,106 @@ void Crimson::slot_exit()
 //*****************************************************************
 void Crimson::initializeFxParameters()
 {
-    //inicializo los efectos con el ultimo preset bank cargado
-    //Por defecto es el numero 1.
-    //Al inicial el programa fx.bank.preset comienza en NONINIT
+    // inicializo los efectos con el ultimo preset bank cargado
+    // Por defecto es el numero 1.
+    // Al inicial el programa fx.bank.preset comienza en NONINIT
     QString addr = QString(fxBank.presetAddr);
     int lastBankPreset = crimsonSettings.value(addr,DEFAULTPRESET).toInt();
-    mainWindow->bankPresetSelector(lastBankPreset); //desde mainwindow emite signal de vuelta a crimson
+
+    // desde mainwindow emite signal de vuelta a crimson
+    mainWindow->bankPresetSelector(lastBankPreset);
 }
 
 //*****************************************************************
 //                  SLOTS
 //*****************************************************************
-
 void Crimson::slot_bank_preset_changed(int preset)
 {
-    int fx,param;      //para ciclar los for
+    int fx,param;
 
-    //Si no es el preset seleccionado cargo la configuracion guardada
+    // Si no es el preset seleccionado cargo la configuracion guardada
     if(fxBank.preset != preset)
     {
         QString addr = QString(fxBank.presetAddr);
-        //Primero guardo el preset al cual se cambio para que quede almacenado
-        //como lastPreset para cuando se inicialice el programa de nuevo
+
+        // Primero guardo el preset al cual se cambio para que quede almacenado
+        // como lastPreset para cuando se inicialice el programa de nuevo
         crimsonSettings.setValue(addr,preset);
 
         fxBank.preset = preset;
 
         for(fx=0;fx<MAXEFFECTS;fx++)
         {
-            //cargo los estados de cada efecto
+            // cargo los estados de cada efecto
             addr = QString(fxBank.fx[fx].stateAddr).append(QString::number(preset));
-            //armo dir ej: over/state1
+
+            // armo dir ej: over/state1
             fxBank.fx[fx].state = crimsonSettings.value(addr,DEFAULTSTATE).toBool();
             qDebug() << "Loaded" << addr << " " << QString::number(fxBank.fx[fx].state);
 
-            //Envio el nuevo estado a Pd
+            // Envio el nuevo estado a Pd
             QString addr = QString(fxBank.fx[fx].stateAddr).prepend("/");
             comms.oscSendInt(addr,fxBank.fx[fx].state);
 
-            //Actualizo cues visuales de que efectos estan prendidos
+            // Actualizo cues visuales de que efectos estan prendidos
             if(mainWindow != nullptr)
                 mainWindow->updateFxState(fx,fxBank.fx[fx].state);
 
 
             int nParam = fxBank.fx[fx].nParam;
-            //Inicializo los valores de los parametros de los efectos
+            // Inicializo los valores de los parametros de los efectos
             for(param=0;param<nParam;param++)
             {
                 addr = QString(fxBank.fx[fx].param[param].addr).append(QString::number(preset));
                 fxBank.fx[fx].param[param].value = crimsonSettings.value(
                             addr,fxBank.fx[fx].param[param].defValue).toInt();
 
-                //envio parametros a pd
+                // envio parametros a pd
                 addr = QString(fxBank.fx[fx].param[param].addr).prepend("/");
                 comms.oscSendInt(addr,fxBank.fx[fx].param[param].value);
             }
 
-            //Actualizo los diales
+            // Actualizo los diales
             if(dialogFx != nullptr)
                 dialogFx->setDialValues(fxBank.fx[fx]);
-
         }
     }
 }
 
 void Crimson::slot_fx_state_changed(int fx)
 {
-    //Actualizo el nuevo estado del efecto
+    // Actualizo el nuevo estado del efecto
     fxBank.fx[fx].state = !fxBank.fx[fx].state;
-    //Actualizar estado de botones de mainwindow
-    //y de dialogfx si es que esta activo
+
+    // Actualizar estado de botones de mainwindow
+    // y de dialogfx si es que esta activo
     mainWindow->updateFxState(fx,fxBank.fx[fx].state);
     if(dialogFx != nullptr)
         dialogFx->updateFxState(fxBank.fx[fx].state);
 
-    //Envio el nuevo estado a Pd
+    // Envio el nuevo estado a Pd
     QString addr = QString(fxBank.fx[fx].stateAddr).prepend("/");
     comms.oscSendInt(addr,fxBank.fx[fx].state);
 }
 
 void Crimson::slot_fx_param_changed(int fx, int param, int value)
 {
-    //Actualizo el valor del parametro
+    // Actualizo el valor del parametro
     fxBank.fx[fx].param[param].value = value;
-    //Envio el nuevo valor del parametro a Pd
+
+    // Envio el nuevo valor del parametro a Pd
     QString addr = QString(fxBank.fx[fx].param[param].addr).prepend("/");
     comms.oscSendInt(addr, value);
 }
 
-//Habria que implementar el dirty bit asi no guardo todo en el reg al pedo
+// TODO: Mejora habria que implementar dirty bit y guardar solo cosas que se hayan cambiado
 void Crimson::slot_fx_preset_saved()
 {
     int fx,param;
 
     for(fx=0;fx<MAXEFFECTS;fx++)
     {
-        //guardo los estados de cada efecto
+        // guardo los estados de cada efecto
         QString addr = QString(fxBank.fx[fx].stateAddr).append(QString::number(fxBank.preset));
         crimsonSettings.setValue(addr,fxBank.fx[fx].state);
 
@@ -164,7 +172,6 @@ void Crimson::slot_fx_preset_saved()
 //*****************************************************************
 //                  FX DIALOG
 //*****************************************************************
-
 void Crimson::slot_dialogFx_open(int fx)
 {
     dialogFx = new DialogFx;
@@ -201,7 +208,6 @@ void Crimson::slot_dialogFx_closed()
 //*****************************************************************
 //                  GPIO
 //*****************************************************************
-
 #ifdef RPI
 
 void Crimson::initializeGPIO()
@@ -216,10 +222,11 @@ void Crimson::slot_pedals_read()
     static bool prevLeftValue = false;
     static bool prevRightValue = false;
 
-    //ACTIVE LOW
+    // ACTIVE LOW
     bool leftValue = rpiGpio->readPin(PIN_LEFT_PEDAL) == mmapGpio::LOW;
     bool rightValue = rpiGpio->readPin(PIN_RIGHT_PEDAL) == mmapGpio::LOW;
 
+    // Logica ciclar entre presets al apretar los pedales
     if((leftValue || rightValue) && (leftValue != rightValue)) {
         if((leftValue && (leftValue != prevLeftValue)) || (rightValue && (rightValue != prevRightValue))) {
             if(leftValue) {

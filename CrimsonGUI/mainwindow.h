@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------------------
+//              MAINWINDOW.H
+//--------------------------------------------------------------------------------------------------
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -8,6 +12,9 @@
 
 #include "fxbank.h"
 
+//*****************************************************************
+//                  MAINWINDOW
+//*****************************************************************
 namespace Ui {
 class MainWindow;
 }
@@ -37,7 +44,7 @@ public:
     void showDebugMsg(QString msg);
 
 signals:
-    //Señales ON OFF Switches
+    // Señales ON OFF Switches
     void signal_fx_state_toggled(int fx);
     void signal_dialogFx_open(int fx);
     void signal_preset_changed(int preset);
@@ -45,39 +52,39 @@ signals:
     void signal_debug_menu_toggled();
 
 private slots:
-    //Compressor
+    // Compressor
     void on_btnCompressorState_released();
     void on_btnCompressorSettings_released();
 
-    //Distortion
+    // Distortion
     void on_btnDistortionState_released();
     void on_btnDistortionSettings_released();
 
-    //Overdrive
+    // Overdrive
     void on_btnOverdrive1State_released();
     void on_btnOverdrive1Settings_released();
 
-    //8Band Eq
+    // 8Band Eq
     void on_btnEqualizerState_released();
     void on_btnEqualizerSettings_released();
 
-    //Reverb
+    // Reverb
     void on_btnReverb1State_released();
     void on_btnReverb1Settings_released();
 
-    //Chorus
+    // Chorus
     void on_btnChorusState_released();
     void on_btnChorusSettings_released();
 
-    //Flanger
+    // Flanger
     void on_btnFlangerState_released();
     void on_btnFlangerSettings_released();
 
-    //Delay
+    // Delay
     void on_btnDelay1State_released();
     void on_btnDelay1Settings_released();
 
-    //Presets
+    // Presets
     void on_btnPreset1_released();
     void on_btnPreset2_released();
     void on_btnPreset3_released();

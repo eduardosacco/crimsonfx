@@ -1,10 +1,13 @@
+//--------------------------------------------------------------------------------------------------
+//              FXBANK.H
+//--------------------------------------------------------------------------------------------------
+
 #ifndef FXBANK_H
 #define FXBANK_H
 
-#define PRESET1 1
-#define PRESET2 2
-#define PRESET3 3
-
+//*****************************************************************
+//                  DEFINES
+//*****************************************************************
 #define PARAM0 0
 #define PARAM1 1
 #define PARAM2 2
@@ -15,7 +18,7 @@
 #define MAXEFFECTS 8
 #define MAXPARAM 6
 
-//Valores por defecto de carga de settings
+// Valores por defecto de carga de settings
 #define DEFAULTPRESET 1
 #define DEFAULTSTATE 0
 
@@ -31,7 +34,6 @@
 #define DEFAULTDELAY1D 20
 #define DEFAULTDELAY1F 15
 
-//Default param value para los que todavia no estan definidos
 #define DEFAULTPVALUE 50
 
 #define NONINIT -1
@@ -40,39 +42,42 @@
 
 #include <QString>
 
-//NEWTYPES Y ENUMS
+//*****************************************************************
+//                  TYPEDEF PARAMETRO
+//*****************************************************************
 typedef struct
 {
-    const char * name;
-    int value;
-    int defValue;
-    const char *addr;
+    const char * name;  // Nombre
+    int value;          // Valor actual
+    int defValue;       // Valor por defecto
+    const char *addr;   // Direccion de valor del parametro en crimsonSettings
 
 }Parameter;
 
+//*****************************************************************
+//                  TYPEDEF EFECTO
+//*****************************************************************
 typedef struct
 {
     bool state;
-    const char *name;
-    //Estado del efecto On o OFF
-    //Numero de parametros del efecto
-
-    int nParam;
-    //Para acceder a crimsonSettings se usa concatenando el numero del banco N
-    //Refiere al estado del efecto guardado en el banco N
-    const char *stateAddr;
-
-    //Parametros de cada efecto
-    Parameter param[MAXPARAM];
+    const char *name;           // Estado del efecto On o OFF
+    int nParam;                 // Numero de parametros del efecto
+    const char *stateAddr;      // Direccion de estado del efecto en crimsonSettings
+    Parameter param[MAXPARAM];  // Parametros de cada efecto
 
 }Effect;
 
+//*****************************************************************
+//                  ENUMS
+//*****************************************************************
+
+// Presets
 enum {bPreset1, bPreset2, bPreset3, bPreset4, bPreset5, bPreset6};
 
-//All effects
+// Efectos
 enum {fxCompressor,fxDistortion,fxOverdrive,fxEqualizer,fxChorus,fxFlanger,fxReverb,fxDelay}; //8 Fx
 
-//Parameters for each effect
+// Parametros de cada efecto
 enum {pCompThreshold,pCompRatio,pCompLookAhead,pCompResp,pCompGain};                //6
 enum {pDistoGain,pDistoDepth,pDistoCutoff};                                         //3
 enum {pOverGain,pOverDepth,pOverCutoff};                                            //3
@@ -82,21 +87,17 @@ enum {pFlangerFF,pFlangerDelay,pFlangerFB,pFlangerBlend};                       
 enum {pDelLevel,pDelDelay,pDelFeedback};                                            //3
 enum {pRevDryWet,pRevRoomSize,pRevDamping};                                         //3
 
-
-
 //*****************************************************************
-//                  FX CLASS
+//                  FXBANK CLASS
 //*****************************************************************
-
 class FxBank
 {
 public:
     FxBank();
 
-    int preset;
-    const char *presetAddr;
-    Effect fx[MAXEFFECTS];
-
+    int preset;                 // Preset actual
+    const char *presetAddr;     // Direccion de preset actual en crimsonSettings
+    Effect fx[MAXEFFECTS];      // Banco de efectos
 };
 
 #endif // FXBANK_H

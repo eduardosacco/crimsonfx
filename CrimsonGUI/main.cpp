@@ -1,3 +1,8 @@
+//--------------------------------------------------------------------------------------------------
+//              MAIN.CPP
+//--------------------------------------------------------------------------------------------------
+
+// Habilita logger
 #define LOG
 
 #include "crimson.h"
@@ -10,7 +15,7 @@
 
 #ifdef LOG
 
-Crimson *crimson;
+Crimson *crimson = nullptr;
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -30,15 +35,20 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 #endif
 
+//*****************************************************************
+//                  MAIN
+//*****************************************************************
 int main(int argc, char *argv[])
 {
 
 #ifdef LOG
-    //Cambio el gestor de mensajes por uno custom
+    // Cambio el gestor de mensajes por uno custom
     qInstallMessageHandler(myMessageOutput);
-    //Abro o creo archivo de Log
+
+    // Abro o creo archivo de Log
     QFile outFile("log.txt");
-    //Borro si ahbia un archivo viejo
+
+    // Borro si habia un archivo anterior
     outFile.resize(0);
 #endif
 
@@ -51,11 +61,11 @@ int main(int argc, char *argv[])
         qDebug() << "Loaded font correctly";
     }
 
-    //Aviso a la aplicacion los nombres correpondientes
+    // Aviso a la aplicacion los nombres correpondientes
     a.setOrganizationName("Crimson");
     a.setApplicationName("Fx16");
 
-    //Corro el programa principal
+    // Corro el programa principal
     crimson = new Crimson;
 
     return a.exec();
