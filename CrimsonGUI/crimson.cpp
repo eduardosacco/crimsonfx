@@ -54,9 +54,9 @@ void Crimson::slot_exit()
 //*****************************************************************
 void Crimson::initializeFxParameters()
 {
-    // inicializo los efectos con el ultimo preset bank cargado
+    // Inicializo los efectos con el ultimo preset bank cargado
     // Por defecto es el numero 1.
-    // Al inicial el programa fx.bank.preset comienza en NONINIT
+    // Al iniciar el programa fx.bank.preset comienza en NONINIT
     QString addr = QString(fxBank.presetAddr);
     int lastBankPreset = crimsonSettings.value(addr,DEFAULTPRESET).toInt();
 
@@ -95,7 +95,7 @@ void Crimson::slot_bank_preset_changed(int preset)
             QString addr = QString(fxBank.fx[fx].stateAddr).prepend("/");
             comms.oscSendInt(addr,fxBank.fx[fx].state);
 
-            // Actualizo cues visuales de que efectos estan prendidos
+            // Actualizo señales visuales de que efectos estan prendidos
             if(mainWindow != nullptr)
                 mainWindow->updateFxState(fx,fxBank.fx[fx].state);
 
