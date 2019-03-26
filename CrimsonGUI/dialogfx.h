@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------------------
+//              DIALOGFX.H
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DIALOGFX_H
 #define DIALOGFX_H
 
@@ -8,6 +12,9 @@
 
 #include "fxbank.h"
 
+//*****************************************************************
+//                  DIALOG FX
+//*****************************************************************
 namespace Ui {
 class DialogFx;
 }
@@ -17,7 +24,7 @@ class DialogFx : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogFx(QWidget *parent = 0);
+    explicit DialogFx(QWidget *parent = nullptr);
     ~DialogFx();
 
     void dialogSettings(int fxNum,Effect fx);
@@ -25,7 +32,7 @@ public:
     void updateFxState(bool state);
 
 private slots:
-    //Diales
+    // Cambio de valor de diales
     void slot_dial0_valueChanged(int position);
     void slot_dial1_valueChanged(int position);
     void slot_dial2_valueChanged(int position);
@@ -33,10 +40,12 @@ private slots:
     void slot_dial4_valueChanged(int position);
     void slot_dial5_valueChanged(int position);
 
+    // Botones
     void on_btnClose_released();
     void on_btnOnOff_released();
 
 signals:
+    // Señales para emitir a MainWindow
     void signal_fx_state_changed(int fx);
     void signal_fx_param_changed(int fx, int param,int position);
     void signal_destroyed();
@@ -46,6 +55,7 @@ private:
 
     int effect;
 
+    // Diales
     QDial *dial0 = new QDial;
     QDial *dial1 = new QDial;
     QDial *dial2 = new QDial;
@@ -53,6 +63,7 @@ private:
     QDial *dial4 = new QDial;
     QDial *dial5 = new QDial;
 
+    // Labels
     QLabel *lblDial0 = new QLabel;
     QLabel *lblDial1 = new QLabel;
     QLabel *lblDial2 = new QLabel;
@@ -60,7 +71,7 @@ private:
     QLabel *lblDial4 = new QLabel;
     QLabel *lblDial5 = new QLabel;
 
-
+    // Layouts
     QHBoxLayout *row1 = new QHBoxLayout;
     QHBoxLayout *row2 = new QHBoxLayout;
     QHBoxLayout *row3 = new QHBoxLayout;
@@ -68,8 +79,6 @@ private:
 
     void setPBtnStyle(QPushButton *button, bool checked);
     void showDebugMsg(char *msg);
-
-
 };
 
 #endif // DIALOGFX_H

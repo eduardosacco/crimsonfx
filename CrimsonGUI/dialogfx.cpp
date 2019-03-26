@@ -1,3 +1,7 @@
+//--------------------------------------------------------------------------------------------------
+//              DIALOGFX.CPP
+//--------------------------------------------------------------------------------------------------
+
 #include "dialogfx.h"
 #include "ui_dialogfx.h"
 
@@ -26,25 +30,25 @@ DialogFx::~DialogFx()
 
 void DialogFx::dialogSettings(int fxNum, Effect fx)
 {           
-    //Aca hay que inicializar los botones de encendido y apagado de los
+    // Aca hay que inicializar los botones de encendido y apagado de los
     // efectos y del preset en el que esten
     effect = fxNum;
 
-    //Seteo el estado del boton on off
+    // Seteo el estado del boton on off
     updateFxState(fx.state);
 
-    //Esta funcion debe crear dinamicamente
-    //los widgets necesarios para cada efecto
+    // Esta funcion debe crear dinamicamente
+    // los widgets necesarios para cada efecto
 
-    //pongo el nombre del efecto en el gui
+    // pongo el nombre del efecto en el gui
     ui->lblFx->setText(fx.name);
 
-    ui->vLayout->addLayout(row1); //hehe rowOne a Star Wars Stwory
+    ui->vLayout->addLayout(row1); //rowOne a Star Wars Stwory
     ui->vLayout->addLayout(row2);
     ui->vLayout->addLayout(row3);
     ui->vLayout->addLayout(row4);
 
-    if(fx.nParam >= 1)
+    if (fx.nParam >= 1)
     {
         lblDial0->setText(QString(fx.param[PARAM0].name));
         dial0->setValue(fx.param[PARAM0].value);
@@ -53,7 +57,7 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
         connect(dial0,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial0_valueChanged(int)));
     }
-    if(fx.nParam >= 2)
+    if (fx.nParam >= 2)
     {
         lblDial1->setText(QString(fx.param[PARAM1].name));
         dial1->setValue(fx.param[PARAM1].value);
@@ -62,7 +66,7 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
         connect(dial1,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial1_valueChanged(int)));
     }
-    if(fx.nParam >= 3)
+    if (fx.nParam >= 3)
     {
 
         lblDial2->setText(QString(fx.param[PARAM2].name));
@@ -72,7 +76,7 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
         connect(dial2,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial2_valueChanged(int)));
     }
-    if(fx.nParam >= 4)
+    if (fx.nParam >= 4)
     {
         lblDial3->setText(QString(fx.param[PARAM3].name));
         dial3->setValue(fx.param[PARAM3].value);
@@ -81,7 +85,7 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
         connect(dial3,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial3_valueChanged(int)));
     }
-    if(fx.nParam >= 5)
+    if (fx.nParam >= 5)
     {
         lblDial4->setText(QString(fx.param[PARAM4].name));
         row3->addWidget(dial4);
@@ -89,7 +93,7 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
         connect(dial4,SIGNAL(valueChanged(int)),
                 this,SLOT(slot_dial4_valueChanged(int)));
     }
-    if(fx.nParam >= 6)
+    if (fx.nParam >= 6)
     {
         lblDial5->setText(QString(fx.param[PARAM5].name));
         row3->addWidget(dial5);
@@ -103,33 +107,33 @@ void DialogFx::dialogSettings(int fxNum, Effect fx)
 
 void DialogFx::updateFxState(bool state)
 {
-    //Actualizar la GUI con los estados de los efectos
+    // Actualizar la GUI con los estados de los efectos
     setPBtnStyle(ui->btnOnOff,state);
 }
 
 void DialogFx::setDialValues(Effect fx)
 {
-    if(fx.nParam >= 1)
+    if (fx.nParam >= 1)
     {
         dial0->setValue(fx.param[PARAM0].value);
     }
-    if(fx.nParam >= 2)
+    if (fx.nParam >= 2)
     {
         dial1->setValue(fx.param[PARAM1].value);
     }
-    if(fx.nParam >= 3)
+    if (fx.nParam >= 3)
     {
         dial2->setValue(fx.param[PARAM2].value);
     }
-    if(fx.nParam >= 4)
+    if (fx.nParam >= 4)
     {
         dial3->setValue(fx.param[PARAM3].value);
     }
-    if(fx.nParam >= 5)
+    if (fx.nParam >= 5)
     {
         dial4->setValue(fx.param[PARAM4].value);
     }
-    if(fx.nParam >= 6)
+    if (fx.nParam >= 6)
     {
         dial5->setValue(fx.param[PARAM5].value);
     }

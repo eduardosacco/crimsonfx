@@ -1,7 +1,11 @@
-// WARNING: Define TESTMODE only to grant public access to every member of Crimson in order to test
-#define TESTMODE
+//--------------------------------------------------------------------------------------------------
+//              CRIMSON.H
+//--------------------------------------------------------------------------------------------------
 
-// Define RPI to have full RPI HW functionality
+// WARNING: Definir TESTMODE unicamente para correr CrimsonGUITests
+//#define TESTMODE
+
+// Definir RPI para funcionalidad completa de hardware para la RPI
 //#define RPI
 
 #ifndef CRIMSON_H
@@ -19,11 +23,17 @@
 #include "mmapgpio.h"
 #endif
 
+//*****************************************************************
+//                  DEFINES
+//*****************************************************************
 #define PIN_POWER_LED 4
 #define PIN_LEFT_PEDAL 17
 #define PIN_RIGHT_PEDAL 27
 #define POLLING_TIME 250
 
+//*****************************************************************
+//                  CRIMSON CLASS
+//*****************************************************************
 class Crimson : public QObject
 {
     Q_OBJECT
@@ -33,17 +43,16 @@ public:
 #else
 private:
 #endif
-    //OBJETOS Y METODOS PRIVADOS **********************************************
-    FxBank fxBank;                      //Efectos
-    Comms comms;                        //Comunicaciones
-    QSettings crimsonSettings;          //Settings: guardado de presets y otros
-    MainWindow *mainWindow = nullptr;   //Ventana principal
-    DialogFx *dialogFx = nullptr;       //Dialogos efectos
-    QTimer *timer;                      //Timer for polling pin inputs
+    FxBank fxBank;                      // Efectos
+    Comms comms;                        // Comunicaciones
+    QSettings crimsonSettings;          // Settings: guardado de presets y otros
+    MainWindow *mainWindow = nullptr;   // Ventana principal
+    DialogFx *dialogFx = nullptr;       // Dialogos efectos
+    QTimer *timer;                      // Timer for polling pin inputs
 
 #ifdef RPI
     void initializeGPIO(void);
-    mmapGpio *rpiGpio;                  //mmapGpio class to control the GPIO
+    mmapGpio *rpiGpio;                  //mmapGpio class para controlar GPIO
 #endif
 
     void initializeFxParameters(void);
@@ -60,18 +69,11 @@ public slots:
 #else
 private slots:
 #endif
-    //DIALOGOS *************************************
     void slot_dialogFx_open(int fx);
-
-    //EFECTOS
     void slot_fx_state_changed(int fx);
     void slot_fx_param_changed(int fx,int param, int value);
     void slot_fx_preset_saved();
-
-    //Salida del programa
     void slot_exit();
-
-    //private slots:
     void slot_bank_preset_changed(int bankPreset);
     void slot_dialogFx_closed();
 
