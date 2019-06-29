@@ -1,9 +1,0 @@
-portaudio/src/common/pa_dither.o: portaudio/src/common/pa_dither.c \
- /usr/include/stdc-predef.h portaudio/src/common/pa_types.h \
- portaudio/src/common/pa_dither.h
-
-/usr/include/stdc-predef.h:
-
-portaudio/src/common/pa_types.h:
-
-portaudio/src/common/pa_dither.h:
