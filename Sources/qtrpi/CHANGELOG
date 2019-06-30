@@ -1,0 +1,29 @@
+v1.2.3 - 2017-04-21
+- Add fontconfig package in deploy-qtrpi script
+- Add sanity check on env vars at beginning of scripts
+
+v1.2.2 - 2017-04-06
+- Update README with host dependencies
+- Update README with qtrpi installation youtube video
+
+v1.2.1 - 2017-04-05
+- Fix sysroot symlink creation
+- Update README with Qt Creator video
+
+v1.2.0 - 2017-03-29
+- Add QtSvg module
+- Add QtSerialPort module
+- Add local cache for raspbian / toolchain / Qt modules
+- Add Vagrant to virtualize qtrpi (provisionned with Ansible)
+- Add test qtrpi minimal script
+- Add download ci artefacts scripts
+- Update raspbian compatibility to the version 2017-03-02
+- Update README
+
+v1.1.0 - 2016-11-09
+- Add support for RPi 1 & RPi 3
+- Add support of Qt 5.6.2
+
+v1.0.0 - 2016-11-03
+- Initial release with full and minimal scripts for RPi 2
+
