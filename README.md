@@ -82,3 +82,11 @@ Una vez que qtrpi fue instalado en la PC y desplegado en la placa, se puede comp
 (la ruta complete puede ser omitida si se agregó /opt/qtrpi/bin al PATH)  
 `make`  
 El archivo binario generado está listo para copiarse y ejecutarse en la Raspberry
+
+## Configuracion para auto ejecucion de CrimsonFX y CrimsonGUI
+En la terminal en rpi o bien mediante ssh ingresar el comando:
+`sudo nano /etc/rc.local`  
+Antes de la linea 'exit o' agregar las siguientes lineas:  
+`sudo pd -nogui /home/pi/Documents/Pd/externals/CrimsonFX.pd &`  
+`sudo /home/pi/CrimsonGUI &`  
+Guardar el archivo, al reiniciar el dispositivo los programas iniciaran automagicamente.

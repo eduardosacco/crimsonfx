@@ -2,7 +2,7 @@
 //              CRIMSON.CPP
 //--------------------------------------------------------------------------------------------------
 
-//#define RPI
+#define RPI
 #include "crimson.h"
 #include <QDebug>
 

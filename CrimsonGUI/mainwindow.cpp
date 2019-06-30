@@ -175,7 +175,7 @@ void MainWindow::on_btnPreset6_released()
 
 void MainWindow::on_btnSave_pressed()
 {
-    timerSaveBtn->start(10000);
+    timerSaveBtn->start(HIDDENFNDELAY);
 }
 
 void MainWindow::on_btnSave_released()
@@ -242,7 +242,7 @@ void MainWindow::setPBtnStyle(QPushButton *button, bool checked)
 
 void MainWindow::on_btnLock_pressed()
 {
-    timerLockBtn->start(5000);
+    timerLockBtn->start(HIDDENFNDELAY);
 }
 
 void MainWindow::on_btnLock_released()

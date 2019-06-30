@@ -40,6 +40,8 @@
 #define OFF 0
 #define ON 1
 
+#define HIDDENFNDELAY 5000
+
 #include <QString>
 
 //*****************************************************************
