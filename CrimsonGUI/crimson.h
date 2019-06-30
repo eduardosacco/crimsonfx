@@ -6,7 +6,7 @@
 //#define TESTMODE
 
 // Definir RPI para funcionalidad completa de hardware para la RPI
-//#define RPI
+#define RPI
 
 #ifndef CRIMSON_H
 #define CRIMSON_H
