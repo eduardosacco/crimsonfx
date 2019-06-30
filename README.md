@@ -77,9 +77,17 @@ Una vez que qtrpi fue instalado en la PC y desplegado en la placa, se puede comp
 El archivo binario generado está listo para copiarse y ejecutarse en la Raspberry
 
 ## Configuracion para auto ejecucion de CrimsonFX y CrimsonGUI
-En la terminal en rpi o bien mediante ssh ingresar el comando:
+En la terminal en RPi o bien mediante ssh ingresar el comando:  
 `sudo nano /etc/rc.local`  
 Antes de la linea 'exit o' agregar las siguientes lineas:  
 `sudo pd -nogui /home/pi/Documents/Pd/externals/CrimsonFX.pd &`  
 `sudo /home/pi/CrimsonGUI &`  
 Guardar el archivo, al reiniciar el dispositivo los programas iniciaran automagicamente.
+
+## Configuracion de placa USB por defecto en RPi
+En la terminal en RPi o bien mediante ssh ingresar el comando:  
+`sudo nano /usr/share/alsa/alsa.conf`  
+Buscar las siguientes lineas de codigo
+`defaults.ctl.card 0`
+`defaults.pcm.card 0`
+Cambiar el valor de 0 a 1.
