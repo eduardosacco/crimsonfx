@@ -72,3 +72,7 @@ log.txt
 *.dll
 *.exe
 
+CrimsonGUI/qrc_resources.cpp
+CrimsonGUI/Makefile
+CrimsonGUI/CrimsonGUI
+CrimsonGUI/CrimsonGUI.pro.user
