@@ -3,11 +3,10 @@ Interfaz grafica y nucleo de procesamiento de efectos de Crimson Fx
 
 ## Instalación de Qt en Linux y configuración del proyecto CrimsonGUI
 Los siguientes pasos instalarán Qt 5.7.0 en el ordenador. Se precisa un sistema operativo Linux (por ejemplo, Ubuntu o Mint).
-1.	Descargar el instalador de Qt Open Source del sitio web de Qt [23] y, al correrlo, seleccionar la opción de instalar Qt 5.7.0.
+1.	Descargar el instalador de Qt Open Source del sitio web de Qt y, al correrlo, seleccionar la opción de instalar Qt 5.7.0.
 2.	En la terminal, correr los siguientes comandos para instalar las herramientas necesarias para compilar y ejecutar el proyecto  
 `sudo apt-get update`  
-`sudo apt-get install build-essential`  
-`sudo apt-get install libgl1-mesa-dev` 
+`sudo apt-get install build-essential libgl1-mesa-dev`  
 3.	En Qt ir a Tools>Options>Build&Run>Options y seleccionar los compiladores:  
  	`C: GCC(C, x86 64bit in /usr/bin)`  
   `C++: GCC(C++, x86 64bit in /usr/bin)`  
@@ -16,10 +15,7 @@ Los siguientes pasos instalarán Qt 5.7.0 en el ordenador. Se precisa un sistema
 Para instalar Pure Data en la placa Raspberry Pi, deben seguirse los siguientes pasos desde la placa Raspberry Pi:
 1.	Descargar `puredata_0.48.1.orig.tar.gz` (o alguna version mas nueva) de el repositorio de descargas de Debian
 2.	Abrir una terminal y correr los comandos:  
-`sudo apt-get install autoconf`  
-`sudo apt-get install automake`  
-`sudo apt-get install libasound2-dev`  
-`sudo apt-get install libtool`  
+`sudo apt-get install autoconf automake libasound2-dev libtool`   
 3.	Abrir una terminal en la carpeta donde se descargó el fichero del paso 1 y ejecutar los siguientes comandos:  
 `tar -xzf puredata_0.48.1.orig.tar.gz`  
 `cd pd-0.48-1`  
@@ -28,7 +24,7 @@ Para instalar Pure Data en la placa Raspberry Pi, deben seguirse los siguientes 
 `sudo make install`  
 `sudo apt-get install --reinstall tk`  
 
-## Instalación de librerías de Qt en Raspberry Pi
+## Instalación de librerías de Qt en Raspberry Pi (Raspbian Jesse UNICAMENTE)
 Para instalar las librerías de Qt en la placa Raspberry Pi, se utilizó QtRpi. Puede verse un video tutorial en la carpeta qtrpi de este repositorio.
 Deben seguirse los siguientes pasos desde el ordenador (linux):  
 1. Instalar dependencias de qtrpi:  
@@ -68,12 +64,6 @@ Al finalizar el script, la Raspberry Pi debe contener el directorio /usr/local/q
  `export PATH=/opt/qtrpi/bin:$PATH`
 9.	Agregar esta línea a /home/user/.bashrc:  
  `source ~/.bashrc`
- 
-### Troubleshooting
-* Error al tratar de correr el archivo Crimson.GUI generado desde la consola:  
- `error while loading shared libraries: libpng12.so.0: cannot open shared object file: No such file or directory`  
- Instalar libpng12 mediante terminal usando:  
- `sudo apt-get install libpng12-0`
 
 ## Compilación cruzada de aplicaciones Qt 
 Una vez que qtrpi fue instalado en la PC y desplegado en la placa, se puede compilar el proyecto para la placa, siguiendo los pasos desde la terminal:  
@@ -81,6 +71,9 @@ Una vez que qtrpi fue instalado en la PC y desplegado en la placa, se puede comp
 `/opt/qtrpi/bin/qmake-qtrpi`  
 (la ruta complete puede ser omitida si se agregó /opt/qtrpi/bin al PATH)  
 `make`  
+* Si hay error al ejecutar `make`:
+ `recipe for target 'main.o' failed`
+  Ejecutar comando `make clean`
 El archivo binario generado está listo para copiarse y ejecutarse en la Raspberry
 
 ## Configuracion para auto ejecucion de CrimsonFX y CrimsonGUI
